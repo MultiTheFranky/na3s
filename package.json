@@ -1,0 +1,19 @@
+{
+  "name": "na3s",
+  "version": "1.0.0",
+  "description": "na3s",
+  "private": true,
+  "scripts": {
+    "dev": "yarn dev:server & yarn dev:client",
+    "dev:server": "cd server && yarn dev",
+    "dev:client": "cd client && yarn dev",
+    "start": "yarn start:server & yarn start:client",
+    "start:server": "cd server && yarn start",
+    "start:client": "cd client && yarn start"
+  },
+  "workspaces": [
+    "web",
+    "server",
+    "shared"
+  ]
+}
