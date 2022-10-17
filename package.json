@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "precommit": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run precommit",
     "prepush": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run prepush",
-    "clear-install": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run clear-install"
+    "clean": "rm -rf node_modules && yarn cache clean && yarn install",
+    "build": "yarn workspaces foreach -ipv --topological-dev -j ${AGENT_CPU:-2} run build"
   },
   "devDependencies": {
     "@commitlint/cli": "17.1.2",
