@@ -1,5 +1,9 @@
 import winston from "winston";
 
+/**
+ *
+ * @returns
+ */
 export const initLogger = () => {
   // Setup winston logger
   const logger = winston.createLogger({
@@ -29,14 +33,26 @@ export const initLogger = () => {
 
 const logger = initLogger();
 
+/**
+ * Function to log information
+ * @param {string } message Message to log
+ */
 export const logInfo = (message: string) => {
   logger.info(message);
 };
 
+/**
+ * Function to log warnings
+ * @param {string } message Message to log
+ */
 export const logWarn = (message: string) => {
   logger.warn(message);
 };
 
+/**
+ * Function to log errors
+ * @param {string } message Message to log
+ */
 export const logError = (message: string) => {
   logger.error(message);
 };

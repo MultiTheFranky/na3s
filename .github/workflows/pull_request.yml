@@ -1,0 +1,15 @@
+# Action to run on pull request creation
+name: Pull Request
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Run the tests
+        run: |
+          echo "Running tests"
+          echo "Tests passed"

@@ -1,12 +1,16 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "build/index.js",
+  "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
     "build": "rimraf ./build && tsc",
     "dev": "nodemon",
-    "start": "npm run build && node build/index.js"
+    "start": "npm run build && node build/index.js",
+    "prepush": "yarn build",
+    "precommit": "yarn lint && yarn prettier",
+    "prettier": "prettier --write \"**/*.{ts,tsx}\"",
+    "lint": "eslint \"**/*.{ts,tsx}\""
   },
   "dependencies": {
     "winston": "^3.8.2"

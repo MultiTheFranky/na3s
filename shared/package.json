@@ -1,5 +1,14 @@
 {
   "name": "shared",
   "version": "1.0.0",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc --build",
+    "prepush": "yarn build",
+    "precommit": "yarn lint && yarn prettier",
+    "prettier": "prettier --write \"**/*.{ts,tsx}\"",
+    "lint": "eslint \"**/*.{ts,tsx}\""
+  },
+  "devDependencies": {}
 }

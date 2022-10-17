@@ -1,9 +1,23 @@
 import { exec } from "child_process";
 
-export const startArma3Server = async () => {
-  const { stdout, stderr } = await exec(
-    "arma3server.exe -config=server.cfg -profiles=profiles -name=MyServer -port=2302 -password=MyPassword -mod=@MyMod"
-  );
-  console.log("stdout:", stdout);
-  console.log("stderr:", stderr);
+import { ServerConfig } from "shared";
+
+import { logError, logInfo } from "../../../logger";
+
+/**
+ * Function to start the Arma 3 server
+ * @param config The server config
+ */
+export const startArma3Server = async (config: ServerConfig) => {
+  const { stdout, stderr } = await exec(`arma3server.exe ${config}`);
+
+  if (stdout)
+    stdout?.on("data", (data) => {
+      logInfo(data);
+    });
+
+  if (stderr)
+    stderr?.on("data", (data) => {
+      logError(data);
+    });
 };

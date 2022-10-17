@@ -9,7 +9,30 @@
     "dev:client": "cd client && yarn dev",
     "start": "yarn start:server & yarn start:client",
     "start:server": "cd server && yarn start",
-    "start:client": "cd client && yarn start"
+    "start:client": "cd client && yarn start",
+    "prepare": "husky install",
+    "precommit": "yarn workspaces run precommit",
+    "prepush": "yarn workspaces run prepush"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.1.2",
+    "@commitlint/config-conventional": "16.2.1",
+    "@commitlint/config-lerna-scopes": "16.2.2",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "eslint": "^8.25.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-config-prettier": "8.5.0",
+    "prettier": "2.7.1",
+    "import-sort-style-module": "6.0.0",
+    "prettier-plugin-import-sort": "0.0.7"
+  },
+  "importSort": {
+    ".js, .jsx, .ts, .tsx": {
+      "style": "module",
+      "parser": "typescript"
+    }
   },
   "workspaces": [
     "web",

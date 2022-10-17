@@ -22,7 +22,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "react-scripts start"
+    "dev": "react-scripts start",
+    "prepush": "yarn build",
+    "precommit": "yarn lint && yarn prettier",
+    "prettier": "prettier --write \"**/*.{ts,tsx}\"",
+    "lint": "eslint \"**/*.{ts,tsx}\""
   },
   "eslintConfig": {
     "extends": [
