@@ -10,5 +10,9 @@
     "prettier": "prettier --write \"**/*.{ts,tsx}\"",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "clear-install": "rm -rf node_modules && yarn"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
   }
 }

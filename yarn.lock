@@ -12133,6 +12133,9 @@ __metadata:
 "shared@1.0.0, shared@workspace:shared":
   version: 0.0.0-use.local
   resolution: "shared@workspace:shared"
+  dependencies:
+    ts-node: ^10.9.1
+    typescript: ^4.8.4
   languageName: unknown
   linkType: soft
 
