@@ -11,8 +11,9 @@
     "start:server": "cd server && yarn start",
     "start:client": "cd client && yarn start",
     "prepare": "husky install",
-    "precommit": "yarn workspaces run precommit",
-    "prepush": "yarn workspaces run prepush"
+    "precommit": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run precommit",
+    "prepush": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run prepush",
+    "clear-install": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run clear-install"
   },
   "devDependencies": {
     "@commitlint/cli": "17.1.2",
@@ -22,10 +23,10 @@
     "@typescript-eslint/parser": "^5.39.0",
     "eslint": "^8.25.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.25.4",
     "eslint-config-prettier": "8.5.0",
-    "prettier": "2.7.1",
+    "eslint-plugin-import": "^2.25.4",
     "import-sort-style-module": "6.0.0",
+    "prettier": "2.7.1",
     "prettier-plugin-import-sort": "0.0.7"
   },
   "importSort": {
@@ -33,6 +34,10 @@
       "style": "module",
       "parser": "typescript"
     }
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "yarn": ">=1.22.0"
   },
   "workspaces": [
     "web",

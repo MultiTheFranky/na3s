@@ -2,13 +2,13 @@
   "name": "shared",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "build/index.js",
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsc --build",
     "prepush": "yarn build",
     "precommit": "yarn lint && yarn prettier",
     "prettier": "prettier --write \"**/*.{ts,tsx}\"",
-    "lint": "eslint \"**/*.{ts,tsx}\""
-  },
-  "devDependencies": {}
+    "lint": "eslint \"**/*.{ts,tsx}\"",
+    "clear-install": "rm -rf node_modules && yarn"
+  }
 }
