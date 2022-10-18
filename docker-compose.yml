@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  arma3:
+    build: .
+    image: multithefranky/na3s
+    platform: linux/amd64
+    container_name: na3s
+    network_mode: host
+    volumes:
+      - "./missions:/arma3/mpmissions"
+      - "./configs:/arma3/configs"
+      - "./mods:/arma3/mods"
+      - "./servermods:/arma3/servermods"
+    env_file: .env
+    restart: unless-stopped
