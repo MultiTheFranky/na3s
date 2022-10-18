@@ -16,5 +16,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           repository: ${{ env.IMAGE_REPOSITORY }}/na3s
+          tags: multithefranky/na3s:latest
           tag_with_ref: true
           push: true
