@@ -1,8 +1,10 @@
-import { Mod } from "./Mod";
+import Mod from "./Mod";
 
-export type ServerConfig = {
+type ServerConfig = {
   name: string;
   password: string;
   port: number;
   mods: Mod[];
 };
+
+export default ServerConfig;

@@ -2,14 +2,15 @@
   "name": "shared",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "./build/index.js",
+  "main": "./build",
   "scripts": {
     "build": "tsc --build",
     "prepush": "yarn build",
     "precommit": "yarn lint && yarn prettier",
     "prettier": "prettier --write \"**/*.{ts,tsx}\"",
     "lint": "eslint \"**/*.{ts,tsx}\"",
-    "clean": "rm -rf ./build && rm -f ./tsconfig.tsbuildinfo && rm -rf ./node_modules"
+    "clean": "rm -rf ./build && rm -f ./tsconfig.tsbuildinfo && rm -rf ./node_modules",
+    "clean-build": "rm -rf ./build && rm -f ./tsconfig.tsbuildinfo && yarn build"
   },
   "devDependencies": {
     "ts-node": "^10.9.1",

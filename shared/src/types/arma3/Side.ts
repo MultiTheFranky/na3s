@@ -1,1 +1,3 @@
-export type Side = "WEST" | "EAST" | "GUER" | "CIV";
+type Side = "WEST" | "EAST" | "GUER" | "CIV";
+
+export default Side;
