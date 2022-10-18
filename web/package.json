@@ -30,7 +30,8 @@
     "prepush": "yarn build",
     "precommit": "yarn lint && yarn prettier",
     "prettier": "prettier --write \"**/*.{ts,tsx}\"",
-    "lint": "eslint \"**/*.{ts,tsx}\""
+    "lint": "eslint \"**/*.{ts,tsx}\"",
+    "clean": "rm -rf ./build && rm -rf ./node_modules"
   },
   "eslintConfig": {
     "extends": [
