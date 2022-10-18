@@ -9,12 +9,7 @@ import { logError, logInfo } from "../../../logger";
  * @param {SteamCMDCommand[]} args The steamcmd args
  */
 export const runtSteamCMD = async (args?: SteamCMDCommand[]) => {
-  let argsString = "";
-  if (args) {
-    argsString = args
-      .map((arg) => `${arg.command} ${arg.args.join(" ")}`)
-      .join(" +");
-  }
+  const argsString = args && args.length ? args .map((arg) => `${arg.command} ${arg.args.join(" ")}`).join(" +") : "";
 
   const { stdout, stderr } = await exec(`/steamcmd/steamcmd.sh${argsString}`);
 
