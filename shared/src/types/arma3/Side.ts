@@ -1,3 +1,10 @@
-type Side = "WEST" | "EAST" | "GUER" | "CIV";
+enum SideEnum {
+  West = "WEST",
+  East = "EAST",
+  Guer = "GUER",
+  Civ = "CIV",
+}
+
+type Side = SideEnum;
 
 export default Side;
