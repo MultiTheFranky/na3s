@@ -66,7 +66,7 @@ COPY yarn.lock .
 COPY .yarnrc.yml .
 COPY web ./web
 COPY shared ./shared
-COPY server .server
+COPY server ./server
 COPY .yarn ./.yarn
 
 STOPSIGNAL SIGINT
