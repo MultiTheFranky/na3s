@@ -1,3 +1,7 @@
+import "winston-daily-rotate-file";
+
+import { existsSync, mkdirSync } from "fs";
+
 import winston from "winston";
 
 /**
@@ -5,6 +9,12 @@ import winston from "winston";
  * @returns
  */
 export const initLogger = () => {
+  // Create logger folder if it doesn't exists
+  const logsDir = "logs";
+  if (!existsSync(logsDir)) {
+    mkdirSync(logsDir);
+  }
+
   // Setup winston logger
   const logger = winston.createLogger({
     level: "info",
@@ -15,8 +25,21 @@ export const initLogger = () => {
       // - Write all logs with importance level of `error` or less to `error.log`
       // - Write all logs with importance level of `info` or less to `combined.log`
       //
-      new winston.transports.File({ filename: "error.log", level: "error" }),
-      new winston.transports.File({ filename: "combined.log" }),
+      new winston.transports.DailyRotateFile({
+        filename: `${logsDir}/error.log`,
+        datePattern: "YYYY-MM-DD-HH",
+        zippedArchive: true,
+        maxSize: "200m",
+        maxFiles: "14d",
+        level: "error",
+      }),
+      new winston.transports.DailyRotateFile({
+        filename: `${logsDir}/combined.log`,
+        datePattern: "YYYY-MM-DD-HH",
+        zippedArchive: true,
+        maxSize: "200m",
+        maxFiles: "14d",
+      }),
     ],
   });
 
