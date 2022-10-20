@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:bullseye
 
 LABEL maintainer="multithefranky - github.com/multithefranky"
 LABEL org.opencontainers.image.source=https://github.com/multithefranky/na3s
