@@ -62,11 +62,4 @@ VOLUME /steamcmd
 
 STOPSIGNAL SIGINT
 
-# Copy web, server and shared files
-COPY web /web
-COPY server /server
-COPY shared /shared
-
-CMD ["yarn",""];
-
-CMD ["yarn","start"];
+CMD ["yarn","install-launch"];

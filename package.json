@@ -7,16 +7,15 @@
     "dev": "yarn dev:server & yarn dev:client",
     "dev:server": "cd server && yarn dev",
     "dev:client": "cd client && yarn dev",
-    "start": "yarn start:server & yarn start:client",
-    "start:server": "cd server && yarn start",
-    "start:client": "cd client && yarn start",
+    "start": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} --exclude share run start",
     "prepare": "husky install",
     "precommit": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run precommit",
     "prepush": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run prepush",
     "clean": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run clean && rm -rf node_modules && yarn cache clean && yarn && yarn build",
     "build": "yarn workspaces foreach -ipv --topological-dev -j ${AGENT_CPU:-2} run build",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "lint": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run lint"
+    "lint": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run lint",
+    "install-launch": "yarn && yarn build && yarn start"
   },
   "devDependencies": {
     "@commitlint/cli": "17.1.2",
