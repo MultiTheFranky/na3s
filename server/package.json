@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf ./build && tsc",
     "dev": "nodemon",
-    "start": "npm run build && node build/index.js",
+    "start": "node build/index.js",
     "prepush": "yarn build",
     "precommit": "yarn lint && yarn prettier",
     "prettier": "prettier --write \"**/*.{ts,tsx}\"",
@@ -14,7 +14,8 @@
     "clean": "rm -rf ./build && rm -rf ./node_modules"
   },
   "dependencies": {
-    "winston": "^3.8.2"
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "4.7.1"
   },
   "devDependencies": {
     "@types/node": "^18.11.0",
