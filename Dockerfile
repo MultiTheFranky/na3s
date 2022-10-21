@@ -54,19 +54,23 @@ EXPOSE 2306/udp
 # Expose web ports
 EXPOSE 3000/tcp
 
-# Set working directory
-WORKDIR /arma3
-
 # Set steamcmd as a volume
 VOLUME /steamcmd
 
+# Set working directory
+WORKDIR /na3s
+
+# Copy all necessary files
+COPY package.json .
+COPY yarn.lock .
+COPY .yarnrc.yml .
+COPY web ./web
+COPY shared ./shared
+COPY server ./server
+COPY .yarn ./.yarn
+
 STOPSIGNAL SIGINT
 
-# Copy web, server and shared files
-COPY web /web
-COPY server /server
-COPY shared /shared
+RUN ["yarn"]
 
-CMD ["yarn",""];
-
-CMD ["yarn","start"];
+CMD ["yarn","install-launch"];
