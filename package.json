@@ -4,9 +4,7 @@
   "description": "na3s",
   "private": true,
   "scripts": {
-    "dev": "yarn dev:server & yarn dev:client",
-    "dev:server": "cd server && yarn dev",
-    "dev:client": "cd client && yarn dev",
+    "dev": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run dev",
     "start": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} --exclude share run start",
     "prepare": "husky install",
     "precommit": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run precommit",

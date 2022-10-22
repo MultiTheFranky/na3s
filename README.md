@@ -2,6 +2,7 @@
 
 ![https://github.com/MultiTheFranky/na3s/issues](https://img.shields.io/github/issues/MultiTheFranky/na3s) ![https://github.com/MultiTheFranky/na3s/fork](https://img.shields.io/github/forks/MultiTheFranky/na3s) ![](https://img.shields.io/github/stars/MultiTheFranky/na3s) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![](https://github.com/multithefranky/na3s/actions/workflows/docker-image.yml/badge.svg) ![](https://github.com/multithefranky/na3s/actions/workflows/docker-github.yml/badge.svg)
+![](https://img.shields.io/docker/pulls/multithefranky/na3s.svg?style=flat-square)
 
 ## Description
 

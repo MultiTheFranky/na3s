@@ -4,6 +4,7 @@
   "license": "MIT",
   "main": "./build",
   "scripts": {
+    "dev": "tsc -w",
     "build": "tsc --build",
     "prepush": "yarn build",
     "precommit": "yarn lint && yarn prettier",

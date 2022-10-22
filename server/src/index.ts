@@ -1,7 +1,8 @@
-import { initLogger, logInfo } from "./logger";
+import "./api";
+
+import { initLogger } from "./logger";
 
 (async () => {
   // Init logger
   initLogger();
-  logInfo("🚀 Server started 🚀");
 })();
