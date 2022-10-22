@@ -1,7 +1,8 @@
 name: Docker Image CI
 
-pull_request:
-  types: [opened, synchronize, reopened]
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   docker:
