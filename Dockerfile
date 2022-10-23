@@ -78,4 +78,4 @@ STOPSIGNAL SIGINT
 
 RUN ["yarn"]
 
-CMD ["yarn","install-launch"];
+CMD ["yarn","launch-prod"];
