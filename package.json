@@ -4,16 +4,16 @@
   "description": "na3s",
   "private": true,
   "scripts": {
-    "dev": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run dev",
-    "start": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} --exclude share run start",
+    "dev": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run dev",
+    "start": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} --exclude share run start",
     "prepare": "husky install",
-    "precommit": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run precommit",
-    "prepush": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run prepush",
-    "clean": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run clean && rm -rf node_modules && yarn cache clean && yarn && yarn build",
-    "build": "yarn workspaces foreach -ipv --topological-dev -j ${AGENT_CPU:-2} run build",
+    "precommit": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run precommit",
+    "prepush": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run prepush",
+    "clean": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run clean && rm -rf node_modules && yarn cache clean && yarn && yarn build",
+    "build": "yarn workspaces foreach -ipv --topological-dev -j ${AGENT_CPU:-3} run build",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "lint": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-2} run lint",
-    "install-launch": "yarn && yarn build && yarn start"
+    "lint": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run lint",
+    "launch-prod": "yarn build && yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run launch-prod"
   },
   "devDependencies": {
     "@commitlint/cli": "17.1.2",

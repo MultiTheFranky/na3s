@@ -5,13 +5,14 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf ./build && tsc",
-    "dev": "nodemon",
+    "dev": "env-cmd -f ../.env nodemon",
     "start": "node build/index.js",
     "prepush": "yarn build",
     "precommit": "yarn lint && yarn prettier",
     "prettier": "prettier --write \"**/*.{ts,tsx}\"",
     "lint": "eslint \"**/*.{ts,tsx}\"",
-    "clean": "rm -rf ./build && rm -rf ./node_modules"
+    "clean": "rm -rf ./build && rm -rf ./node_modules",
+    "launch-prod": "env-cmd -f ../.env yarn start"
   },
   "dependencies": {
     "winston": "^3.8.2",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.0",
+    "env-cmd": "10.1.0",
     "nodemon": "^2.0.20",
     "rimraf": "^3.0.2",
     "shared": "1.0.0",

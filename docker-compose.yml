@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  arma3:
+  na3s:
     build: .
     image: multithefranky/na3s
     platform: linux/amd64
@@ -11,5 +11,6 @@ services:
       - "./configs:/arma3/configs"
       - "./mods:/arma3/mods"
       - "./servermods:/arma3/servermods"
+      - "./mongodb:/mongodb"
     env_file: .env
     restart: unless-stopped

@@ -1,16 +1,22 @@
 // Express API
 import express from "express";
 
+import { loadEnvironmentVariables } from "../env";
 import { router as apiRouter } from "./api.router";
+import { ServerEnvironment } from "./types";
 
-export const router = express.Router();
+(async () => {
+  const router = express.Router();
 
-router.use("/api", apiRouter);
+  router.use("/api", apiRouter);
 
-const app = express();
+  const app = express();
 
-app.use(router);
+  app.use(router);
 
-app.listen(3000, () => {
-  console.log("🚀 Server is running on port 8000 🚀");
-});
+  const { SERVER_PORT } = await loadEnvironmentVariables<ServerEnvironment>();
+
+  app.listen(SERVER_PORT, () => {
+    console.log("🚀 Server is running on port 8000 🚀");
+  });
+})();

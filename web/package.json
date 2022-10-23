@@ -26,12 +26,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "react-scripts start",
+    "dev": "env-cmd -f ../.env react-scripts start",
     "prepush": "yarn build",
     "precommit": "yarn lint && yarn prettier",
     "prettier": "prettier --write \"**/*.{ts,tsx}\"",
     "lint": "eslint \"**/*.{ts,tsx}\"",
-    "clean": "rm -rf ./build && rm -rf ./node_modules"
+    "clean": "rm -rf ./build && rm -rf ./node_modules",
+    "launch-prod": "env-cmd -f ../.env serve -s build"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +53,8 @@
     ]
   },
   "devDependencies": {
+    "env-cmd": "10.1.0",
+    "serve": "14.0.1",
     "web-vitals": "^3.0.3"
   }
 }
