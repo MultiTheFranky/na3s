@@ -4,16 +4,18 @@
   "license": "MIT",
   "main": "./build",
   "scripts": {
-    "dev": "tsc -w",
+    "dev": "env-cmd -f ../.env tsc -w &",
     "build": "tsc --build",
     "prepush": "yarn build",
     "precommit": "yarn lint && yarn prettier",
     "prettier": "prettier --write \"**/*.{ts,tsx}\"",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "clean": "rm -rf ./build && rm -f ./tsconfig.tsbuildinfo && rm -rf ./node_modules",
-    "clean-build": "rm -rf ./build && rm -f ./tsconfig.tsbuildinfo && yarn build"
+    "clean-build": "rm -rf ./build && rm -f ./tsconfig.tsbuildinfo && yarn build",
+    "launch-prod": "env-cmd -f ../.env node ./build/index.js"
   },
   "devDependencies": {
+    "env-cmd": "10.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4"
   }
