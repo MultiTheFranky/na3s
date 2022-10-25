@@ -24,27 +24,29 @@ RUN apt-get update \
     && \
     mkdir -p /steamcmd \
     && \
-    wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf - -C /steamcmd \
+    wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf - -C /steamcmd
+
+# Install mongodb
+RUN echo "deb http://repo.mongodb.org/apt/debian bullseye/mongodb-org/5.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list \
     && \
-    mkdir -p /mongodb \
+    wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add - \
     && \
-    cd mongodb \
+    apt-get update \
     && \
-    wget -qO- 'https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian10-4.4.6.tgz' | tar zxf - -C /mongodb \
+    apt-get install -y --no-install-recommends --no-install-suggests \
+        mongodb-org \
     && \
-    mv mongodb-linux-x86_64-debian10-4.4.6/* .  \
+    apt-get remove --purge -y \
     && \
-    rm -rf mongodb-linux-x86_64-debian10-4.4.6 \
+    apt-get clean autoclean \
     && \
-    rm -rf /mongodb/mongodb-linux-x86_64-debian10-4.4.6.tgz \
+    apt-get autoremove -y \
     && \
-    export PATH=$PATH:/mongodb/mongodb-linux-x86_64-debian10-4.4.6/bin \
+    rm -rf /var/lib/apt/lists/* \
     && \
-    mkdir data \
+    sudo systemctl enable --now mongod \
     && \
-    cd bin \
-    && \
-    ./mongod --dbpath ../data --fork --logpath ../data/mongod.log
+    sudo systemctl status mongod
 
 # Default environment variables
 #SERVER ENVS
@@ -60,7 +62,7 @@ EXPOSE ${WEB_PORT}/tcp
 VOLUME /steamcmd
 
 # Set mongodb as a volume
-VOLUME /mongodb
+VOLUME /data/db
 
 # Set working directory
 WORKDIR /na3s
@@ -73,6 +75,7 @@ COPY web ./web
 COPY shared ./shared
 COPY server ./server
 COPY .yarn ./.yarn
+COPY .env.example .env
 
 STOPSIGNAL SIGINT
 

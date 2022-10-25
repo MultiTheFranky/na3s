@@ -11,6 +11,6 @@ services:
       - "./configs:/arma3/configs"
       - "./mods:/arma3/mods"
       - "./servermods:/arma3/servermods"
-      - "./mongodb:/mongodb"
+      - "/db:/data/db"
     env_file: .env
     restart: unless-stopped

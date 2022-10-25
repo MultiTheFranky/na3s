@@ -1,0 +1,375 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        admin:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      xml:
+        name: User
+    JWT:
+      type: object
+      properties:
+        token:
+          type: string
+          format: JWT
+      xml:
+        name: JWT
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      scopes:
+        admin: Grants write access
+        user: Grants read access
+/web/user/login:
+  post:
+    summary: Login a user
+    description: Login a user
+    tags:
+      - User
+    security: []
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                description: The email of the user
+                example: "test@test.com"
+              password:
+                type: string
+                description: The password of the user
+                example: "test"
+    responses:
+      "200":
+        description: The user has been logged in
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: The token of the user
+                  example: "542/&$H1231"
+      "400":
+        description: Invalid request or Invalid credentials
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "Invalid credentials"
+      "404":
+        description: User not found
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "User not found"
+      "500":
+        description: Internal server error
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "Internal server error"
+/web/user/register:
+  post:
+    summary: Register a user
+    description: Register a user
+    tags:
+      - User
+    security:
+      - bearerAuth: [admin]
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                description: The email of the user
+                example: "test@test.com"
+              password:
+                type: string
+                description: The password of the user
+                example: "test"
+              name:
+                type: string
+                description: The name of the user
+                example: "Test"
+              admin:
+                type: boolean
+                description: The admin status of the user
+                example: false
+    responses:
+      "200":
+        description: The user has been registered
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: The token of the register user
+                  example: "542/&$H1231"
+      "400":
+        description: Invalid request or User already exists
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "Invalid request"
+      "401":
+        description: User not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "User not authorized"
+      "500":
+        description: Internal server error
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "Server error"
+/web/user/{email}:
+  get:
+    summary: Get a user
+    description: Get a user
+    tags:
+      - User
+    security:
+      - bearerAuth: [admin]
+    parameters:
+      - name: email
+        in: path
+        description: The email of the user
+        required: true
+        schema:
+          type: string
+          example: "test@test.com"
+    responses:
+      "200":
+        description: The user has been found
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: "#/components/schemas/User"
+      "400":
+        description: Schema validation error
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "Schema validation error"
+      "401":
+        description: User not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "User not authorized"
+      "404":
+        description: User not found
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "User not found"
+      "500":
+        description: Internal server error
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "Server error"
+/web/user:
+  get:
+    summary: Get all users
+    description: Get all users
+    tags:
+      - User
+    security:
+      - bearerAuth: [admin]
+    responses:
+      "200":
+        description: The users have been found
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                users:
+                  type: array
+                  description: The users
+                  items:
+                    type: object
+                    ref: "#/components/schemas/User"
+      "401":
+        description: User not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "User not authorized"
+      "500":
+        description: Internal server error
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "Server error"
+  put:
+    summary: Update a user
+    description: Update a user
+    tags:
+      - User
+    security:
+      - bearerAuth: [admin]
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              oldUser:
+                $ref: "#/components/schemas/User"
+              newUser:
+                $ref: "#/components/schemas/User"
+    responses:
+      "200":
+        description: The user has been updated
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: "#/components/schemas/User"
+      "400":
+        description: Schema validation error
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "Schema validation error"
+      "401":
+        description: User not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "User not authorized"
+      "404":
+        description: User not found
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "User not found"
+      "500":
+        description: Internal server error
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "Server error"
+  delete:
+    summary: Delete a user
+    description: Delete a user
+    tags:
+      - User
+    security:
+      - bearerAuth: [admin]
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                description: The email of the user
+                example: "test@test.com"
+    responses:
+      "200":
+        description: The user has been deleted
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The message of the response
+              example: "User deleted"
+      "400":
+        description: Schema validation error
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "Schema validation error"
+      "401":
+        description: User not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "User not authorized"
+      "404":
+        description: User not found
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "User not found"
+      "500":
+        description: Internal server error
+        content:
+          text/plain:
+            schema:
+              type: string
+              description: The error of the response
+              example: "Server error"

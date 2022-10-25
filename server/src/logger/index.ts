@@ -15,11 +15,26 @@ export const initLogger = () => {
     mkdirSync(logsDir);
   }
 
+  const alignColorsAndTime = winston.format.combine(
+    winston.format.colorize({
+      all: true,
+    }),
+    winston.format.label({
+      label: "[NA3S]",
+    }),
+    winston.format.timestamp({
+      format: "YYYY-MM-DD HH:mm:ss",
+    }),
+    winston.format.printf(
+      (info) => `${info.timestamp} ${info.level} ${info.label}: ${info.message}`
+    ),
+    winston.format.align()
+  );
+
   // Setup winston logger
   const logger = winston.createLogger({
     level: "info",
     format: winston.format.json(),
-    defaultMeta: { service: "server" },
     transports: [
       //
       // - Write all logs with importance level of `error` or less to `error.log`
@@ -46,15 +61,26 @@ export const initLogger = () => {
   if (process.env.NODE_ENV !== "production") {
     logger.add(
       new winston.transports.Console({
-        format: winston.format.simple(),
+        format: winston.format.combine(
+          winston.format.colorize(),
+          alignColorsAndTime
+        ),
       })
     );
   }
 
+  winston.addColors({
+    error: "red",
+    warn: "yellow",
+    info: "blue",
+  });
+
+  logger.info("📝 Logger initialized 📝");
+
   return logger;
 };
 
-const logger = initLogger();
+export const logger = initLogger();
 
 /**
  * Function to log information

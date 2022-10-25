@@ -5,7 +5,7 @@ import { startArma3Server } from ".";
 
 const router = express.Router();
 
-router.post("/on", async (req, res) => {
+router.post("/start", async (req, res) => {
   //Get the server config from the request body
   try {
     const serverConfig = req.body as Arma3ServerConfig;
