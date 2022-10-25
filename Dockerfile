@@ -26,28 +26,6 @@ RUN apt-get update \
     && \
     wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf - -C /steamcmd
 
-# Install mongodb
-RUN echo "deb http://repo.mongodb.org/apt/debian bullseye/mongodb-org/5.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list \
-    && \
-    wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add - \
-    && \
-    apt-get update \
-    && \
-    apt-get install -y --no-install-recommends --no-install-suggests \
-        mongodb-org \
-    && \
-    apt-get remove --purge -y \
-    && \
-    apt-get clean autoclean \
-    && \
-    apt-get autoremove -y \
-    && \
-    rm -rf /var/lib/apt/lists/* \
-    && \
-    sudo systemctl enable --now mongod \
-    && \
-    sudo systemctl status mongod
-
 # Default environment variables
 #SERVER ENVS
 ENV SERVER_PORT=8000
@@ -58,11 +36,15 @@ ENV WEB_PORT=3000
 # Expose web ports
 EXPOSE ${WEB_PORT}/tcp
 
+# Expose arma ports
+EXPOSE 2302/udp
+EXPOSE 2303/udp
+EXPOSE 2304/udp
+EXPOSE 2305/udp
+EXPOSE 2306/udp
+
 # Set steamcmd as a volume
 VOLUME /steamcmd
-
-# Set mongodb as a volume
-VOLUME /data/db
 
 # Set working directory
 WORKDIR /na3s
@@ -79,6 +61,6 @@ COPY .env.example .env
 
 STOPSIGNAL SIGINT
 
-RUN ["yarn"]
+RUN yarn
 
-CMD ["yarn","launch-prod"];
+ENTRYPOINT ["yarn","launch-prod"];
