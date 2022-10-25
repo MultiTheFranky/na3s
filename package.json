@@ -44,5 +44,9 @@
     "web",
     "server",
     "shared"
-  ]
+  ],
+  "dependencies": {
+    "@reduxjs/toolkit": "1.8.6",
+    "redux-thunk": "2.4.1"
+  }
 }
