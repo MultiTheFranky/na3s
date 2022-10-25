@@ -24,7 +24,27 @@ RUN apt-get update \
     && \
     mkdir -p /steamcmd \
     && \
-    wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf - -C /steamcmd
+    wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf - -C /steamcmd \
+    && \
+    mkdir -p /mongodb \
+    && \
+    cd mongodb \
+    && \
+    wget -qO- 'https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian10-4.4.6.tgz' | tar zxf - -C /mongodb \
+    && \
+    mv mongodb-linux-x86_64-debian10-4.4.6/* .  \
+    && \
+    rm -rf mongodb-linux-x86_64-debian10-4.4.6 \
+    && \
+    rm -rf /mongodb/mongodb-linux-x86_64-debian10-4.4.6.tgz \
+    && \
+    export PATH=$PATH:/mongodb/mongodb-linux-x86_64-debian10-4.4.6/bin \
+    && \
+    mkdir data \
+    && \
+    cd bin \
+    && \
+    ./mongod --dbpath ../data --fork --logpath ../data/mongod.log
 
 # Default environment variables
 #SERVER ENVS
@@ -45,6 +65,9 @@ EXPOSE 2306/udp
 
 # Set steamcmd as a volume
 VOLUME /steamcmd
+
+# Set mongodb as a volume
+VOLUME /mongodb
 
 # Set working directory
 WORKDIR /na3s
