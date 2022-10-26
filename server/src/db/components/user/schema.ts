@@ -36,7 +36,7 @@ export const deleteUserSchema: joi.ObjectSchema<User> = joi.object({
   email: joi.string().email().required(),
 });
 
-export const dbUserSchema = new Schema({
+export const dbUserSchema = new Schema<User>({
   name: {
     type: String,
     required: true,
@@ -52,6 +52,14 @@ export const dbUserSchema = new Schema({
   },
   admin: {
     type: Boolean,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    required: true,
+  },
+  updatedAt: {
+    type: Date,
     required: true,
   },
 });

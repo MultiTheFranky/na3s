@@ -137,7 +137,7 @@ export const getUser = async (req: Request, res: Response) => {
     }
 
     // Get the email from the request body
-    const { email } = req.body;
+    const { email } = req.params;
 
     // Get the user from the database
     const user = await getUserByEmail(email);
@@ -289,11 +289,8 @@ export const updateUser = async (req: Request, res: Response) => {
     const { oldUser, newUser }: { oldUser: User; newUser: User } = req.body;
     // Check if the old user exists and the new user does not exist
     const oldUserExists = await getUserByEmail(oldUser.email);
-    const newUserExists = await getUserByEmail(newUser.email);
-    if (!oldUserExists || newUserExists) {
-      return res
-        .status(404)
-        .send("The old user does not exist or the new user already exists");
+    if (!oldUserExists) {
+      return res.status(404).send("The old user does not exist");
     }
 
     // Update the user
