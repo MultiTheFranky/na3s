@@ -2,7 +2,7 @@ version: "3.8"
 services:
   na3s:
     build: .
-    image: na3s
+    image: multithefranky/na3s
     platform: linux/amd64
     container_name: na3s
     volumes:
