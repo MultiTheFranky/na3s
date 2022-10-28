@@ -56,6 +56,13 @@ ENV WEB_PORT=3000
 # Expose web ports
 EXPOSE ${WEB_PORT}/tcp
 
+# Expose arma ports
+EXPOSE 2302/udp
+EXPOSE 2303/udp
+EXPOSE 2304/udp
+EXPOSE 2305/udp
+EXPOSE 2306/udp
+
 # Set steamcmd as a volume
 VOLUME /steamcmd
 
@@ -73,9 +80,10 @@ COPY web ./web
 COPY shared ./shared
 COPY server ./server
 COPY .yarn ./.yarn
+COPY .env.example .env
 
 STOPSIGNAL SIGINT
 
-RUN ["yarn"]
+RUN yarn
 
-CMD ["yarn","launch-prod"];
+ENTRYPOINT ["yarn","launch-prod"];

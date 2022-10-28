@@ -5,7 +5,6 @@ services:
     image: multithefranky/na3s
     platform: linux/amd64
     container_name: na3s
-    network_mode: host
     volumes:
       - "./missions:/arma3/mpmissions"
       - "./configs:/arma3/configs"
@@ -13,4 +12,19 @@ services:
       - "./servermods:/arma3/servermods"
       - "./mongodb:/mongodb"
     env_file: .env
+    ports:
+      - "2302:2302/udp"
+      - "2303:2303/udp"
+      - "2304:2304/udp"
+      - "2305:2305/udp"
+      - "2306:2306/udp"
+      - "3123:3000"
+    restart: unless-stopped
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    volumes:
+      - "./db:/data/db"
+    ports:
+      - "27017:27017"
     restart: unless-stopped

@@ -1,9 +1,7 @@
-import Side from "./Side";
+import { Side } from "./Side";
 
-type Player = {
+export type Player = {
   id: string;
   name: string;
   side: Side;
 };
-
-export default Player;
