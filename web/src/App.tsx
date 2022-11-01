@@ -1,6 +1,6 @@
 import "./App.css";
-import { WebSocketLog } from "./component/webSocketLog";
 
+import { WebSocketLog } from "./component/webSocketLog";
 import { WSProvider } from "./context/webSocket";
 
 /**
@@ -11,10 +11,10 @@ function App() {
   return (
     <div className="App">
       <WSProvider>
-      <header className="App-header">
+        <header className="App-header">
           <div>
             <WebSocketLog />
-        </div>
+          </div>
         </header>
       </WSProvider>
     </div>

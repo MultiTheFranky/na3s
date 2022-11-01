@@ -39,9 +39,11 @@ export const WSProvider = ({ children }: { children: ReactElement }) => {
 /**
  * Main function to create a websocket
  */
-const createWebSocket = (webSocket: WebSocket | null,
+const createWebSocket = (
+  webSocket: WebSocket | null,
   setWebSocket: React.Dispatch<React.SetStateAction<WebSocket | null>>,
-  setWSLogs: React.Dispatch<React.SetStateAction<LogData[]>>) => {
+  setWSLogs: React.Dispatch<React.SetStateAction<LogData[]>>
+) => {
   if (!webSocket || webSocket.readyState === WebSocket.CLOSED) {
     const ws = new WebSocket("ws://localhost:8080");
     ws.onopen = () => {
@@ -56,10 +58,13 @@ const createWebSocket = (webSocket: WebSocket | null,
       console.log("ws closed");
       setWebSocket(null);
       // Reconnect in 5 seconds
-      setTimeout(() => createWebSocket(webSocket, setWebSocket, setWSLogs), 5000);
+      setTimeout(
+        () => createWebSocket(webSocket, setWebSocket, setWSLogs),
+        5000
+      );
     };
     ws.onerror = (e) => {
       console.log("ws error", e);
     };
-  };
+  }
 };
