@@ -31,7 +31,7 @@ import { JWTUser } from "./user.router";
  * @param token
  * @returns Promise<boolean>
  */
-const isAdmin = async (token?: string): Promise<boolean> => {
+export const isAdmin = async (token?: string): Promise<boolean> => {
   if (!token) {
     return false;
   }

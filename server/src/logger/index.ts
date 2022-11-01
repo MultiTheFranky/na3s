@@ -4,11 +4,13 @@ import { existsSync, mkdirSync } from "fs";
 
 import winston from "winston";
 
+import { wsSend } from "../api/websocket";
+
 /**
- *
- * @returns
+ * Function to create a logger
+ * @return {winston.Logger} The logger
  */
-export const initLogger = () => {
+const initLogger = () => {
   // Create logger folder if it doesn't exists
   const logsDir = "logs";
   if (!existsSync(logsDir)) {
@@ -61,10 +63,7 @@ export const initLogger = () => {
   if (process.env.NODE_ENV !== "production") {
     logger.add(
       new winston.transports.Console({
-        format: winston.format.combine(
-          winston.format.colorize(),
-          alignColorsAndTime
-        ),
+        format: alignColorsAndTime,
       })
     );
   }
@@ -75,18 +74,38 @@ export const initLogger = () => {
     info: "blue",
   });
 
+  /* logger.exceptions.handle(
+    new winston.transports.Console({
+      format: alignColorsAndTime,
+    }),
+    new winston.transports.DailyRotateFile({
+      filename: `${logsDir}/exceptions.log`,
+      datePattern: "YYYY-MM-DD-HH",
+      zippedArchive: true,
+      maxSize: "200m",
+      maxFiles: "14d",
+    })
+  ); */
+
   logger.info("📝 Logger initialized 📝");
 
   return logger;
 };
 
-export const logger = initLogger();
+const logger = initLogger();
 
 /**
  * Function to log information
  * @param {string } message Message to log
  */
 export const logInfo = (message: string) => {
+  wsSend({
+    type: "info",
+    message: `${new Date()
+      .toISOString()
+      .replace(/T/, " ")
+      .replace(/\..+/, "")} info [NA3S]: ${message}`,
+  });
   logger.info(message);
 };
 
@@ -95,6 +114,13 @@ export const logInfo = (message: string) => {
  * @param {string } message Message to log
  */
 export const logWarn = (message: string) => {
+  wsSend({
+    type: "warn",
+    message: `${new Date()
+      .toISOString()
+      .replace(/T/, " ")
+      .replace(/\..+/, "")} warn [NA3S]: ${message}`,
+  });
   logger.warn(message);
 };
 
@@ -103,5 +129,27 @@ export const logWarn = (message: string) => {
  * @param {string } message Message to log
  */
 export const logError = (message: string) => {
+  wsSend({
+    type: "error",
+    message: `${new Date()
+      .toISOString()
+      .replace(/T/, " ")
+      .replace(/\..+/, "")} error [NA3S]: ${message}`,
+  });
   logger.error(message);
+};
+
+/**
+ * Function to log debug
+ * @param {string } message Message to log
+ */
+export const logDebug = (message: string) => {
+  wsSend({
+    type: "debug",
+    message: `${new Date()
+      .toISOString()
+      .replace(/T/, " ")
+      .replace(/\..+/, "")} debug [NA3S]: ${message}`,
+  });
+  logger.debug(message);
 };

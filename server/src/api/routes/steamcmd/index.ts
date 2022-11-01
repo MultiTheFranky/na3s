@@ -1,28 +1,12 @@
-import { exec } from "child_process";
-
-import { SteamCMDCommand } from "shared";
-
-import { logError, logInfo } from "../../../logger";
+import { getUpdateInterval } from "../../../db/components/system";
+import { mainSteamCMD } from "./utils";
 
 /**
- * Function to run steamcmd
- * @param {SteamCMDCommand[]} args The steamcmd args
+ * Main function for steamcmd checker system
  */
-export const runtSteamCMD = async (args?: SteamCMDCommand[]) => {
-  const argsString =
-    args && args.length
-      ? args.map((arg) => `${arg.command} ${arg.args.join(" ")}`).join(" +")
-      : "";
-
-  const { stdout, stderr } = await exec(`/steamcmd/steamcmd.sh${argsString}`);
-
-  if (stdout)
-    stdout?.on("data", (data) => {
-      logInfo(data);
-    });
-
-  if (stderr)
-    stderr?.on("data", (data) => {
-      logError(data);
-    });
+export const initSteamCMDCheckerSystem = async () => {
+  await mainSteamCMD();
+  setInterval(async () => {
+    await mainSteamCMD();
+  }, 60000 * (await getUpdateInterval()));
 };
