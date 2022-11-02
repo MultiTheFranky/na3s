@@ -47,24 +47,18 @@ const createWebSocket = (
   if (!webSocket || webSocket.readyState === WebSocket.CLOSED) {
     const ws = new WebSocket("ws://localhost:8080");
     ws.onopen = () => {
-      console.log("ws connected");
       setWebSocket(ws);
     };
     ws.onmessage = (e) => {
-      console.log("ws message", JSON.parse(e.data));
       setWSLogs((prev) => [...prev, JSON.parse(e.data) as LogData]);
     };
     ws.onclose = () => {
-      console.log("ws closed");
       setWebSocket(null);
       // Reconnect in 5 seconds
       setTimeout(
         () => createWebSocket(webSocket, setWebSocket, setWSLogs),
         5000
       );
-    };
-    ws.onerror = (e) => {
-      console.log("ws error", e);
     };
   }
 };
