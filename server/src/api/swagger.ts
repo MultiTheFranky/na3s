@@ -39,7 +39,7 @@ export const initSwagger = async (app: Application) => {
 
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-  logInfo("🛠 Swagger initialized 🛠");
+  logInfo("🔧 Swagger initialized 🔧");
   logInfo(
     `📄 Swagger documentation available at http://localhost:${SERVER_PORT}/api-docs 📄`
   );
