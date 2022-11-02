@@ -1,3 +1,4 @@
+import joi from "joi";
 import { Schema } from "mongoose";
 import { SteamCMDUser } from "shared";
 
@@ -21,3 +22,8 @@ export const DBSteamCMDUserSchema = new Schema<SteamCMDUser>(
     },
   }
 );
+
+export const steamCMDUserSchema: joi.ObjectSchema<SteamCMDUser> = joi.object({
+  username: joi.string().required(),
+  password: joi.string().required(),
+});

@@ -5,7 +5,6 @@ import { DBSteamCMDUserSchema } from "./schema";
 
 /**
  * Get a SteamCMDUser by its username.
- * @param {string} username - The username of the steamcmd user
  * @return {Promise<SteamCMDUser | null>} A promise that resolves with the SteamCMDUser or null if not found
  */
 export const getSteamCMDUser = async (): Promise<SteamCMDUser | undefined> => {
@@ -33,17 +32,15 @@ export const createSteamCMDUser = async (
 
 /**
  * Update a SteamCMDUser by its username.
- * @param {string} username - The username of the SteamCMDUser to update
  * @param {SteamCMDUser} user - The SteamCMDUser to update
  * @return {Promise<SteamCMDUser | null>} A promise that resolves with the updated SteamCMDUser or null if not found
  */
 export const updateSteamCMDUser = async (
-  username: string,
   user: SteamCMDUser
 ): Promise<SteamCMDUser | null> => {
   return await mongoose
     .model("SteamCMDUser", DBSteamCMDUserSchema)
-    .findOneAndUpdate({ username }, user);
+    .findOneAndUpdate({}, user);
 };
 
 /**
