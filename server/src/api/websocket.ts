@@ -1,5 +1,7 @@
-import { LogData } from "shared";
+import { LogData, WebSocketEnv } from "shared";
 import { WebSocketServer } from "ws";
+import { loadEnvironmentVariables } from "../env";
+import { logInfo } from "../logger";
 
 const logsData: LogData[] = [];
 
@@ -8,13 +10,15 @@ export let wss: WebSocketServer;
 /**
  * Function to create a websocket server
  */
-export const ws = () => {
-  wss = new WebSocketServer({ port: 8080 });
+export const ws = async () => {
+  const { WEBHOOK_PORT } = loadEnvironmentVariables<WebSocketEnv>();
+  wss = new WebSocketServer({ port: WEBHOOK_PORT });
   wss.on("connection", (ws) => {
     logsData.forEach((data) => {
       ws.send(JSON.stringify(data));
     });
   });
+  logInfo(`🎯 Websocket server is running on port ${WEBHOOK_PORT} 🎯`);
 };
 
 /**

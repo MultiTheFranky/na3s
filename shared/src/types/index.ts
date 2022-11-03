@@ -19,3 +19,6 @@ export { System } from "./db/System";
 
 // Log
 export { LogData, LogType } from "./log/Log";
+
+// Websocket
+export { WebSocketEnv } from "./ws/WebSocket";
