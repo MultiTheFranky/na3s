@@ -8,7 +8,7 @@ import { Mod } from "shared/src/types/arma3/Mod";
 
 import { getArma3Servers } from "../../../db/components/arma3/server";
 import { getSteamCMDUser } from "../../../db/components/steamcmd/user";
-import { setIsSteamCMDRunning } from "../../../db/components/system";
+import { getSystemDb, updateSystemDb } from "../../../db/components/system";
 import { logError, logInfo, logWarn } from "../../../logger";
 import { wsSend } from "../../websocket";
 
@@ -19,28 +19,29 @@ import { wsSend } from "../../websocket";
 export const mainSteamCMD = async () => {
   // Get the steamcmd user
   const user = await getSteamCMDUser();
-  // Get the arma 3 servers
-  const servers = await getArma3Servers();
   if (!user) {
     logWarn("No steamcmd user found");
     return;
   }
+  const system = await getSystemDb();
+  // Get the arma 3 servers
+  const servers = await getArma3Servers();
   // If server is not updated and all servers are stopped, update it
   if (!(await isServerUpdated()) && !servers.find((s) => s.isOn)) {
-    await setIsSteamCMDRunning(true);
+    await updateSystemDb({ ...system, isSteamCMDRunning: true });
     await updateServer(user);
-    await setIsSteamCMDRunning(false);
+    await updateSystemDb({ ...system, isSteamCMDRunning: false });
   }
   // Update all outdated mods
   for (const server of servers) {
     const modsToUpdate = server.mods.filter((mod) => !isModUpdated(mod));
     if (modsToUpdate.length > 0 && !server.isOn) {
-      await setIsSteamCMDRunning(true);
+      await updateSystemDb({ ...system, isSteamCMDRunning: true });
       await updateMods(modsToUpdate, user);
-      await setIsSteamCMDRunning(false);
+      await updateSystemDb({ ...system, isSteamCMDRunning: false });
     }
   }
-  await setIsSteamCMDRunning(false);
+  await updateSystemDb({ ...system, isSteamCMDRunning: false });
 };
 
 /**

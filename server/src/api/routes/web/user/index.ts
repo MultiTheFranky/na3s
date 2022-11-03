@@ -3,10 +3,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { User } from "shared";
 
-import {
-  getFirstExecution,
-  setFirstExecution,
-} from "../../../../db/components/system";
+import { getSystemDb, updateSystemDb } from "../../../../db/components/system";
 import {
   createUser,
   deleteUserByEmail,
@@ -303,9 +300,15 @@ export const updateUser = async (req: Request, res: Response) => {
     };
     await updateUserByEmail(newUser.email, updatedUser);
 
+    const system = await getSystemDb();
+
     // If oldUser is admin and firstExecution is true, set firstExecution to false
-    if (oldUser.email === "admin@admin.com" && (await getFirstExecution())) {
-      await setFirstExecution(false);
+    if (
+      oldUser.email === "admin@admin.com" &&
+      system &&
+      system.firstExecution
+    ) {
+      await updateSystemDb({ ...system, firstExecution: false });
     }
 
     // If the oldUser email is different from the newUser email, delete the oldUser

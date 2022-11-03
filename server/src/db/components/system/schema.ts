@@ -1,3 +1,4 @@
+import joi from "joi";
 import { Schema } from "mongoose";
 import { System } from "shared";
 
@@ -29,3 +30,10 @@ export const dbSystemSchema = new Schema<System>(
     },
   }
 );
+
+export const systemSchema: joi.ObjectSchema<System> = joi.object({
+  firstExecution: joi.boolean().required(),
+  updateInterval: joi.number().required(),
+  debug: joi.boolean().required(),
+  isSteamCMDRunning: joi.boolean().required(),
+});

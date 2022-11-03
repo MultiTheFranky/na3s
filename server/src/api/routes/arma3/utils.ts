@@ -4,7 +4,7 @@ import { writeFileSync } from "fs";
 import { Arma3Server } from "shared";
 
 import { updateArma3Server } from "../../../db/components/arma3/server";
-import { getDebug, getIsSteamCMDRunning } from "../../../db/components/system";
+import { getSystemDb } from "../../../db/components/system";
 import { logDebug, logError, logInfo } from "../../../logger";
 
 /**
@@ -17,7 +17,8 @@ export const startServer = async (server: Arma3Server) => {
     logError("Server is already on");
     return false;
   }
-  if (await getIsSteamCMDRunning()) {
+  const system = await getSystemDb();
+  if (system && system.isSteamCMDRunning) {
     logError("SteamCMD is running");
     return false;
   }
@@ -51,7 +52,7 @@ export const startServer = async (server: Arma3Server) => {
     }
   }
 
-  if (await getDebug()) {
+  if (system && system.debug) {
     logDebug(
       `Started server with PID: ${
         server.serverPID

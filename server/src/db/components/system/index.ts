@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { System } from "shared";
 
 import { dbSystemSchema } from "./schema";
 
@@ -6,90 +7,40 @@ import { dbSystemSchema } from "./schema";
  * Init System DB
  */
 export const initSystemDb = async () => {
-  const system = await mongoose.model("System", dbSystemSchema).findOne({});
+  const system = (await mongoose
+    .model("System", dbSystemSchema)
+    .findOne({})) as System;
   if (!system) {
     await mongoose.model("System", dbSystemSchema).create({
       firstExecution: true,
       updateInterval: 60,
+      debug: true,
+      isSteamCMDRunning: false,
     });
   }
 };
 
 /**
- * Set first execution
- * @param {boolean} firstExecution
+ * Get System DB
+ * @returns System DB
  */
-export const setFirstExecution = async (firstExecution: boolean) => {
-  await mongoose
-    .model("System", dbSystemSchema)
-    .updateOne({}, { firstExecution });
+export const getSystemDb = async () => {
+  return await mongoose.model("System", dbSystemSchema).findOne({});
 };
 
 /**
- * Get first execution
- * @returns {boolean}
+ * Update System DB
+ * @param system System DB
+ * @returns System DB
  */
-export const getFirstExecution = async (): Promise<boolean> => {
-  const system = await mongoose.model("System", dbSystemSchema).findOne({});
-  return system?.firstExecution || false;
+export const updateSystemDb = async (system: any) => {
+  return await mongoose.model("System", dbSystemSchema).updateOne({}, system);
 };
 
 /**
- * Set update interval
- * @param {number} updateInterval
- * @returns {Promise<void>}
+ * Delete System DB
+ * @returns System DB
  */
-export const setUpdateInterval = async (updateInterval: number) => {
-  await mongoose
-    .model("System", dbSystemSchema)
-    .updateOne({}, { updateInterval });
-};
-
-/**
- * Get update interval
- * @returns {number}
- * @returns {Promise<number>}
- */
-export const getUpdateInterval = async (): Promise<number> => {
-  const system = await mongoose.model("System", dbSystemSchema).findOne({});
-  return system?.updateInterval || 60;
-};
-
-/**
- * Set debug
- * @param {boolean} debug
- * @returns {Promise<void>}
- */
-export const setDebug = async (debug: boolean) => {
-  await mongoose.model("System", dbSystemSchema).updateOne({}, { debug });
-};
-
-/**
- * Get debug
- * @returns {boolean}
- * @returns {Promise<boolean>}
- */
-export const getDebug = async (): Promise<boolean> => {
-  const system = await mongoose.model("System", dbSystemSchema).findOne({});
-  return system?.debug || false;
-};
-
-/**
- * Set isSteamCMDRunning
- * @param {boolean} isSteamCMDRunning
- * @returns {Promise<void>}
- */
-export const setIsSteamCMDRunning = async (isSteamCMDRunning: boolean) => {
-  await mongoose
-    .model("System", dbSystemSchema)
-    .updateOne({}, { isSteamCMDRunning });
-};
-
-/**
- * Get isSteamCMDRunning
- * @returns {Promise<boolean>}
- */
-export const getIsSteamCMDRunning = async (): Promise<boolean> => {
-  const system = await mongoose.model("System", dbSystemSchema).findOne({});
-  return system?.isSteamCMDRunning || false;
+export const deleteSystemDb = async () => {
+  return await mongoose.model("System", dbSystemSchema).deleteOne({});
 };
