@@ -20,7 +20,7 @@ services:
       - "2306:2306/udp"
       - "${PORT}:${PORT}"
       - "${SERVER_PORT}:${SERVER_PORT}"
-      - "${WEBHOOK_PORT}:${WEBHOOK_PORT}"
+      - "${REACT_APP_WEBHOOK_PORT}:${REACT_APP_WEBHOOK_PORT}"
     restart: unless-stopped
   mongo:
     image: mongo:latest

@@ -45,7 +45,7 @@ const createWebSocket = (
   setWSLogs: React.Dispatch<React.SetStateAction<LogData[]>>
 ) => {
   if (!webSocket || webSocket.readyState === WebSocket.CLOSED) {
-    const ws = new WebSocket("ws://localhost:8080");
+    const ws = new WebSocket(`ws://${window.location.hostname}:${process.env.REACT_APP_WEBHOOK_PORT ?? 8080}`);
     ws.onopen = () => {
       setWebSocket(ws);
     };

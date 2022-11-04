@@ -11,14 +11,14 @@ export let wss: WebSocketServer;
  * Function to create a websocket server
  */
 export const ws = async () => {
-  const { WEBHOOK_PORT } = loadEnvironmentVariables<WebSocketEnv>();
-  wss = new WebSocketServer({ port: WEBHOOK_PORT });
+  const { REACT_APP_WEBHOOK_PORT } = loadEnvironmentVariables<WebSocketEnv>();
+  wss = new WebSocketServer({ port: REACT_APP_WEBHOOK_PORT });
   wss.on("connection", (ws) => {
     logsData.forEach((data) => {
       ws.send(JSON.stringify(data));
     });
   });
-  logInfo(`🎯 Websocket server is running on port ${WEBHOOK_PORT} 🎯`);
+  logInfo(`🎯 Websocket server is running on port ${REACT_APP_WEBHOOK_PORT} 🎯`);
 };
 
 /**

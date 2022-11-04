@@ -1,3 +1,3 @@
 export type WebSocketEnv = {
-    WEBHOOK_PORT: number;
+    REACT_APP_WEBHOOK_PORT: number;
 };
