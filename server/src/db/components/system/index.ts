@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import { System } from "shared";
 
+import { logInfo } from "../../../logger";
+import { createSteamCMDUser } from "../steamcmd/user";
 import { dbSystemSchema } from "./schema";
 
 /**
@@ -18,6 +20,12 @@ export const initSystemDb = async () => {
       isSteamCMDRunning: false,
     });
   }
+  // TODO: Delete this after FE is done
+  await createSteamCMDUser({
+    username: "test",
+    password: "test2",
+    steamGuardCode: null,
+  });
 };
 
 /**
@@ -25,7 +33,9 @@ export const initSystemDb = async () => {
  * @returns System DB
  */
 export const getSystemDb = async () => {
-  return await mongoose.model("System", dbSystemSchema).findOne({});
+  return (
+    await mongoose.model("System", dbSystemSchema).findOne({})
+  )?.toObject() as System;
 };
 
 /**
@@ -33,7 +43,8 @@ export const getSystemDb = async () => {
  * @param system System DB
  * @returns System DB
  */
-export const updateSystemDb = async (system: any) => {
+export const updateSystemDb = async (system: System) => {
+  logInfo(system);
   return await mongoose.model("System", dbSystemSchema).updateOne({}, system);
 };
 

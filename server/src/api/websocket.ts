@@ -1,5 +1,10 @@
 import { LogData, WebSocketEnv } from "shared";
 import { WebSocketServer } from "ws";
+
+import {
+  getSteamCMDUser,
+  updateSteamCMDUser,
+} from "../db/components/steamcmd/user";
 import { loadEnvironmentVariables } from "../env";
 import { logInfo } from "../logger";
 
@@ -18,7 +23,18 @@ export const ws = async () => {
       ws.send(JSON.stringify(data));
     });
   });
-  logInfo(`🎯 Websocket server is running on port ${REACT_APP_WEBHOOK_PORT} 🎯`);
+  wss.on("data", async (data: LogData) => {
+    logInfo(data);
+    if (data.type === "steamGuard" && data.message) {
+      const user = await getSteamCMDUser();
+      if (user) {
+        await updateSteamCMDUser({ ...user, steamGuardCode: data.message });
+      }
+    }
+  });
+  logInfo(
+    `🎯 Websocket server is running on port ${REACT_APP_WEBHOOK_PORT} 🎯`
+  );
 };
 
 /**

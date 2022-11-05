@@ -26,7 +26,7 @@ export const dbSystemSchema = new Schema<System>(
     capped: {
       size: 1024,
       max: 1,
-      autoIndexId: true,
+      autoIndexId: false,
     },
   }
 );

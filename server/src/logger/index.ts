@@ -96,9 +96,9 @@ const logger = initLogger();
 
 /**
  * Function to log information
- * @param {string } message Message to log
+ * @param {any } message Message to log
  */
-export const logInfo = (message: string) => {
+export const logInfo = (message: any) => {
   wsSend({
     type: "info",
     message: `${new Date()
@@ -111,9 +111,9 @@ export const logInfo = (message: string) => {
 
 /**
  * Function to log warnings
- * @param {string } message Message to log
+ * @param {any } message Message to log
  */
-export const logWarn = (message: string) => {
+export const logWarn = (message: any) => {
   wsSend({
     type: "warn",
     message: `${new Date()
@@ -126,9 +126,9 @@ export const logWarn = (message: string) => {
 
 /**
  * Function to log errors
- * @param {string } message Message to log
+ * @param {any } message Message to log
  */
-export const logError = (message: string) => {
+export const logError = (message: any) => {
   wsSend({
     type: "error",
     message: `${new Date()
@@ -141,9 +141,9 @@ export const logError = (message: string) => {
 
 /**
  * Function to log debug
- * @param {string } message Message to log
+ * @param {any } message Message to log
  */
-export const logDebug = (message: string) => {
+export const logDebug = (message: any) => {
   wsSend({
     type: "debug",
     message: `${new Date()
