@@ -1,5 +1,6 @@
 import { exec } from "child_process";
 import { statSync } from "fs";
+import internal from "stream";
 
 import axios from "axios";
 import { DateTime } from "luxon";
@@ -24,6 +25,10 @@ export const mainSteamCMD = async () => {
     return;
   }
   const system = await getSystemDb();
+  if (!system) {
+    logWarn("No system db found");
+    return;
+  }
   // Get the arma 3 servers
   const servers = await getArma3Servers();
   // If server is not updated and all servers are stopped, update it
@@ -49,7 +54,7 @@ export const mainSteamCMD = async () => {
  * @param {SteamCMDCommand[]} args The steamcmd args
  */
 export const runSteamCMD = async (
-  onData: (data: string) => void,
+  onData: (data: string, stdin: internal.Writable) => void,
   onError: (data: string) => void,
   args?: SteamCMDCommand[]
 ) => {
@@ -58,11 +63,23 @@ export const runSteamCMD = async (
       ? args.map((arg) => `${arg.command} ${arg.args.join(" ")}`).join(" ")
       : "";
 
-  const { stdout, stderr } = await exec(`/steamcmd/steamcmd.sh ${argsString}`);
+  const system = await getSystemDb();
+  if (system && system.isSteamCMDRunning) {
+    logWarn("SteamCMD is already running");
+    return;
+  }
 
-  if (stdout)
+  if (system.debug) {
+    logInfo(`/steamcmd/steamcmd.sh ${argsString}`);
+  }
+
+  const { stdout, stderr, stdin } = await exec(
+    `/steamcmd/steamcmd.sh ${argsString}`
+  );
+
+  if (stdout && stdin)
     stdout?.on("data", (data) => {
-      onData(data);
+      onData(data, stdin);
     });
 
   if (stderr)
@@ -75,19 +92,39 @@ export const runSteamCMD = async (
  * Function to update the arma 3 server
  */
 export const updateServer = async (user: SteamCMDUser) => {
+  let steamGuard = false;
   await runSteamCMD(
-    (data) => {
-      wsSend({
-        type: "info",
-        message: data,
-      });
+    (data, stdin) => {
       logInfo(data);
+      if (steamGuard) {
+        steamGuard = false;
+      }
+      if (
+        data.includes(`Logging in user '${user.username}' to Steam Public...`)
+      ) {
+        setTimeout(() => {
+          if (steamGuard) {
+            logInfo("Requesting steam guard code");
+            wsSend({
+              type: "steamGuard",
+              message: "Please enter the steam guard code",
+            });
+            // Wait for the steam guard code
+            const interval = setInterval(async () => {
+              const user = await getSteamCMDUser();
+              if (user && user.steamGuardCode) {
+                clearInterval(interval);
+                steamGuard = false;
+                stdin.write(`${user.steamGuardCode}\n`);
+                stdin.end();
+              }
+            }, 1000);
+          }
+        }, 5000);
+        steamGuard = true;
+      }
     },
     (data) => {
-      wsSend({
-        type: "error",
-        message: data,
-      });
       logError(data);
     },
     [
@@ -105,18 +142,10 @@ export const updateServer = async (user: SteamCMDUser) => {
  */
 export const updateMods = async (mods: Mod[], user: SteamCMDUser) => {
   await runSteamCMD(
-    (data) => {
-      wsSend({
-        type: "info",
-        message: data,
-      });
+    (data, stdin) => {
       logInfo(data);
     },
     (data) => {
-      wsSend({
-        type: "error",
-        message: data,
-      });
       logError(data);
     },
     [
@@ -230,8 +259,8 @@ const getServerFileLastModified = async (): Promise<DateTime> => {
     const stats = await statSync("/arma3/arma3server_x64");
     return DateTime.fromMillis(stats.mtimeMs);
   } catch (error) {
-    if (error instanceof Error) logError(error.message);
-    return DateTime.now();
+    if (error instanceof Error) logWarn(error.message);
+    return DateTime.fromMillis(0);
   }
 };
 

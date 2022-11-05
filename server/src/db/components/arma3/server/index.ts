@@ -17,7 +17,7 @@ export const getArma3Server = async (
   if (!server) {
     return undefined;
   }
-  return server;
+  return server.toObject() as Arma3Server;
 };
 
 /**

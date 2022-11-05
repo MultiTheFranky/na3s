@@ -28,7 +28,7 @@ RUN apt-get update \
     && \
     mkdir -p /mongodb \
     && \
-    cd mongodb \
+    cd /mongodb \
     && \
     wget -qO- 'https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian10-4.4.6.tgz' | tar zxf - -C /mongodb \
     && \
@@ -65,9 +65,6 @@ EXPOSE 2306/udp
 
 # Set steamcmd as a volume
 VOLUME /steamcmd
-
-# Set mongodb as a volume
-VOLUME /mongodb
 
 # Set working directory
 WORKDIR /na3s

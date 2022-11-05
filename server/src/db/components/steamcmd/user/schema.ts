@@ -13,6 +13,10 @@ export const DBSteamCMDUserSchema = new Schema<SteamCMDUser>(
       type: String,
       required: true,
     },
+    steamGuardCode: {
+      type: String,
+      required: false,
+    },
   },
   {
     collection: "steamcmdUser",
@@ -26,4 +30,5 @@ export const DBSteamCMDUserSchema = new Schema<SteamCMDUser>(
 export const steamCMDUserSchema: joi.ObjectSchema<SteamCMDUser> = joi.object({
   username: joi.string().required(),
   password: joi.string().required(),
+  steamGuardCode: joi.string().allow(null).required(),
 });

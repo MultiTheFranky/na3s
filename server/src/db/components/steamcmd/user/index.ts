@@ -14,7 +14,7 @@ export const getSteamCMDUser = async (): Promise<SteamCMDUser | undefined> => {
   if (!user) {
     return undefined;
   }
-  return user;
+  return user.toObject() as SteamCMDUser;
 };
 
 /**
