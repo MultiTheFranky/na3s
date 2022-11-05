@@ -10,7 +10,6 @@ services:
       - "./configs:/arma3/configs"
       - "./mods:/arma3/mods"
       - "./servermods:/arma3/servermods"
-      - "./mongodb:/mongodb"
     env_file: .env
     ports:
       - "2302:2302/udp"
