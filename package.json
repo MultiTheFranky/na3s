@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run dev",
     "start": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} --exclude share run start",
-    "prepare": "husky install",
+    "postinstall": "husky install",
     "precommit": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run precommit",
     "prepush": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run prepush",
     "clean": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run clean && rm -rf node_modules && yarn cache clean && yarn && yarn build",
