@@ -7,7 +7,7 @@ import {
   loginUser,
   registerUser,
   updateUser,
-} from "./user";
+} from ".";
 
 const router = express.Router();
 

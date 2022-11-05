@@ -18,7 +18,9 @@ services:
       - "2304:2304/udp"
       - "2305:2305/udp"
       - "2306:2306/udp"
-      - "3123:3000"
+      - "${PORT}:${PORT}"
+      - "${SERVER_PORT}:${SERVER_PORT}"
+      - "${REACT_APP_WEBHOOK_PORT}:${REACT_APP_WEBHOOK_PORT}"
     restart: unless-stopped
   mongo:
     image: mongo:latest

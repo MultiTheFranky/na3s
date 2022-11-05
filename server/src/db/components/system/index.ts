@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { System } from "shared";
 
 import { dbSystemSchema } from "./schema";
 
@@ -6,29 +7,40 @@ import { dbSystemSchema } from "./schema";
  * Init System DB
  */
 export const initSystemDb = async () => {
-  const system = await mongoose.model("System", dbSystemSchema).findOne({});
+  const system = (await mongoose
+    .model("System", dbSystemSchema)
+    .findOne({})) as System;
   if (!system) {
     await mongoose.model("System", dbSystemSchema).create({
       firstExecution: true,
+      updateInterval: 60,
+      debug: true,
+      isSteamCMDRunning: false,
     });
   }
 };
 
 /**
- * Set first execution
- * @param {boolean} firstExecution
+ * Get System DB
+ * @returns System DB
  */
-export const setFirstExecution = async (firstExecution: boolean) => {
-  await mongoose
-    .model("System", dbSystemSchema)
-    .updateOne({}, { firstExecution });
+export const getSystemDb = async () => {
+  return await mongoose.model("System", dbSystemSchema).findOne({});
 };
 
 /**
- * Get first execution
- * @returns {boolean}
+ * Update System DB
+ * @param system System DB
+ * @returns System DB
  */
-export const getFirstExecution = async (): Promise<boolean> => {
-  const system = await mongoose.model("System", dbSystemSchema).findOne({});
-  return system?.firstExecution || false;
+export const updateSystemDb = async (system: any) => {
+  return await mongoose.model("System", dbSystemSchema).updateOne({}, system);
+};
+
+/**
+ * Delete System DB
+ * @returns System DB
+ */
+export const deleteSystemDb = async () => {
+  return await mongoose.model("System", dbSystemSchema).deleteOne({});
 };

@@ -1,0 +1,202 @@
+components:
+  schemas:
+    SteamCmd:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+/steamcmd:
+  get:
+    summary: Get SteamCMDUser
+    description: Get SteamCMDUser from the database
+    operationId: steamcmd
+    tags:
+      - SteamCMD
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SteamCmd"
+      required: true
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SteamCmd"
+      "401":
+        description: Unauthorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Unauthorized
+      "404":
+        description: Not Found
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Not Found
+      "500":
+        description: Internal Server Error
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Internal Server Error
+  post:
+    summary: Create SteamCMDUser
+    description: Create SteamCMDUser in the database
+    operationId: steamcmd
+    tags:
+      - SteamCMD
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SteamCmd"
+      required: true
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SteamCmd"
+      "400":
+        description: Bad Request
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Bad Request
+      "401":
+        description: Unauthorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Unauthorized
+      "500":
+        description: Internal Server Error
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Internal Server Error
+  put:
+    summary: Update SteamCMDUser
+    description: Update SteamCMDUser in the database
+    operationId: steamcmd
+    tags:
+      - SteamCMD
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SteamCmd"
+      required: true
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SteamCmd"
+      "400":
+        description: Bad Request
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Bad Request
+      "401":
+        description: Unauthorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Unauthorized
+      "500":
+        description: Internal Server Error
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Internal Server Error
+  delete:
+    summary: Delete SteamCMDUser
+    description: Delete SteamCMDUser from the database
+    operationId: steamcmd
+    tags:
+      - SteamCMD
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SteamCmd"
+      required: true
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SteamCmd"
+      "400":
+        description: Bad Request
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Bad Request
+      "401":
+        description: Unauthorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Unauthorized
+      "500":
+        description: Internal Server Error
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Internal Server Error
+/steamcmd/update:
+  post:
+    summary: Update Server and Mods using steamCMD
+    description: Update Server and Mods using steamCMD
+    operationId: steamcmd
+    tags:
+      - SteamCMD
+    responses:
+      "200":
+        description: OK
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Server and mods updated
+      "401":
+        description: Unauthorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Unauthorized
+      "500":
+        description: Internal Server Error
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: Internal Server Error
