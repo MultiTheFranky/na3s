@@ -1,7 +1,7 @@
 import {IRoutes} from './types';
 
 export enum Env {
-  DEVLEOPMENT = 'development',
+  DEVELOPMENT = 'development',
   TEST = 'test',
   PROD = 'prod',
 }

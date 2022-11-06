@@ -2,6 +2,9 @@ import React, {CSSProperties, useMemo} from 'react';
 import {Container} from 'react-bootstrap';
 import {useLocation} from 'react-router-dom';
 import Sidebar from 'src/components/Sidebar';
+import {ROUTES} from 'src/utils/enums';
+
+import Dashboard from '../Dashboard';
 
 interface IComponents {
   [key: string]: React.FC;
@@ -12,7 +15,11 @@ interface IComponents {
  * @returns {React.FC}
  */
 const Main: React.FC = () => {
-  const components: IComponents = {};
+  const components: IComponents = {
+    [ROUTES.home]: Dashboard,
+    [ROUTES.root]: Dashboard,
+  };
+
   const {pathname} = useLocation();
 
   const Content = useMemo(() => {
@@ -38,7 +45,7 @@ const styles = {
     alignItems: 'flex-start',
     textAlign: 'center',
     width: '100%',
-    height: '100%',
+    height: '100vh',
     maxWidth: 'none',
   } as CSSProperties,
   body: {

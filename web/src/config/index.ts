@@ -1,6 +1,6 @@
 import {Env} from '../utils/enums';
 
-const isDevEnv = process.env.NODE_ENV === Env.DEVLEOPMENT;
+const isDevEnv = process.env.NODE_ENV === Env.DEVELOPMENT;
 const isTestEnv = process.env.NODE_ENV === Env.TEST;
 
 const isProdEnv = !isDevEnv && !isTestEnv;
