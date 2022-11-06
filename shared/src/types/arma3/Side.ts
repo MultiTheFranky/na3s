@@ -5,6 +5,4 @@ enum SideEnum {
   Civ = "CIV",
 }
 
-type Side = SideEnum;
-
-export default Side;
+export type Side = SideEnum;

@@ -1,6 +1,4 @@
-type SteamCMDCommand = {
+export type SteamCMDCommand = {
   command: string;
   args: string[];
 };
-
-export default SteamCMDCommand;

@@ -1,0 +1,881 @@
+components:
+  schemas:
+    Mod:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        path:
+          type: string
+    Mission:
+      type: object
+      properties:
+        template:
+          type: string
+          description: The name of the mission template to use
+          example: "MissionName.Altis"
+        difficulty:
+          type: string
+          description: Difficulty of the mission
+          enum:
+            - Recruit
+            - Regular
+            - Veteran
+            - Custom
+          example: "Regular"
+    DisableChannel:
+      type: object
+      properties:
+        channelId:
+          type: string
+          description: The channel ID to disable
+          enum:
+            - Global
+            - Side
+            - Command
+            - Group
+            - Vehicle
+            - Direct
+            - System
+        text:
+          type: boolean
+          description: Whether to disable text messages
+        voice:
+          type: boolean
+          description: Whether to disable voice messages
+    VoteCommand:
+      type: object
+      properties:
+        commandName:
+          type: string
+          description: The name of the command to be executed
+        preMissionStart:
+          type: boolean
+          description: Whether the command should be executed before the mission starts
+        postMissionStart:
+          type: boolean
+          description: Whether the command should be executed after the mission starts
+        votingThreshold:
+          type: integer
+          description: The number of votes required to execute the command
+        percentSideVotingThreshold:
+          type: integer
+          description: The percentage of votes required to execute the command
+    ServerParameters:
+      type: object
+      properties:
+        port:
+          type: integer
+          description: The port of the server
+          example: 2302
+        basicConfig:
+          type: string
+          description: The basic config of the server
+          example: "basic.cfg"
+        config:
+          type: string
+          description: The config of the server
+          example: "config.cfg"
+        mods:
+          type: array
+          description: The mods of the server
+          items:
+            type: string
+            example: "@mod"
+        serverMods:
+          type: array
+          description: The server mods of the server
+          items:
+            type: string
+            example: "@servermod"
+        ranking:
+          type: string
+          description: The ranking of the server
+          example: "ranking.cfg"
+        netLog:
+          type: boolean
+          description: If the net log is enabled
+          example: true
+        profiles:
+          type: string
+          description: The profiles of the server
+          example: "/home/arma3/profiles/profileX"
+        loadMissionToMemory:
+          type: boolean
+          description: If the mission is loaded to memory
+          example: true
+        disableServerThread:
+          type: boolean
+          description: If the server thread is disabled
+          example: true
+        bandwidthAlg:
+          type: number
+          description: The bandwidth algorithm selected
+          example: 2
+        limitFPS:
+          type: number
+          description: The limit FPS
+          example: 60
+      xml:
+        name: ServerParameters
+    BasicServerConfig:
+      type: object
+      properties:
+        MaxMsgSend:
+          type: integer
+          description: The maximum message send
+          example: 128
+        MaxSizeGuaranteed:
+          type: integer
+          description: The maximum size guaranteed
+          example: 256
+        MaxSizeNonguaranteed:
+          type: integer
+          description: The maximum size non-guaranteed
+          example: 256
+        MinBandwidth:
+          type: integer
+          description: The minimum bandwidth
+          example: 0
+        MaxBandwidth:
+          type: integer
+          description: The maximum bandwidth
+          example: 100000
+        MinErrorToSend:
+          type: integer
+          description: The maximum error to send
+          example: 0
+        MinErrorToSendNear:
+          type: integer
+          description: The minimum error to send near
+          example: 0
+        MaxPacketSize:
+          type: integer
+          description: The maximum packet size
+          example: 1440
+        MaxCustomFileSize:
+          type: integer
+          description: The maximum custom file size
+          example: 10485760
+    ServerConfig:
+      type: object
+      properties:
+        hostname:
+          type: string
+          description: The hostname of the server
+          example: "My Server"
+        password:
+          type: string
+          description: The password of the server
+          example: "password"
+        passwordAdmin:
+          type: string
+          description: The admin password of the server
+          example: "adminpassword"
+        serverCommandPassword:
+          type: string
+          description: The server command password of the server
+          example: "servercommandpassword"
+        maxPlayers:
+          type: integer
+          description: The max players of the server
+          example: 64
+        motd:
+          type: array
+          description: The motd of the server
+          items:
+            type: string
+            example: "Welcome"
+        admins:
+          type: array
+          description: The admins of the server
+          items:
+            type: string
+            example: "76561198000000000"
+        headlessClients:
+          type: array
+          description: The headless clients of the server
+          items:
+            type: string
+            example: "127.0.0.1"
+        localClient:
+          type: array
+          description: The local clients of the server
+          items:
+            type: string
+            example: "127.0.0.1"
+        filePatchingExceptions:
+          type: array
+          description: The file patching exceptions of the server
+          items:
+            type: string
+            example: "76561198000000000"
+        voteThreshold:
+          type: number
+          description: The vote threshold of the server
+          example: 0.5
+        voteMissionPlayers:
+          type: integer
+          description: The vote mission players of the server
+          example: 1
+        allowedVoteCmds:
+          type: array
+          description: The allowed vote commands of the server
+          items:
+            $$ref: "#/components/schemas/VoteCommand"
+        allowedVoteAdminCmds:
+          type: array
+          description: The allowed vote admin commands of the server
+          items:
+            $$ref: "#/components/schemas/VoteCommand"
+        kickDuplicate:
+          type: boolean
+          description: If the kick duplicate is enabled
+          example: true
+        loopback:
+          type: boolean
+          description: If the loopback is enabled
+          example: true
+        upnp:
+          type: boolean
+          description: If the upnp is enabled
+          example: true
+        allowedFilePatching:
+          type: boolean
+          description: If the allowed file patching is enabled
+          example: true
+        allowedLoadFileExtensions:
+          type: array
+          description: The allowed load file extensions of the server
+          items:
+            type: string
+            example: "sqf"
+        allowedPreprocessFileExtensions:
+          type: array
+          description: The allowed preprocess file extensions of the server
+          items:
+            type: string
+            example: "sqf"
+        allowedHTMLLoadExtensions:
+          type: array
+          description: The allowed HTML load extensions of the server
+          items:
+            type: string
+            example: "html"
+        allowedHTMLLoadURIs:
+          type: array
+          description: The allowed HTML load URIs of the server
+          items:
+            type: string
+            example: "http://www.google.com"
+        disconnectTimeout:
+          type: integer
+          description: The disconnect timeout of the server
+          example: 10
+        maxDesync:
+          type: integer
+          description: The max desync of the server
+          example: 10
+        maxPing:
+          type: integer
+          description: The max ping of the server
+          example: 10
+        maxPacketLoss:
+          type: integer
+          description: The max packet loss of the server
+          example: 10
+        kickClientOnSlowNetwork:
+          type: array
+          description: If the kick client on slow network is enabled
+          items:
+            type: boolean
+            example: true
+        enablePlayerDiag:
+          type: boolean
+          description: If the enable player diag is enabled
+          example: true
+        callExtReportLimit:
+          type: integer
+          description: The call ext report limit of the server
+          example: 10
+        kickTimeout:
+          type: integer
+          description: The kick timeout of the server
+          example: 10
+        votingTimeout:
+          type: integer
+          description: The voting timeout of the server
+          example: 10
+        roleTimeout:
+          type: integer
+          description: The role timeout of the server
+          example: 10
+        briefingTimeout:
+          type: integer
+          description: The briefing timeout of the server
+          example: 10
+        debriefingTimeout:
+          type: integer
+          description: The debriefing timeout of the server
+          example: 10
+        lobbyIdleTimeout:
+          type: integer
+          description: The lobby idle timeout of the server
+          example: 10
+        missionToServerRestart:
+          type: integer
+          description: The mission to server restart of the server
+          example: 10
+        missionToShutdown:
+          type: integer
+          description: The mission to shutdown of the server
+          example: 10
+        autoSelectMission:
+          type: boolean
+          description: If the auto select mission is enabled
+          example: true
+        randomMissionOrder:
+          type: boolean
+          description: If the random mission order is enabled
+          example: true
+        disableChannels:
+          type: array
+          description: The disabled channels of the server
+          items:
+            $ref: "#/components/schemas/DisableChannel"
+        verifySignatures:
+          type: integer
+          description: The verify signatures of the server
+          example: 2
+        drawingsInMap:
+          type: boolean
+          description: If the drawings in map is enabled
+          example: true
+        disableVoN:
+          type: boolean
+          description: If the disable VoN is enabled
+          example: true
+        vonCodecQuality:
+          type: integer
+          description: The VoN codec quality of the server
+          example: 10
+        vonCodec:
+          type: integer
+          description: The VoN codec of the server
+          example: 10
+        skipLobby:
+          type: boolean
+          description: If the skip lobby is enabled
+          example: true
+        allowProfileGlasses:
+          type: boolean
+          description: If the allow profile glasses is enabled
+          example: true
+        zeusCompositionScriptLevel:
+          type: integer
+          description: The zeus composition script level of the server
+          example: 10
+        logFile:
+          type: string
+          description: The log file of the server
+          example: "server.log"
+        doubleIdDetected:
+          type: string
+          description: The double ID detected of the server command
+          example: "kick"
+        onUserConnected:
+          type: string
+          description: The on user connected of the server command
+          example: "kick"
+        onUserDisconnected:
+          type: string
+          description: The on user disconnected of the server command
+          example: "kick"
+        onHackedData:
+          type: string
+          description: The on hacked data of the server command
+          example: "kick"
+        onDifferentData:
+          type: string
+          description: The on different data of the server command
+          example: "kick"
+        onUnsignedData:
+          type: string
+          description: The on unsigned data of the server command
+          example: "kick"
+        onUserKick:
+          type: string
+          description: The on user kick of the server command
+          example: "kick"
+        regularCheck:
+          type: string
+          description: The regular check of the server command
+          example: "kick"
+        battlEye:
+          type: boolean
+          description: If the battlEye is enabled
+          example: true
+        timeStampFormat:
+          type: string
+          description: The time stamp format of the server
+          example: "short"
+        forceRotorLibSimulation:
+          type: number
+          description: The force rotor lib simulation of the server
+          example: 0
+        persistent:
+          type: boolean
+          description: If the persistent is enabled
+          example: true
+        requiereBuild:
+          type: string
+          description: The requiere build of the server
+          example: "100000"
+        statisticsEnabled:
+          type: boolean
+          description: If the statistics enabled is enabled
+          example: true
+        forceDifficulty:
+          type: string
+          description: The force difficulty of the server
+          example: "custom"
+        missionWhitelist:
+          type: array
+          description: The mission whitelist of the server
+          items:
+            type: string
+            example: "mission1.altis"
+        steamProtocolMaxPacketSize:
+          type: integer
+          description: The steam protocol max packet size of the server
+          example: 1024
+        logObjectNotFound:
+          type: boolean
+          description: If the log object not found is enabled
+          example: true
+        skipDescriptionParsing:
+          type: boolean
+          description: If the skip description parsing is enabled
+          example: true
+        ignoreMissionLoadErrors:
+          type: boolean
+          description: If the ignore mission load errors is enabled
+          example: true
+        queueSizeLogG:
+          type: integer
+          description: The queue size log G of the server
+          example: 10
+        armaUnitsTimeout:
+          type: integer
+          description: The arma units timeout of the server
+          example: 10
+      xml:
+        name: ServerConfig
+    Arma3Server:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the server
+          format: uuid
+          example: "123e4567-e89b-12d3-a456-426655440000"
+        isOn:
+          type: boolean
+          description: If the server is on
+          example: true
+        parameters:
+          $ref: "#/components/schemas/ServerParameters"
+        serverSettings:
+          $ref: "#/components/schemas/ServerConfig"
+        basicServerSettings:
+          $ref: "#/components/schemas/BasicServerConfig"
+        missions:
+          type: array
+          description: The missions of the server
+          items:
+            $ref: "#/components/schemas/Mission"
+        mods:
+          type: array
+          description: The mods of the server
+          items:
+            $ref: "#/components/schemas/Mod"
+        serverMods:
+          type: array
+          description: The server mods of the server
+          items:
+            $ref: "#/components/schemas/Mod"
+        serverPID:
+          type: integer
+          description: The server PID of the server
+          example: 10
+/arma3server/start:
+  post:
+    tags:
+      - Arma3Server
+    security:
+      - bearerAuth: [admin]
+    summary: Start the server
+    operationId: startServer
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the server
+                format: uuid
+                example: "123e4567-e89b-12d3-a456-426655440000"
+    responses:
+      "200":
+        description: The server is started
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server started"
+      "400":
+        description: The server is already started or missing id
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server already started"
+      "401":
+        description: Not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Not authorized"
+      "404":
+        description: The server is not found
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not found"
+      "500":
+        description: The server is not started
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not started"
+/arma3server/stop:
+  post:
+    tags:
+      - Arma3Server
+    security:
+      - bearerAuth: [admin]
+    summary: Stop the server
+    operationId: stopServer
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the server
+                format: uuid
+                example: "123e4567-e89b-12d3-a456-426655440000"
+    responses:
+      "200":
+        description: The server is stopped
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server stopped"
+      "400":
+        description: The server is already stopped or missing id
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server already stopped"
+      "401":
+        description: Not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Not authorized"
+      "404":
+        description: The server is not found
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not found"
+      "500":
+        description: The server is not stopped
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not stopped"
+/arma3server/restart:
+  post:
+    tags:
+      - Arma3Server
+    security:
+      - bearerAuth: [admin]
+    summary: Restart the server
+    operationId: restartServer
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the server
+                format: uuid
+                example: "123e4567-e89b-12d3-a456-426655440000"
+    responses:
+      "200":
+        description: The server is restarted
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server restarted"
+      "400":
+        description: Missing id
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Missing id"
+      "401":
+        description: Not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Not authorized"
+      "404":
+        description: The server is not found
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not found"
+      "500":
+        description: The server is not restarted
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not restarted"
+/arma3server:
+  post:
+    tags:
+      - Arma3Server
+    security:
+      - bearerAuth: [admin]
+    summary: Add a server
+    operationId: addServer
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $$ref: "#/components/schemas/Arma3Server"
+    responses:
+      "200":
+        description: The server is added
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server added"
+      "400":
+        description: Body not valid
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Missing name or parameters"
+      "401":
+        description: Not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Not authorized"
+      "500":
+        description: The server is not added
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not added"
+  delete:
+    tags:
+      - Arma3Server
+    security:
+      - bearerAuth: [admin]
+    summary: Delete a server
+    operationId: deleteServer
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the server
+                format: uuid
+                example: "123e4567-e89b-12d3-a456-426655440000"
+    responses:
+      "200":
+        description: The server is deleted
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server deleted"
+      "400":
+        description: Missing id
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Missing id"
+      "401":
+        description: Not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Not authorized"
+      "404":
+        description: The server is not found
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not found"
+      "500":
+        description: The server is not deleted
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not deleted"
+  put:
+    tags:
+      - Arma3Server
+    security:
+      - bearerAuth: [admin]
+    summary: Update a server
+    operationId: updateServer
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $$ref: "#/components/schemas/Arma3Server"
+    responses:
+      "200":
+        description: The server is updated
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server updated"
+      "400":
+        description: Body not valid
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Missing name or parameters"
+      "401":
+        description: Not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Not authorized"
+      "404":
+        description: The server is not found
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not found"
+      "500":
+        description: The server is not updated
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not updated"
+  get:
+    tags:
+      - Arma3Server
+    summary: Get all servers
+    operationId: getServers
+    responses:
+      "200":
+        description: The servers are returned
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $$ref: "#/components/schemas/Arma3Server"
+      "500":
+        description: The servers are not returned
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Servers not returned"
+/arma3server/{id}:
+  get:
+    tags:
+      - Arma3Server
+    summary: Get a server
+    operationId: getServer
+    parameters:
+      - name: id
+        in: path
+        description: The ID of the server
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: "123e4567-e89b-12d3-a456-426655440000"
+    responses:
+      "200":
+        description: The server is returned
+        content:
+          application/json:
+            schema:
+              $$ref: "#/components/schemas/Arma3Server"
+      "404":
+        description: The server is not found
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not found"
+      "500":
+        description: The server is not returned
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Server not returned"
