@@ -3436,6 +3436,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/warning@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@types/warning@npm:3.0.0"
+  checksum: 120dcf90600d583c68a60872200061eab9318ae15ea898581f8e9a6dc71b7941095dd81d8324e36d2a6006e5e12b6fc1cf8eda00cc514ee12bb39a912cc4e040
+  languageName: node
+  linkType: hard
+
 "@types/webidl-conversions@npm:*":
   version: 7.0.0
   resolution: "@types/webidl-conversions@npm:7.0.0"
@@ -9719,6 +9726,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.isarguments@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "lodash.isarguments@npm:3.1.0"
+  checksum: ae1526f3eb5c61c77944b101b1f655f846ecbedcb9e6b073526eba6890dc0f13f09f72e11ffbf6540b602caee319af9ac363d6cdd6be41f4ee453436f04f13b5
+  languageName: node
+  linkType: hard
+
+"lodash.isarray@npm:^3.0.0":
+  version: 3.0.4
+  resolution: "lodash.isarray@npm:3.0.4"
+  checksum: 3b298fb76ff16981353f7d0695d8680be9451b74d2e76714ddbd903a90fbaa8e1d84979d0ae99325f5a9033776771154b19e05027ab23de83202251c8abe81b5
+  languageName: node
+  linkType: hard
+
 "lodash.isboolean@npm:^3.0.3":
   version: 3.0.3
   resolution: "lodash.isboolean@npm:3.0.3"
@@ -9747,6 +9768,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.isplainobject@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "lodash.isplainobject@npm:3.2.0"
+  dependencies:
+    lodash._basefor: ^3.0.0
+    lodash.isarguments: ^3.0.0
+    lodash.keysin: ^3.0.0
+  checksum: c49ee7642dea4427aeae37ad987fb43b574e15322c0cd5c8e9d6097099394dd68783948da646291e25471b7faa917ce8e18435403a6da89b1652520ea735d9c5
+  languageName: node
+  linkType: hard
+
 "lodash.isplainobject@npm:^4.0.6":
   version: 4.0.6
   resolution: "lodash.isplainobject@npm:4.0.6"
@@ -9758,6 +9790,16 @@ __metadata:
   version: 4.0.1
   resolution: "lodash.isstring@npm:4.0.1"
   checksum: eaac87ae9636848af08021083d796e2eea3d02e80082ab8a9955309569cb3a463ce97fd281d7dc119e402b2e7d8c54a23914b15d2fc7fff56461511dc8937ba0
+  languageName: node
+  linkType: hard
+
+"lodash.keysin@npm:^3.0.0":
+  version: 3.0.8
+  resolution: "lodash.keysin@npm:3.0.8"
+  dependencies:
+    lodash.isarguments: ^3.0.0
+    lodash.isarray: ^3.0.0
+  checksum: 7d748df105266a474b6b3b17bef339f16c8625fb3091e3c6cad4a02ad943617c3fd5cb9036fed0dbd4a38e6d02e1f6d4a8cc5399f075d411f2a8f21b2eb8a8e4
   languageName: node
   linkType: hard
 
