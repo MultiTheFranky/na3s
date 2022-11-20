@@ -4,6 +4,8 @@
 ![](https://github.com/multithefranky/na3s/actions/workflows/docker-image.yml/badge.svg) ![](https://github.com/multithefranky/na3s/actions/workflows/docker-github.yml/badge.svg)
 ![](https://img.shields.io/docker/pulls/multithefranky/na3s.svg?style=flat-square)
 
+![na3s_logo](https://user-images.githubusercontent.com/23142431/202914836-1fd3fc94-28b6-4ca5-9645-6ca338fb3c8b.png)
+
 ## Description
 
 NA3S (Node Arma 3 Server) is a Node All in One application to be used on a docker image to easy use and fast deployment on new servers
