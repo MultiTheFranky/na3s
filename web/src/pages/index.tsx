@@ -1,6 +1,7 @@
-import { Home as HomeIcon, StorageOutlined } from '@mui/icons-material';
-import { Home } from './home';
-import { ServerList } from './serverList';
+import { Home as HomeIcon, StorageOutlined } from "@mui/icons-material";
+
+import { Home } from "./home";
+import { ServerList } from "./serverList";
 
 export type Page = {
   name: string;

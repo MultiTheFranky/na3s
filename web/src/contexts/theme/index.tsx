@@ -1,8 +1,8 @@
 import { ThemeProvider } from "@emotion/react";
 import {
-    PaletteOptions,
-    createTheme,
-    responsiveFontSizes,
+  PaletteOptions,
+  createTheme,
+  responsiveFontSizes,
 } from "@mui/material";
 import React, { ReactElement } from "react";
 
@@ -14,29 +14,29 @@ const secondaryLight = "#ffffff";
 const secondaryDark = "#c9c9c9";
 
 const colors = {
-    primary: {
-        main: primaryMain,
-        light: primaryLight,
-        dark: primaryDark,
-    },
-    secondary: {
-        main: secondaryMain,
-        light: secondaryLight,
-        dark: secondaryDark,
-    },
+  primary: {
+    main: primaryMain,
+    light: primaryLight,
+    dark: primaryDark,
+  },
+  secondary: {
+    main: secondaryMain,
+    light: secondaryLight,
+    dark: secondaryDark,
+  },
 };
 
-const paletteOptions: PaletteOptions = colors
+const paletteOptions: PaletteOptions = colors;
 
 export const ColorModeContext = React.createContext({
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    toggleColorMode: () => { },
-    theme: createTheme({
-        palette: {
-            mode: "light",
-            ...paletteOptions,
-        },
-    }),
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  toggleColorMode: () => {},
+  theme: createTheme({
+    palette: {
+      mode: "light",
+      ...paletteOptions,
+    },
+  }),
 });
 
 /**
@@ -45,32 +45,32 @@ export const ColorModeContext = React.createContext({
  * @returns {JSX.Element}
  */
 export const ColorModeProvider = ({ children }: { children: ReactElement }) => {
-    const [mode, setMode] = React.useState<"light" | "dark">("light");
-    const themeOptions = createTheme({
-        palette: {
-            mode: mode,
-            ...paletteOptions,
-            background: {
-                default: mode === "light" ? "#fff" : "#121212",
-                paper: mode === "light" ? "#fff" : "#1e1e1e",
-            },
-        },
-    });
-    const colorMode = React.useMemo(
-        () => ({
-            toggleColorMode: () => {
-                setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-            },
-            theme: responsiveFontSizes(themeOptions),
-        }),
-        [mode]
-    );
+  const [mode, setMode] = React.useState<"light" | "dark">("light");
+  const themeOptions = createTheme({
+    palette: {
+      mode: mode,
+      ...paletteOptions,
+      background: {
+        default: mode === "light" ? "#fff" : "#121212",
+        paper: mode === "light" ? "#fff" : "#1e1e1e",
+      },
+    },
+  });
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+      },
+      theme: responsiveFontSizes(themeOptions),
+    }),
+    [mode]
+  );
 
-    return (
-        <ColorModeContext.Provider value={colorMode}>
-            <ThemeProvider theme={responsiveFontSizes(themeOptions)}>
-                {children}
-            </ThemeProvider>
-        </ColorModeContext.Provider>
-    );
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={responsiveFontSizes(themeOptions)}>
+        {children}
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
 };

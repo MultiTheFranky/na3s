@@ -1,7 +1,7 @@
+import { AuthProvider } from "./contexts/auth";
+import { ColorModeProvider } from "./contexts/theme";
 import { WSProvider } from "./contexts/webSocket";
-import { AuthProvider } from './contexts/auth';
-import { AppRouter } from './router';
-import { ColorModeProvider } from './contexts/theme';
+import { AppRouter } from "./router";
 
 /**
  * Function App component
