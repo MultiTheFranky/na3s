@@ -1,6 +1,6 @@
 import React from "react";
 
-import { WSContext } from "../context/webSocket";
+import { WSContext } from "../../contexts/webSocket";
 
 /**
  *
@@ -18,10 +18,10 @@ export const WebSocketLog = () => {
               log.type === "error"
                 ? "red"
                 : log.type === "warn"
-                ? "orange"
-                : log.type === "info"
-                ? "blue"
-                : "cyan",
+                  ? "orange"
+                  : log.type === "info"
+                    ? "blue"
+                    : "cyan",
             textAlign: "left",
           }}
         >

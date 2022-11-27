@@ -1,3 +1,4 @@
+import cors from "cors";
 // Express API
 import express from "express";
 
@@ -19,6 +20,8 @@ export const initApi = async () => {
   router.use("/api", apiRouter);
 
   const app = express();
+
+  app.use(cors());
 
   app.use(express.json());
 

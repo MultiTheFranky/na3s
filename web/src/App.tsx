@@ -1,7 +1,7 @@
-import "./App.css";
-
-import { WebSocketLog } from "./component/webSocketLog";
-import { WSProvider } from "./context/webSocket";
+import { WSProvider } from "./contexts/webSocket";
+import { AuthProvider } from './contexts/auth';
+import { AppRouter } from './router';
+import { ColorModeProvider } from './contexts/theme';
 
 /**
  * Function App component
@@ -9,15 +9,13 @@ import { WSProvider } from "./context/webSocket";
  */
 function App() {
   return (
-    <div className="App">
+    <AuthProvider>
       <WSProvider>
-        <header className="App-header">
-          <div>
-            <WebSocketLog />
-          </div>
-        </header>
+        <ColorModeProvider>
+          <AppRouter />
+        </ColorModeProvider>
       </WSProvider>
-    </div>
+    </AuthProvider>
   );
 }
 
