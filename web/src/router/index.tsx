@@ -5,6 +5,7 @@ import { Dashboard } from "../components";
 import { AuthContext } from "../contexts/auth/index";
 import { Login } from "../pages/login/index";
 import { NotFound } from "../pages/notFound/index";
+
 /**
  * Router component
  * @returns {JSX.Element}
