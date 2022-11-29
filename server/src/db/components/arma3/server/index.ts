@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
 import { Arma3Server } from "shared";
 
-import { DBArma3ServerSchema } from "./schema";
+import { arma3ServerModel } from "./schema";
 
 /**
  * Function to get a server
@@ -11,9 +10,7 @@ import { DBArma3ServerSchema } from "./schema";
 export const getArma3Server = async (
   id: string
 ): Promise<Arma3Server | undefined> => {
-  const server = await mongoose
-    .model("arma3Server", DBArma3ServerSchema)
-    .findOne({ id });
+  const server = await arma3ServerModel.findOne({ id });
   if (!server) {
     return undefined;
   }
@@ -24,7 +21,7 @@ export const getArma3Server = async (
  * Function to get all servers
  */
 export const getArma3Servers = async (): Promise<Arma3Server[]> => {
-  return await mongoose.model("arma3Server", DBArma3ServerSchema).find();
+  return await arma3ServerModel.find();
 };
 
 /**
@@ -35,9 +32,7 @@ export const getArma3Servers = async (): Promise<Arma3Server[]> => {
 export const createArma3Server = async (
   server: Arma3Server
 ): Promise<Arma3Server> => {
-  return await mongoose
-    .model("arma3Server", DBArma3ServerSchema)
-    .create(server);
+  return await arma3ServerModel.create(server);
 };
 
 /**
@@ -50,9 +45,7 @@ export const updateArma3Server = async (
   id: string,
   server: Arma3Server
 ): Promise<Arma3Server | null> => {
-  return await mongoose
-    .model("arma3Server", DBArma3ServerSchema)
-    .findOneAndUpdate({ id }, server);
+  return await arma3ServerModel.findOneAndUpdate({ id }, server);
 };
 
 /**
@@ -63,7 +56,5 @@ export const updateArma3Server = async (
 export const deleteArma3Server = async (
   id: string
 ): Promise<Arma3Server | null> => {
-  return await mongoose
-    .model("arma3Server", DBArma3ServerSchema)
-    .findOneAndDelete({ id });
+  return await arma3ServerModel.findOneAndDelete({ id });
 };

@@ -1,5 +1,5 @@
 import joi from "joi";
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { Arma3Server } from "shared";
 
 import {
@@ -58,6 +58,11 @@ export const DBArma3ServerSchema = new Schema<Arma3Server>(
       autoIndexId: false,
     },
   }
+);
+
+export const arma3ServerModel = model<typeof DBArma3ServerSchema>(
+  "Arma3Server",
+  DBArma3ServerSchema
 );
 
 export const serverSchema: joi.ObjectSchema<Arma3Server> = joi.object({

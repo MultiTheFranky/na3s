@@ -1,5 +1,5 @@
 import joi from "joi";
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { User } from "shared";
 
 export const userSchema: joi.ObjectSchema<User> = joi.object({
@@ -63,3 +63,5 @@ export const dbUserSchema = new Schema<User>({
     required: true,
   },
 });
+
+export const userModel = model<typeof dbUserSchema>("User", dbUserSchema);

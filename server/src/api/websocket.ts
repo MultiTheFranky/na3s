@@ -24,7 +24,7 @@ export const ws = async () => {
     });
   });
   wss.on("data", async (data: LogData) => {
-    logInfo(data);
+    logInfo(data.message);
     if (data.type === "steamGuard" && data.message) {
       const user = await getSteamCMDUser();
       if (user) {

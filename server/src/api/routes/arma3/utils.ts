@@ -3,7 +3,10 @@ import { writeFileSync } from "fs";
 
 import { Arma3Server } from "shared";
 
-import { updateArma3Server } from "../../../db/components/arma3/server";
+import {
+  getArma3Server,
+  updateArma3Server,
+} from "../../../db/components/arma3/server";
 import { getSystemDb } from "../../../db/components/system";
 import { logDebug, logError, logInfo } from "../../../logger";
 
@@ -25,28 +28,35 @@ export const startServer = async (server: Arma3Server) => {
 
   await writeConfig(server);
 
-  const { stdout, stderr, pid } = await exec(
-    `/arma3/arma3server_x64 ${buildArgsString(server)}`
-  );
+  const child = await exec(`/arma3/arma3server_x64 ${buildArgsString(server)}`);
 
-  if (stdout)
-    stdout?.on("data", (data) => {
+  if (child.stdout)
+    child.stdout.on("data", (data) => {
       logInfo(data);
     });
 
-  if (stderr)
-    stderr?.on("data", (data) => {
+  if (child.stderr)
+    child.stderr.on("data", (data) => {
       logError(data);
     });
 
+  child.on("exit", async (code) => {
+    logDebug(`Server exited with code ${code}`);
+    const serverToUpdate = await getArma3Server(server.id);
+    if (serverToUpdate) {
+      serverToUpdate.isOn = false;
+      await updateArma3Server(serverToUpdate.id, serverToUpdate);
+    }
+  });
+
   server.isOn = true;
   await updateArma3Server(server.id, server);
-  if (pid) {
-    server.serverPID = pid;
+  if (child.pid) {
+    server.serverPID = child.pid;
   } else {
-    const { stdout } = exec("pgrep -f arma3server_x64");
-    if (stdout) {
-      stdout.on("data", (data) => {
+    const childPID = exec("pgrep -f arma3server_x64");
+    if (childPID.stdout) {
+      childPID.stdout.on("data", (data) => {
         server.serverPID = data;
       });
     }

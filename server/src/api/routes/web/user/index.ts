@@ -29,8 +29,25 @@ import { JWTUser } from "./user.router";
  * @returns Promise<boolean>
  */
 export const isAdmin = async (token?: string): Promise<boolean> => {
+  const email = await getEmailFromToken(token);
+  if (email) {
+    // Check if the user is an admin
+    const checkUser = await getUserByEmail(email);
+    return checkUser?.admin || false;
+  }
+  return false;
+};
+
+/**
+ *
+ * @param token
+ * @returns
+ */
+export const getEmailFromToken = async (
+  token?: string
+): Promise<string | undefined> => {
   if (!token) {
-    return false;
+    return undefined;
   }
   // Remove the Bearer from the token
   const tokenWithoutBearer = token.split(" ")[1];
@@ -38,11 +55,10 @@ export const isAdmin = async (token?: string): Promise<boolean> => {
   const { user, exp } = jwt.verify(tokenWithoutBearer, JWT_SECRET) as JWTUser;
   // Check expiration
   if (exp < Date.now().valueOf() / 1000) {
-    return false;
+    return undefined;
   }
-  // Check if the user is an admin
-  const checkUser = await getUserByEmail(user.email);
-  return checkUser?.admin || false;
+
+  return user.email;
 };
 
 /**
@@ -128,8 +144,12 @@ export const getUser = async (req: Request, res: Response) => {
       return res.status(400).send(error.message);
     }
 
-    // If the user is not an admin, return a 401 status code
-    if (!(await isAdmin(req.headers.authorization))) {
+    // If the user is not an admin, return a 401 status code and if the user is not the same as the one in the token
+    const tokenEmail = await getEmailFromToken(req.headers.authorization);
+    if (
+      !(await isAdmin(req.headers.authorization)) &&
+      tokenEmail !== req.params.email
+    ) {
       return res.status(401).send("Not authorized");
     }
 
@@ -308,7 +328,8 @@ export const updateUser = async (req: Request, res: Response) => {
       system &&
       system.firstExecution
     ) {
-      await updateSystemDb({ ...system, firstExecution: false });
+      system.firstExecution = false;
+      await updateSystemDb(system);
     }
 
     // If the oldUser email is different from the newUser email, delete the oldUser

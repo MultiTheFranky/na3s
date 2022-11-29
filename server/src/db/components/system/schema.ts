@@ -1,5 +1,5 @@
 import joi from "joi";
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { System } from "shared";
 
 export const dbSystemSchema = new Schema<System>(
@@ -29,6 +29,11 @@ export const dbSystemSchema = new Schema<System>(
       autoIndexId: false,
     },
   }
+);
+
+export const systemModel = model<typeof dbSystemSchema>(
+  "System",
+  dbSystemSchema
 );
 
 export const systemSchema: joi.ObjectSchema<System> = joi.object({

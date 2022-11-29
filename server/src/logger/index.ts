@@ -98,58 +98,58 @@ const logger = initLogger();
  * Function to log information
  * @param {any } message Message to log
  */
-export const logInfo = (message: any) => {
+export const logInfo = (...message: any) => {
   wsSend({
     type: "info",
     message: `${new Date()
       .toISOString()
       .replace(/T/, " ")
-      .replace(/\..+/, "")} info [NA3S]: ${message}`,
+      .replace(/\..+/, "")} info [NA3S]: ${message.join(" ")}`,
   });
-  logger.info(message);
+  logger.info(message.join(" "));
 };
 
 /**
  * Function to log warnings
  * @param {any } message Message to log
  */
-export const logWarn = (message: any) => {
+export const logWarn = (...message: any) => {
   wsSend({
     type: "warn",
     message: `${new Date()
       .toISOString()
       .replace(/T/, " ")
-      .replace(/\..+/, "")} warn [NA3S]: ${message}`,
+      .replace(/\..+/, "")} warn [NA3S]: ${message.join(" ")}`,
   });
-  logger.warn(message);
+  logger.warn(message.join(" "));
 };
 
 /**
  * Function to log errors
  * @param {any } message Message to log
  */
-export const logError = (message: any) => {
+export const logError = (...message: any) => {
   wsSend({
     type: "error",
     message: `${new Date()
       .toISOString()
       .replace(/T/, " ")
-      .replace(/\..+/, "")} error [NA3S]: ${message}`,
+      .replace(/\..+/, "")} error [NA3S]: ${message.join(" ")}`,
   });
-  logger.error(message);
+  logger.error(message.join(" "));
 };
 
 /**
  * Function to log debug
  * @param {any } message Message to log
  */
-export const logDebug = (message: any) => {
+export const logDebug = (...message: any) => {
   wsSend({
     type: "debug",
     message: `${new Date()
       .toISOString()
       .replace(/T/, " ")
-      .replace(/\..+/, "")} debug [NA3S]: ${message}`,
+      .replace(/\..+/, "")} debug [NA3S]: ${message.join(" ")}`,
   });
-  logger.debug(message);
+  logger.debug(message.join(" "));
 };

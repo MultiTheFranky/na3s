@@ -1,8 +1,8 @@
 import joi from "joi";
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { SteamCMDUser } from "shared";
 
-export const DBSteamCMDUserSchema = new Schema<SteamCMDUser>(
+export const dbSteamCMDUserSchema = new Schema<SteamCMDUser>(
   {
     username: {
       type: String,
@@ -25,6 +25,11 @@ export const DBSteamCMDUserSchema = new Schema<SteamCMDUser>(
       max: 1,
     },
   }
+);
+
+export const steamCMDModel = model<typeof dbSteamCMDUserSchema>(
+  "SteamCMDUser",
+  dbSteamCMDUserSchema
 );
 
 export const steamCMDUserSchema: joi.ObjectSchema<SteamCMDUser> = joi.object({

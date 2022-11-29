@@ -1,8 +1,7 @@
 import bcrypt from "bcrypt";
-import mongoose from "mongoose";
 import { User } from "shared";
 
-import { dbUserSchema } from "./schema";
+import { userModel } from "./schema";
 
 /**
  * Function to create a new user
@@ -10,7 +9,7 @@ import { dbUserSchema } from "./schema";
  * @returns Promise<User>
  */
 export const createUser = async (user: User) => {
-  return await mongoose.model("User", dbUserSchema).create(user);
+  return await userModel.create(user);
 };
 
 /**
@@ -18,7 +17,7 @@ export const createUser = async (user: User) => {
  * @returns Promise<User[]>
  */
 export const getAllUsers = async (): Promise<User[]> => {
-  return await mongoose.model("User", dbUserSchema).find({});
+  return await userModel.find({});
 };
 
 /**
@@ -31,9 +30,7 @@ export const updateUserByEmail = async (
   email: string,
   user: User
 ): Promise<User | null> => {
-  return await mongoose
-    .model("User", dbUserSchema)
-    .findOneAndUpdate({ email }, user);
+  return await userModel.findOneAndUpdate({ email }, user);
 };
 
 /**
@@ -44,7 +41,7 @@ export const updateUserByEmail = async (
 export const deleteUserByEmail = async (
   email: string
 ): Promise<User | null> => {
-  return await mongoose.model("User", dbUserSchema).findOneAndDelete({ email });
+  return await userModel.findOneAndDelete({ email });
 };
 
 /**
@@ -53,7 +50,7 @@ export const deleteUserByEmail = async (
  * @returns Promise<User>
  */
 export const getUserByEmail = async (email: string): Promise<User | null> => {
-  return await mongoose.model("User", dbUserSchema).findOne({ email });
+  return await userModel.findOne({ email });
 };
 
 /**

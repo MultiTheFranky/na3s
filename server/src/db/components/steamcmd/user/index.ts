@@ -1,20 +1,14 @@
-import mongoose from "mongoose";
 import { SteamCMDUser } from "shared";
 
-import { DBSteamCMDUserSchema } from "./schema";
+import { steamCMDModel } from "./schema";
 
 /**
  * Get a SteamCMDUser by its username.
  * @return {Promise<SteamCMDUser | null>} A promise that resolves with the SteamCMDUser or null if not found
  */
-export const getSteamCMDUser = async (): Promise<SteamCMDUser | undefined> => {
-  const user = await mongoose
-    .model("SteamCMDUser", DBSteamCMDUserSchema)
-    .findOne();
-  if (!user) {
-    return undefined;
-  }
-  return user.toObject() as SteamCMDUser;
+export const getSteamCMDUser = async (): Promise<SteamCMDUser | null> => {
+  const user = await steamCMDModel.findOne();
+  return user;
 };
 
 /**
@@ -25,9 +19,7 @@ export const getSteamCMDUser = async (): Promise<SteamCMDUser | undefined> => {
 export const createSteamCMDUser = async (
   user: SteamCMDUser
 ): Promise<SteamCMDUser> => {
-  return await mongoose
-    .model("SteamCMDUser", DBSteamCMDUserSchema)
-    .create(user);
+  return await steamCMDModel.create(user);
 };
 
 /**
@@ -38,9 +30,7 @@ export const createSteamCMDUser = async (
 export const updateSteamCMDUser = async (
   user: SteamCMDUser
 ): Promise<SteamCMDUser | null> => {
-  return await mongoose
-    .model("SteamCMDUser", DBSteamCMDUserSchema)
-    .findOneAndUpdate({}, user);
+  return await steamCMDModel.findOneAndUpdate({}, user);
 };
 
 /**
@@ -51,7 +41,5 @@ export const updateSteamCMDUser = async (
 export const deleteSteamCMDUser = async (
   username: string
 ): Promise<SteamCMDUser | null> => {
-  return await mongoose
-    .model("SteamCMDUser", DBSteamCMDUserSchema)
-    .findOneAndDelete({ username });
+  return await steamCMDModel.findOneAndDelete({ username });
 };

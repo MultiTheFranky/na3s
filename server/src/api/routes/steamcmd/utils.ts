@@ -33,20 +33,17 @@ export const mainSteamCMD = async () => {
   const servers = await getArma3Servers();
   // If server is not updated and all servers are stopped, update it
   if (!(await isServerUpdated()) && !servers.find((s) => s.isOn)) {
-    await updateSystemDb({ ...system, isSteamCMDRunning: true });
     await updateServer(user);
-    await updateSystemDb({ ...system, isSteamCMDRunning: false });
   }
   // Update all outdated mods
   for (const server of servers) {
     const modsToUpdate = server.mods.filter((mod) => !isModUpdated(mod));
     if (modsToUpdate.length > 0 && !server.isOn) {
-      await updateSystemDb({ ...system, isSteamCMDRunning: true });
       await updateMods(modsToUpdate, user);
-      await updateSystemDb({ ...system, isSteamCMDRunning: false });
     }
   }
-  await updateSystemDb({ ...system, isSteamCMDRunning: false });
+  system.isSteamCMDRunning = false;
+  await updateSystemDb(system);
 };
 
 /**
@@ -64,28 +61,42 @@ export const runSteamCMD = async (
       : "";
 
   const system = await getSystemDb();
+
+  if (!system) {
+    logWarn("No system db found");
+    return;
+  }
+
   if (system && system.isSteamCMDRunning) {
     logWarn("SteamCMD is already running");
     return;
   }
 
-  if (system.debug) {
+  system.isSteamCMDRunning = true;
+  await updateSystemDb(system);
+
+  if (system && system.debug) {
     logInfo(`/steamcmd/steamcmd.sh ${argsString}`);
   }
 
-  const { stdout, stderr, stdin } = await exec(
-    `/steamcmd/steamcmd.sh ${argsString}`
-  );
+  const child = await exec(`/steamcmd/steamcmd.sh ${argsString}`);
 
-  if (stdout && stdin)
-    stdout?.on("data", (data) => {
-      onData(data, stdin);
+  if (child.stdout)
+    child.stdout?.on("data", (data) => {
+      if (child.stdin) {
+        onData(data, child.stdin);
+      }
     });
 
-  if (stderr)
-    stderr?.on("data", (data) => {
+  if (child.stderr)
+    child.stderr?.on("data", (data) => {
       onError(data);
     });
+
+  child.on("exit", () => {
+    system.isSteamCMDRunning = false;
+    updateSystemDb(system);
+  });
 };
 
 /**
