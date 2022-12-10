@@ -1,0 +1,78 @@
+components:
+  schemas:
+    System:
+      type: object
+      properties:
+        firstExecution:
+          type: boolean
+        updateInterval:
+          type: number
+        debug:
+          type: boolean
+        isSteamCMDRunning:
+          type: boolean
+/system:
+  post:
+    tags:
+      - System
+    security:
+      - bearerAuth: [admin]
+    summary: Updates the system settings
+    operationId: systemUpdate
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            $$ref: "#/components/schemas/System"
+    responses:
+      "200":
+        description: The system settings are updated
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "OK"
+      "401":
+        description: Not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Not authorized"
+      "500":
+        description: The system settings are not updated
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Exception"
+  get:
+    tags:
+      - System
+    security:
+      - bearerAuth: [admin]
+    summary: Gets the system settings
+    operationId: systemGet
+    responses:
+      "200":
+        description: Gets the system settings
+        content:
+          text/plain:
+            schema:
+              type: object
+              $$ref: "#/components/schemas/System"
+      "401":
+        description: Not authorized
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Not authorized"
+      "500":
+        description: An error occurred
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: "Exception"

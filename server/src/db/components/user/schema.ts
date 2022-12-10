@@ -28,8 +28,7 @@ export const registerUserSchema: joi.ObjectSchema<User> = joi.object({
 });
 
 export const updateUserSchema: joi.ObjectSchema<User> = joi.object({
-  oldUser: userSchema.required(),
-  newUser: userSchema.required(),
+  userToUpdate: userSchema.required(),
 });
 
 export const deleteUserSchema: joi.ObjectSchema<User> = joi.object({

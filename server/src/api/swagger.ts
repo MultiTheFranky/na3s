@@ -1,5 +1,6 @@
 import { Application } from "express";
 import swaggerJSDoc from "swagger-jsdoc";
+import { SwaggerTheme } from "swagger-themes";
 import swaggerUi from "swagger-ui-express";
 
 import { loadEnvironmentVariables } from "../env";
@@ -37,7 +38,19 @@ export const initSwagger = async (app: Application) => {
   };
   const swaggerSpec = swaggerJSDoc(options);
 
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  const theme = new SwaggerTheme("v3");
+
+  app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, {
+      swaggerOptions: {
+        docExpansion: "none",
+        showRequestHeaders: true,
+      },
+      customCss: theme.getBuffer("dark"),
+    })
+  );
 
   logInfo("🔧 Swagger initialized 🔧");
   logInfo(

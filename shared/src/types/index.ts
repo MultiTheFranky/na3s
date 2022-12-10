@@ -1,6 +1,7 @@
 // Arma 3 Types
 export { Mod as Arma3Mod } from "./arma3/Mod";
 export { Server as Arma3Server } from "./arma3/Server";
+export { BasicServerInfo as Arma3BasicServerInfo } from "./arma3/Server";
 export { Side as Arma3Side } from "./arma3/Side";
 export { Player as Arma3Player } from "./arma3/Player";
 export { BasicServerConfig as Arma3BasicServerConfig } from "./arma3/BasicServerConfig";

@@ -144,10 +144,10 @@ export const getUser = async (req: Request, res: Response) => {
       return res.status(400).send(error.message);
     }
 
-    // If the user is not an admin, return a 401 status code and if the user is not the same as the one in the token
+    // If the user is not an admin or if the user is not the same as the one in the token, return a 401 status code
     const tokenEmail = await getEmailFromToken(req.headers.authorization);
     if (
-      !(await isAdmin(req.headers.authorization)) &&
+      !(await isAdmin(req.headers.authorization)) ||
       tokenEmail !== req.params.email
     ) {
       return res.status(401).send("Not authorized");
@@ -303,28 +303,28 @@ export const updateUser = async (req: Request, res: Response) => {
     }
 
     // Get the oldUser and the newUser from the request body
-    const { oldUser, newUser }: { oldUser: User; newUser: User } = req.body;
+    const { userToUpdate }: { userToUpdate: User } = req.body;
     // Check if the old user exists and the new user does not exist
-    const oldUserExists = await getUserByEmail(oldUser.email);
+    const oldUserExists = await getUserByEmail(userToUpdate.email);
     if (!oldUserExists) {
-      return res.status(404).send("The old user does not exist");
+      return res.status(404).send("The user to update does not exist");
     }
 
     // Update the user
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newUser.password, salt);
+    const hashedPassword = await bcrypt.hash(userToUpdate.password, salt);
     const updatedUser: User = {
-      ...newUser,
+      ...userToUpdate,
       password: hashedPassword,
       updatedAt: new Date(),
     };
-    await updateUserByEmail(newUser.email, updatedUser);
+    await updateUserByEmail(userToUpdate.email, updatedUser);
 
     const system = await getSystemDb();
 
     // If oldUser is admin and firstExecution is true, set firstExecution to false
     if (
-      oldUser.email === "admin@admin.com" &&
+      userToUpdate.email === "admin@admin.com" &&
       system &&
       system.firstExecution
     ) {
@@ -332,15 +332,10 @@ export const updateUser = async (req: Request, res: Response) => {
       await updateSystemDb(system);
     }
 
-    // If the oldUser email is different from the newUser email, delete the oldUser
-    if (oldUser.email !== newUser.email) {
-      await deleteUserByEmail(oldUser.email);
-    }
-
     // Return the updated user JWT token
     const payload = {
       user: {
-        email: newUser.email,
+        email: userToUpdate.email,
       },
     };
     const { JWT_SECRET } = await loadEnvironmentVariables<ServerEnvironment>();

@@ -8,11 +8,7 @@ type AuthContextType = {
   setUser: (user: (User & Token) | null) => void;
 };
 
-export const AuthContext = React.createContext<AuthContextType>({
-  user: null,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setUser: () => {},
-});
+export const AuthContext = React.createContext<AuthContextType>({} as AuthContextType);
 
 /**
  * Auth provider content system
@@ -20,7 +16,22 @@ export const AuthContext = React.createContext<AuthContextType>({
  * @returns {JSX.Element}
  */
 export const AuthProvider = ({ children }: { children: ReactElement }) => {
-  const [user, setUser] = useState<(User & Token) | null>(null);
+  const [user, setUser] = useState<(User & Token) | null>(
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")!) as (User & Token) : null);
+
+  // Get user from local storage
+  React.useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      setUser(JSON.parse(user));
+    }
+  }, []);
+
+  // Save user to local storage
+  React.useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   return (
     <AuthContext.Provider

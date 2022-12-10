@@ -3,6 +3,7 @@ import * as express from "express";
 
 import { router as arma3serverRouter } from "./routes/arma3/arma3.router";
 import { router as steamcmdRouter } from "./routes/steamcmd/steamcmd.router";
+import { router as systemRouter } from "./routes/system/system.router";
 import { router as webRouter } from "./routes/web/web.router";
 
 export const router = express.Router();
@@ -10,3 +11,4 @@ export const router = express.Router();
 router.use("/arma3server", arma3serverRouter);
 router.use("/web", webRouter);
 router.use("/steamcmd", steamcmdRouter);
+router.use("/system", systemRouter);

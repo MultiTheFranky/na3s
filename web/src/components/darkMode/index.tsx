@@ -6,7 +6,7 @@ import { ColorModeContext } from "../../contexts/theme/index";
 
 /**
  *
- * @returns
+ * @returns {JSX.Element}
  */
 export const DarkMode = () => {
   const [darkMode, setDarkMode] = React.useState(false);

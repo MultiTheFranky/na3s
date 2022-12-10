@@ -1,3 +1,4 @@
+import { Logout } from "@mui/icons-material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 import { List, Tooltip } from "@mui/material";
@@ -14,11 +15,15 @@ import { ThemeProvider, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import { Navigate } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/auth/index";
 import { ColorModeContext } from "../../contexts/theme/index";
 import { Page, dashboardPages } from "../../pages/index";
 import { DarkMode } from "../darkMode/index";
+import { getNickFromEmail } from '../../utils/nickText/index';
+import { Settings } from "../settings";
+import { AddServer } from '../addServer/index';
 
 const drawerWidth = 240;
 
@@ -71,11 +76,30 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 /**
+ * LogOut component
+ */
+const LogOut = () => {
+  const { setUser } = React.useContext(AuthContext);
+  return (
+    <IconButton>
+      <Tooltip title="Log out">
+        <Logout onClick={
+          () => {
+            localStorage.removeItem("token");
+            setUser(null);
+            <Navigate to="/" />
+          }} />
+      </Tooltip>
+    </IconButton>
+  )
+};
+
+/**
  *
  * @returns {JSX.Element}
  */
 export const Dashboard = () => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [page, setPage] = React.useState<Page>(dashboardPages[0]);
   /**
    *
@@ -119,16 +143,19 @@ export const Dashboard = () => {
             >
               {page.name}
             </Typography>
-            <Typography
+            {user?.email && <Typography
               component="h1"
               variant="h6"
               color="inherit"
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              {user?.email}
-            </Typography>
+              {getNickFromEmail(user?.email)}
+            </Typography>}
+            {user?.admin && <AddServer />}
+            {user?.admin && <Settings />}
             <DarkMode />
+            <LogOut />
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

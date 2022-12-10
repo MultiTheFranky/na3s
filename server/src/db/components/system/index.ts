@@ -1,5 +1,6 @@
 import { System } from "shared";
 
+import { restartSteamCMDCheckerSystem } from "../../../api/routes/steamcmd";
 import { systemModel } from "./schema";
 
 /**
@@ -31,7 +32,12 @@ export const getSystemDb = async (): Promise<System | null> => {
  * @returns System DB
  */
 export const updateSystemDb = async (system: System) => {
-  return await systemModel.updateOne({}, system);
+  const actualSystem = await getSystemDb();
+  const systemUpdated = await systemModel.updateOne({}, system);
+  if (actualSystem?.updateInterval !== system.updateInterval) {
+    await restartSteamCMDCheckerSystem();
+  }
+  return systemUpdated;
 };
 
 /**

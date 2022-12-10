@@ -2,6 +2,7 @@ import { AuthProvider } from "./contexts/auth";
 import { ColorModeProvider } from "./contexts/theme";
 import { WSProvider } from "./contexts/webSocket";
 import { AppRouter } from "./router";
+import { BrowserRouter } from 'react-router-dom';
 
 /**
  * Function App component
@@ -9,13 +10,15 @@ import { AppRouter } from "./router";
  */
 function App() {
   return (
-    <AuthProvider>
-      <WSProvider>
-        <ColorModeProvider>
-          <AppRouter />
-        </ColorModeProvider>
-      </WSProvider>
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <WSProvider>
+          <ColorModeProvider>
+            <AppRouter />
+          </ColorModeProvider>
+        </WSProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

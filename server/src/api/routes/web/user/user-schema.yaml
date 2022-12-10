@@ -269,9 +269,7 @@ components:
           schema:
             type: object
             properties:
-              oldUser:
-                $ref: "#/components/schemas/User"
-              newUser:
+              userToUpdate:
                 $ref: "#/components/schemas/User"
     responses:
       "200":

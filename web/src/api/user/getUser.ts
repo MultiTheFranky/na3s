@@ -8,11 +8,16 @@ import { userAPI } from "..";
  * @param {string} token
  * @return {User} token
  */
-export const getUser = async (email: string, token: string) => {
-  const { data } = await userAPI.get(`/${email}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return (await data) as User;
+export const getUser = async (email: string, token?: string) => {
+  const { data } = await userAPI.get(
+    `/${email}`,
+    token
+      ? {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      : undefined
+  );
+  return data as User;
 };

@@ -1,6 +1,7 @@
-import cors from "cors";
+import { initTRPC } from "@trpc/server";
+/* import cors from "cors"; */
 // Express API
-import express from "express";
+/* import express from "express";
 
 import { initSystemDb } from "../db/components/system";
 import { initUserSystem } from "../db/components/user";
@@ -9,13 +10,17 @@ import { logInfo } from "../logger";
 import { router as apiRouter } from "./api.router";
 import { initSteamCMDCheckerSystem } from "./routes/steamcmd";
 import { initSwagger } from "./swagger";
-import { ServerEnvironment } from "./types";
+import { ServerEnvironment } from "./types"; */
 
 /**
  * Function to initialize the express API
  */
 export const initApi = async () => {
-  const router = express.Router();
+  const t = initTRPC.create();
+
+  const appRouter = t.router({});
+
+  /* const router = express.Router();
 
   router.use("/api", apiRouter);
 
@@ -42,5 +47,5 @@ export const initApi = async () => {
 
   app.listen(SERVER_PORT, () => {
     logInfo(`🚀 Server is running on port ${SERVER_PORT} 🚀`);
-  });
+  }); */
 };

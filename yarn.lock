@@ -2171,6 +2171,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hookform/resolvers@npm:2.9.10":
+  version: 2.9.10
+  resolution: "@hookform/resolvers@npm:2.9.10"
+  peerDependencies:
+    react-hook-form: ^7.0.0
+  checksum: ae3395372d6ff11506a72bb6b3c57046bd14b457c2fe1f0485f60cf2dba0ef4484e3a2fb5a0f6a217f6d701393ebc3683a2ede7c81c6f13e71f965f520c7af16
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.10.5":
   version: 0.10.7
   resolution: "@humanwhocodes/config-array@npm:0.10.7"
@@ -3209,6 +3218,13 @@ __metadata:
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
   checksum: ad87447820dd3f24825d2d947ebc03072b20a42bfc96cbafec16bff8bbda6c1a81fcb0be56d5b21968560c5359a0af4038a68ba150c3e1694fe4c109a063bed8
+  languageName: node
+  linkType: hard
+
+"@trpc/server@npm:10.4.3":
+  version: 10.4.3
+  resolution: "@trpc/server@npm:10.4.3"
+  checksum: 1cffa4b6857a9144f0e8706174e9d4684579064d330ddd467363b75c4bff84b8b214ea9db51b633d1bff5f69a58929059e7078e9ce3f48d8c6b325408361b2b2
   languageName: node
   linkType: hard
 
@@ -12544,6 +12560,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-hook-form@npm:7.40.0":
+  version: 7.40.0
+  resolution: "react-hook-form@npm:7.40.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 8187981c14cc2e016c263a7427ffc5617b126efed97003e259efff1af991d12bef5cb599d824385f760a03a0676eb0d19007aa3ebcc65832cfe819b3802530c5
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -12562,6 +12587,18 @@ __metadata:
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: e72d0ba81b5922759e4aff17e0252bd29988f9642ed817f56b25a3e217e13eea8a7f2322af99a06edb779da12d5d636e9fda473d620df9a3da0df2a74141d53e
+  languageName: node
+  linkType: hard
+
+"react-password-strength-bar@npm:0.4.1":
+  version: 0.4.1
+  resolution: "react-password-strength-bar@npm:0.4.1"
+  dependencies:
+    zxcvbn: 4.4.2
+  peerDependencies:
+    react: ">=16.8.6"
+    react-dom: ">=16.8.6"
+  checksum: e51ab3ea8f1dfae2ad3f0bd0f942b7029872d4eb31244d575739d755ad00ce6b92e5df679d1168e971270ceafee778d26b3ffc617cd0e2f1839a730215794d1a
   languageName: node
   linkType: hard
 
@@ -13459,6 +13496,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "server@workspace:server"
   dependencies:
+    "@trpc/server": 10.4.3
     "@types/bcrypt": ^5
     "@types/cors": 2.8.12
     "@types/jsonwebtoken": ^8
@@ -13479,12 +13517,14 @@ __metadata:
     rimraf: ^3.0.2
     shared: 1.0.0
     swagger-jsdoc: 6.2.5
+    swagger-themes: 1.2.22
     swagger-ui-express: 4.5.0
     ts-node: ^10.9.1
     typescript: ^4.8.4
     winston: ^3.8.2
     winston-daily-rotate-file: 4.7.1
     ws: 8.10.0
+    zod: 3.19.1
   languageName: unknown
   linkType: soft
 
@@ -14184,6 +14224,13 @@ __metadata:
   dependencies:
     "@apidevtools/swagger-parser": 10.0.2
   checksum: 02aa7d6caa5dde20fe93f00928a7803b11099a7cffa70c1750b89add23e8dfb220ee5354d3f691dce91300f25dd155060be9a28ed7772d6aa4ff4ab3f5a36db0
+  languageName: node
+  linkType: hard
+
+"swagger-themes@npm:1.2.22":
+  version: 1.2.22
+  resolution: "swagger-themes@npm:1.2.22"
+  checksum: c89ece5546b553cb22925c7508231108148195d8f92d32b24a3c3b75d159cc105a2f0cc784cf5280576c7bee53e86df388f5d271c05ae7ca855f6356aee801ee
   languageName: node
   linkType: hard
 
@@ -15016,6 +15063,7 @@ __metadata:
   dependencies:
     "@emotion/react": 11.10.5
     "@emotion/styled": 11.10.5
+    "@hookform/resolvers": 2.9.10
     "@mui/icons-material": 5.10.14
     "@mui/material": 5.10.14
     "@testing-library/jest-dom": ^5.16.5
@@ -15029,12 +15077,15 @@ __metadata:
     env-cmd: 10.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-hook-form: 7.40.0
+    react-password-strength-bar: 0.4.1
     react-router-dom: 6.4.3
     react-scripts: 5.0.1
     serve: 14.0.1
     shared: 1.0.0
     typescript: ^4.8.4
     web-vitals: ^3.0.3
+    zod: 3.19.1
   peerDependencies:
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -15810,5 +15861,19 @@ __metadata:
   bin:
     z-schema: bin/z-schema
   checksum: 9afc0b8d4f75122fbbac8835b0398fc6ab3cfa3f68792e4e86edcd9be1e9ae9d982368a8ae25a4eeea6aad3ab35a24379b76e1525b105c23169c4f93b3185004
+  languageName: node
+  linkType: hard
+
+"zod@npm:3.19.1":
+  version: 3.19.1
+  resolution: "zod@npm:3.19.1"
+  checksum: 56e420ea5845912324a8fc61833714a2aec84954e418b52660d76502183c6e62fef9447cbfa64349640c5ce190cf2c24267e006bb80f066183e2f3fa9fe11864
+  languageName: node
+  linkType: hard
+
+"zxcvbn@npm:4.4.2":
+  version: 4.4.2
+  resolution: "zxcvbn@npm:4.4.2"
+  checksum: 76ab32c066082ac73491b7cd7f93ad0595c59b6d45ae80a0745e9e1661237388beb2f0c2ba0ae3dc330ca3ecdb87edcb7a21e0c09137ab81d5b32e584cda1e5d
   languageName: node
   linkType: hard

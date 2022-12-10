@@ -1,7 +1,7 @@
 import { Home as HomeIcon, StorageOutlined } from "@mui/icons-material";
 
 import { Home } from "./home";
-import { ServerList } from "./serverList";
+import { ServerListPage } from "./serverListPage";
 
 export type Page = {
   name: string;
@@ -17,6 +17,6 @@ export const dashboardPages: Page[] = [
   {
     name: "Server List",
     icon: <StorageOutlined />,
-    component: <ServerList />,
+    component: <ServerListPage />,
   },
 ];

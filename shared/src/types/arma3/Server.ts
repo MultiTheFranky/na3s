@@ -15,3 +15,13 @@ export type Server = {
   serverMods: Mod[];
   serverPID?: number;
 };
+
+export type BasicServerInfo = {
+  isOn: boolean;
+  name: string;
+  ip: string;
+  port: number;
+  mission: Mission;
+  players: number;
+  maxPlayers: number;
+};
