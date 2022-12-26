@@ -10,6 +10,7 @@ import { getUsers } from "../../api/user/getUsers";
 import { updateUser } from "../../api/user/updateUser";
 import { Modal } from "../../components/modal/index";
 import { AuthContext } from "../../contexts/auth/index";
+
 type Props = {
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
   editUser: User;

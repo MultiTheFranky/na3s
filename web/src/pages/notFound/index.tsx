@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Loading } from "../../components/loading/index";
+
 /**
  *
  * @returns {JSX.Element}

@@ -6,6 +6,7 @@ import { Arma3Server } from "shared";
 import { getArma3Servers } from "../../api/arma3/getServers";
 import { ServerCard } from "../../components/serverCard/index";
 import { AuthContext } from "../../contexts/auth/index";
+
 /**
  *
  * @return {JSX.Element} Home page

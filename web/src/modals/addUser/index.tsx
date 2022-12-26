@@ -27,6 +27,7 @@ import { Alert } from "../../components/alert/index";
 import FormInput from "../../components/formInput/index";
 import { Modal } from "../../components/modal/index";
 import { AuthContext } from "../../contexts/auth/index";
+
 type Props = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
