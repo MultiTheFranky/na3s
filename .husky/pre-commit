@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn precommit
+yarn precommit && git diff --quiet && git diff --staged --quiet || git commit -am 'feat: prettier'
