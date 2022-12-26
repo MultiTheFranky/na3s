@@ -1,8 +1,9 @@
+import { BrowserRouter } from "react-router-dom";
+
 import { AuthProvider } from "./contexts/auth";
 import { ColorModeProvider } from "./contexts/theme";
 import { WSProvider } from "./contexts/webSocket";
 import { AppRouter } from "./router";
-import { BrowserRouter } from 'react-router-dom';
 
 /**
  * Function App component

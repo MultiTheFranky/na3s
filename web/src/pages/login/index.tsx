@@ -1,3 +1,4 @@
+import { Toolbar } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -16,12 +17,11 @@ import { getUser } from "../../api/user/getUser";
 import { login } from "../../api/user/login";
 import logo from "../../assets/logo.png";
 import { Alert } from "../../components/alert/index";
+import { DarkMode } from "../../components/darkMode/index";
+import { Loading } from "../../components/loading/index";
+import { ServerList } from "../../components/serverList/index";
 import { AuthContext } from "../../contexts/auth/index";
 import { ColorModeContext } from "../../contexts/theme/index";
-import { ServerList } from '../../components/serverList/index';
-import { Loading } from '../../components/loading/index';
-import { DarkMode } from '../../components/darkMode/index';
-import { Toolbar } from "@mui/material";
 
 /**
  *
@@ -131,44 +131,46 @@ export const Login = () => {
                 backgroundPosition: "center",
               }}
             >
-              <ServerList servers={[
-                {
-                  name: "test",
-                  ip: "192.168.1.1",
-                  port: 1,
-                  players: 1,
-                  maxPlayers: 1,
-                  mission: {
-                    template: "mission1.abramia",
-                    difficulty: "Custom",
+              <ServerList
+                servers={[
+                  {
+                    name: "test",
+                    ip: "192.168.1.1",
+                    port: 1,
+                    players: 1,
+                    maxPlayers: 1,
+                    mission: {
+                      template: "mission1.abramia",
+                      difficulty: "Custom",
+                    },
+                    isOn: true,
                   },
-                  isOn: true,
-                },
-                {
-                  name: "test2",
-                  ip: "192.168.1.2",
-                  port: 1,
-                  players: 1,
-                  maxPlayers: 1,
-                  mission: {
-                    template: "mission2.altis",
-                    difficulty: "Custom",
+                  {
+                    name: "test2",
+                    ip: "192.168.1.2",
+                    port: 1,
+                    players: 1,
+                    maxPlayers: 1,
+                    mission: {
+                      template: "mission2.altis",
+                      difficulty: "Custom",
+                    },
+                    isOn: true,
                   },
-                  isOn: true,
-                },
-                {
-                  name: "test3",
-                  ip: "192.168.1.3",
-                  port: 1,
-                  players: 1,
-                  maxPlayers: 1,
-                  mission: {
-                    template: "mission3.beketov",
-                    difficulty: "Custom",
+                  {
+                    name: "test3",
+                    ip: "192.168.1.3",
+                    port: 1,
+                    players: 1,
+                    maxPlayers: 1,
+                    mission: {
+                      template: "mission3.beketov",
+                      difficulty: "Custom",
+                    },
+                    isOn: true,
                   },
-                  isOn: true,
-                }
-              ]} />
+                ]}
+              />
             </Grid>
             {/* <Grid
           item
@@ -186,11 +188,21 @@ export const Login = () => {
             backgroundPosition: "center",
           }}
         /> */}
-            <Grid item xs={12} sm={10} md={5} component={Paper} elevation={6} square>
+            <Grid
+              item
+              xs={12}
+              sm={10}
+              md={5}
+              component={Paper}
+              elevation={6}
+              square
+            >
               <Toolbar>
-                <div style={{
-                  flexGrow: 1,
-                }}>
+                <div
+                  style={{
+                    flexGrow: 1,
+                  }}
+                >
                   <DarkMode />
                 </div>
               </Toolbar>

@@ -20,10 +20,10 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth/index";
 import { ColorModeContext } from "../../contexts/theme/index";
 import { Page, dashboardPages } from "../../pages/index";
+import { getNickFromEmail } from "../../utils/nickText/index";
+import { AddServer } from "../addServer/index";
 import { DarkMode } from "../darkMode/index";
-import { getNickFromEmail } from '../../utils/nickText/index';
 import { Settings } from "../settings";
-import { AddServer } from '../addServer/index';
 
 const drawerWidth = 240;
 
@@ -83,15 +83,16 @@ const LogOut = () => {
   return (
     <IconButton>
       <Tooltip title="Log out">
-        <Logout onClick={
-          () => {
+        <Logout
+          onClick={() => {
             localStorage.removeItem("token");
             setUser(null);
-            <Navigate to="/" />
-          }} />
+            <Navigate to="/" />;
+          }}
+        />
       </Tooltip>
     </IconButton>
-  )
+  );
 };
 
 /**
@@ -143,15 +144,17 @@ export const Dashboard = () => {
             >
               {page.name}
             </Typography>
-            {user?.email && <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              {getNickFromEmail(user?.email)}
-            </Typography>}
+            {user?.email && (
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                sx={{ flexGrow: 1 }}
+              >
+                {getNickFromEmail(user?.email)}
+              </Typography>
+            )}
             {user?.admin && <AddServer />}
             {user?.admin && <Settings />}
             <DarkMode />

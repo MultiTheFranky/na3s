@@ -1,9 +1,9 @@
 import { ThemeProvider } from "@emotion/react";
 import {
+  PaletteMode,
   PaletteOptions,
   createTheme,
   responsiveFontSizes,
-  PaletteMode,
 } from "@mui/material";
 import React, { ReactElement } from "react";
 
@@ -31,10 +31,10 @@ const paletteOptions: PaletteOptions = colors;
 
 export const ColorModeContext = React.createContext({
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggleColorMode: () => { },
+  toggleColorMode: () => {},
   theme: createTheme({
     palette: {
-      mode: localStorage.getItem("theme") as PaletteMode || "light",
+      mode: (localStorage.getItem("theme") as PaletteMode) || "light",
       ...paletteOptions,
     },
   }),
@@ -47,7 +47,8 @@ export const ColorModeContext = React.createContext({
  */
 export const ColorModeProvider = ({ children }: { children: ReactElement }) => {
   const [mode, setMode] = React.useState<"light" | "dark">(
-    localStorage.getItem("theme") as PaletteMode | "dark" || "light");
+    (localStorage.getItem("theme") as PaletteMode | "dark") || "light"
+  );
   const themeOptions = createTheme({
     palette: {
       mode: mode,
