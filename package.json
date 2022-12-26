@@ -45,5 +45,8 @@
     "web",
     "server",
     "shared"
-  ]
+  ],
+  "dependencies": {
+    "express-rate-limit": "6.7.0"
+  }
 }

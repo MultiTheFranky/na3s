@@ -1,7 +1,7 @@
-import { initTRPC } from "@trpc/server";
-/* import cors from "cors"; */
+import cors from "cors";
 // Express API
-/* import express from "express";
+import express from "express";
+import { rateLimit } from "express-rate-limit";
 
 import { initSystemDb } from "../db/components/system";
 import { initUserSystem } from "../db/components/user";
@@ -10,21 +10,27 @@ import { logInfo } from "../logger";
 import { router as apiRouter } from "./api.router";
 import { initSteamCMDCheckerSystem } from "./routes/steamcmd";
 import { initSwagger } from "./swagger";
-import { ServerEnvironment } from "./types"; */
+import { ServerEnvironment } from "./types";
 
 /**
  * Function to initialize the express API
  */
 export const initApi = async () => {
-  const t = initTRPC.create();
+  const router = express.Router();
 
-  const appRouter = t.router({});
-
-  /* const router = express.Router();
+  const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  });
 
   router.use("/api", apiRouter);
 
   const app = express();
+
+  // Apply the rate limiting middleware to all requests
+  app.use(limiter);
 
   app.use(cors());
 
@@ -47,5 +53,5 @@ export const initApi = async () => {
 
   app.listen(SERVER_PORT, () => {
     logInfo(`🚀 Server is running on port ${SERVER_PORT} 🚀`);
-  }); */
+  });
 };
