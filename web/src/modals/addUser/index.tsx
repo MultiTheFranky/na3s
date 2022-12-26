@@ -101,10 +101,9 @@ export const AddUserModal = ({ open, setOpen, setUsers }: Props) => {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        user.token
       )
         .then(() => {
-          getUsers(user.token).then((users) => {
+          getUsers().then((users) => {
             setUsers(users);
           });
           setOpen(false);

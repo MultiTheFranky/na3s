@@ -18,7 +18,7 @@ export const Home = () => {
 
   React.useEffect(() => {
     if (user) {
-      getArma3Servers(user.token).then((servers) => {
+      getArma3Servers().then((servers) => {
         setServers(servers);
       });
     }

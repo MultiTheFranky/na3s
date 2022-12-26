@@ -51,10 +51,10 @@ export const Settings = () => {
 
   React.useEffect(() => {
     if (user) {
-      getSettings(user.token).then((settings) => {
+      getSettings().then((settings) => {
         setSettings(settings);
       });
-      getUsers(user.token).then((users) => {
+      getUsers().then((users) => {
         setUsers(users);
       });
     }
@@ -209,9 +209,8 @@ export const Settings = () => {
                                       onClick={() => {
                                         deleteUser(
                                           userList.email,
-                                          user.token
                                         ).then((message) => {
-                                          getUsers(user.token).then((users) => {
+                                          getUsers().then((users) => {
                                             setUsers(users);
                                           });
                                           setAlert({
@@ -264,7 +263,6 @@ export const Settings = () => {
                       debug: settings.debug,
                       updateInterval: settings.updateInterval,
                     },
-                    user.token
                   ).then((message) => {
                     setAlert({
                       open: true,

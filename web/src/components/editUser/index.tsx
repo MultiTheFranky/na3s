@@ -53,8 +53,8 @@ export const EditUser = ({ setUsers, editUser }: Props) => {
                 onChange={(event) => {
                   editUser.admin = event.target.checked;
                   if (user) {
-                    updateUser(editUser, user.token).then(() => {
-                      getUsers(user.token).then((res) => {
+                    updateUser(editUser).then(() => {
+                      getUsers().then((res) => {
                         setUsers(res);
                         setOpen(false);
                       });

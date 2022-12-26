@@ -29,13 +29,17 @@ import { JWTUser } from "./user.router";
  * @returns Promise<boolean>
  */
 export const isAdmin = async (token?: string): Promise<boolean> => {
-  const email = await getEmailFromToken(token);
-  if (email) {
-    // Check if the user is an admin
-    const checkUser = await getUserByEmail(email);
-    return checkUser?.admin || false;
+  try {
+    const email = await getEmailFromToken(token);
+    if (email) {
+      // Check if the user is an admin
+      const checkUser = await getUserByEmail(email);
+      return checkUser?.admin || false;
+    }
+    return false;
+  } catch (error) {
+    return false;
   }
-  return false;
 };
 
 /**

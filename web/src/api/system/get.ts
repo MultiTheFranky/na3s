@@ -4,14 +4,9 @@ import { systemAPI } from "..";
 
 /**
  * Function to get system settings
- * @param {string} token
  * @returns {System} System
  */
-export const getSettings = async (token: string) => {
-  const { data } = await systemAPI.get("", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getSettings = async () => {
+  const { data } = await systemAPI.get("");
   return data as System;
 };

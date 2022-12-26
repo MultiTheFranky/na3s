@@ -66,10 +66,11 @@ export const Login = () => {
     }
 
     try {
-      const token = await login(
+      const token: string = await login(
         data.get("email") as string,
         data.get("password") as string
       );
+
       if (!token) {
         setAlert({
           open: true,
@@ -77,7 +78,8 @@ export const Login = () => {
           type: "error",
         });
       }
-      const user = await getUser(data.get("email") as string, token);
+      localStorage.setItem("user", JSON.stringify({ token }));
+      const user = await getUser(data.get("email") as string);
       if (!user) {
         setAlert({
           open: true,

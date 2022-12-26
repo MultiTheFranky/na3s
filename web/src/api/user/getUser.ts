@@ -5,19 +5,9 @@ import { userAPI } from "..";
 /**
  * Function to get user data by email
  * @param {string} email
- * @param {string} token
  * @return {User} token
  */
-export const getUser = async (email: string, token?: string) => {
-  const { data } = await userAPI.get(
-    `/${email}`,
-    token
-      ? {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      : undefined
-  );
+export const getUser = async (email: string) => {
+  const { data } = await userAPI.get(`/${email}`);
   return data as User;
 };

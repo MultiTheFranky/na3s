@@ -4,15 +4,10 @@ import { systemAPI } from "..";
 
 /**
  * Function to update system settings
- * @param {string} token
  * @param {System} settings
  * @returns {string} Message
  */
-export const postSettings = async (settings: System, token: string) => {
-  const { data } = await systemAPI.post("", settings, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const postSettings = async (settings: System) => {
+  const { data } = await systemAPI.post("", settings);
   return data as string;
 };
