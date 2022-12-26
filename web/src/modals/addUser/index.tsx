@@ -92,16 +92,14 @@ export const AddUserModal = ({ open, setOpen, setUsers }: Props) => {
    */
   const onSubmitHandler: SubmitHandler<AddUserInput> = (values) => {
     if (user)
-      addUser(
-        {
-          name: values.name,
-          email: values.email,
-          password: values.password,
-          admin: values.admin,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      )
+      addUser({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        admin: values.admin,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
         .then(() => {
           getUsers().then((users) => {
             setUsers(users);

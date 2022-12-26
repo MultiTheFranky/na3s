@@ -207,26 +207,26 @@ export const Settings = () => {
                                     <IconButton
                                       aria-label="deleteUser"
                                       onClick={() => {
-                                        deleteUser(
-                                          userList.email,
-                                        ).then((message) => {
-                                          getUsers().then((users) => {
-                                            setUsers(users);
-                                          });
-                                          setAlert({
-                                            open: true,
-                                            message: message,
-                                            type: "success",
-                                          });
-
-                                          setTimeout(() => {
-                                            setAlert({
-                                              open: false,
-                                              message: alert.message,
-                                              type: alert.type,
+                                        deleteUser(userList.email).then(
+                                          (message) => {
+                                            getUsers().then((users) => {
+                                              setUsers(users);
                                             });
-                                          }, 3000);
-                                        });
+                                            setAlert({
+                                              open: true,
+                                              message: message,
+                                              type: "success",
+                                            });
+
+                                            setTimeout(() => {
+                                              setAlert({
+                                                open: false,
+                                                message: alert.message,
+                                                type: alert.type,
+                                              });
+                                            }, 3000);
+                                          }
+                                        );
                                       }}
                                     >
                                       <Delete />
@@ -256,14 +256,12 @@ export const Settings = () => {
               variant="contained"
               onClick={() => {
                 if (user && settings) {
-                  postSettings(
-                    {
-                      firstExecution: settings.firstExecution,
-                      isSteamCMDRunning: settings.isSteamCMDRunning,
-                      debug: settings.debug,
-                      updateInterval: settings.updateInterval,
-                    },
-                  ).then((message) => {
+                  postSettings({
+                    firstExecution: settings.firstExecution,
+                    isSteamCMDRunning: settings.isSteamCMDRunning,
+                    debug: settings.debug,
+                    updateInterval: settings.updateInterval,
+                  }).then((message) => {
                     setAlert({
                       open: true,
                       message: message,
