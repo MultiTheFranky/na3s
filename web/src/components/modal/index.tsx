@@ -21,7 +21,7 @@ const style = {
   boxShadow: 24,
   pt: 2,
   px: 4,
-  pb: 3,
+  pb: 3
 };
 
 /**
@@ -39,7 +39,7 @@ export const Modal = ({ children, onClose, open, width }: Props) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={{ ...style, width: width ?? "75vw" }}>{children}</Box>
+      <Box sx={{ ...style, width: width ?? "75vw", maxHeight: "100vh", overflow: "auto" }}>{children}</Box>
     </MUIModal>
   );
 };

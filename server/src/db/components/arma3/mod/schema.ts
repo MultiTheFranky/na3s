@@ -15,10 +15,15 @@ export const DBArma3ModSchema = new Schema<Arma3Mod>({
     type: String,
     required: true,
   },
+  enabled: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 export const arma3ModSchema: joi.ObjectSchema<Arma3Mod> = joi.object({
   id: joi.string().required(),
   name: joi.string().required(),
   path: joi.string().required(),
+  enabled: joi.boolean().required(),
 });

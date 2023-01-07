@@ -80,7 +80,7 @@ type DisableChannel = {
   text: boolean;
   voice: boolean;
 };
-enum ChannelId {
+export enum ChannelId {
   "Global",
   "Side",
   "Command",

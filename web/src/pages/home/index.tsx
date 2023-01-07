@@ -1,4 +1,4 @@
-import { Card, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import * as React from "react";
 import { Arma3Server } from "shared";
@@ -42,7 +42,9 @@ export const Home = () => {
               padding: "2rem",
             }}
           >
-            <Typography variant="h4">No servers found</Typography>
+            <CardContent>
+              <Typography variant="h4">No servers found</Typography>
+            </CardContent>
           </Card>
         </Grid>
       )}

@@ -15,14 +15,6 @@ export const DBArma3ParametersSchema = new Schema<Arma3ServerParameters>({
     type: String,
     required: true,
   },
-  mods: {
-    type: [String],
-    required: true,
-  },
-  serverMods: {
-    type: [String],
-    required: true,
-  },
   ranking: {
     type: String,
     required: false,
