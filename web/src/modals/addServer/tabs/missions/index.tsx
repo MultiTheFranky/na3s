@@ -12,7 +12,11 @@ import { TabProps } from "..";
 export const MissionsTab = ({ server, setServer }: TabProps) => {
   return (
     <Grid container spacing={2}>
-      <MissionList missions={server.missions} server={server} setServer={setServer} />
+      <MissionList
+        missions={server.missions}
+        server={server}
+        setServer={setServer}
+      />
     </Grid>
   );
 };

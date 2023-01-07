@@ -16,7 +16,7 @@ export type TabProps = {
 export const ArrayTextField = ({
   label,
   value,
-  onChange
+  onChange,
 }: {
   label: string;
   value: string[];

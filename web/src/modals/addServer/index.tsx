@@ -10,7 +10,14 @@ import { Arma3Server } from "shared";
 import { addServer as addServerAPI } from "../../api/arma3/addServer";
 import { Modal } from "../../components/modal";
 import { server as arma3ServerMock } from "../../mocks/Arma3Server";
-import { BasicServerConfigTab, MissionsTab, ModsTab, ParametersTab, ServerConfigTab, ServerModsTab } from "./tabs";
+import {
+  BasicServerConfigTab,
+  MissionsTab,
+  ModsTab,
+  ParametersTab,
+  ServerConfigTab,
+  ServerModsTab,
+} from "./tabs";
 
 type TabPanelProps = {
   children?: React.ReactNode;
@@ -106,7 +113,7 @@ export const AddServerModal = ({ open, onClose, setOpen }: Props) => {
         <Button
           variant="contained"
           sx={{
-            width: "100%"
+            width: "100%",
           }}
           onClick={addServer}
         >

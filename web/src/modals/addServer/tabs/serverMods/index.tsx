@@ -12,7 +12,11 @@ import { TabProps } from "..";
 export const ServerModsTab = ({ server, setServer }: TabProps) => {
   return (
     <Grid container spacing={2}>
-      <ServerModList mods={server.serverMods} server={server} setServer={setServer} />
+      <ServerModList
+        mods={server.serverMods}
+        server={server}
+        setServer={setServer}
+      />
     </Grid>
   );
 };

@@ -1,5 +1,13 @@
 import { Add, Delete } from "@mui/icons-material";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
@@ -12,7 +20,7 @@ import { Arma3Mission, Arma3Server } from "shared";
 export const MissionList = ({
   missions,
   server,
-  setServer
+  setServer,
 }: {
   missions: Arma3Mission[];
   server: Arma3Server;
@@ -28,9 +36,9 @@ export const MissionList = ({
               ...server.missions,
               {
                 template: "mission.map",
-                difficulty: "Custom"
-              }
-            ]
+                difficulty: "Custom",
+              },
+            ],
           });
         }}
       >
@@ -59,11 +67,11 @@ export const MissionList = ({
                             if (serverMission.template === mission.template) {
                               return {
                                 ...serverMission,
-                                template: event.target.value as `string.string`
+                                template: event.target.value as `string.string`,
                               };
                             }
                             return serverMission;
-                          })
+                          }),
                         });
                       }}
                     />
@@ -78,11 +86,15 @@ export const MissionList = ({
                             if (serverMission.template === mission.template) {
                               return {
                                 ...serverMission,
-                                difficulty: event.target.value as "Custom" | "Recruit" | "Regular" | "Veteran"
+                                difficulty: event.target.value as
+                                  | "Custom"
+                                  | "Recruit"
+                                  | "Regular"
+                                  | "Veteran",
                               };
                             }
                             return serverMission;
-                          })
+                          }),
                         });
                       }}
                     />
@@ -93,9 +105,13 @@ export const MissionList = ({
                         setServer((server) => {
                           return {
                             ...server,
-                            missions: server.missions.filter((serverMission) => {
-                              return serverMission.template !== mission.template;
-                            })
+                            missions: server.missions.filter(
+                              (serverMission) => {
+                                return (
+                                  serverMission.template !== mission.template
+                                );
+                              }
+                            ),
                           };
                         });
                       }}

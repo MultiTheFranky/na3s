@@ -8,7 +8,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField
+  TextField,
 } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
@@ -22,7 +22,7 @@ import { Arma3Mod, Arma3Server } from "shared";
 export const ModList = ({
   mods,
   server,
-  setServer
+  setServer,
 }: {
   mods: Arma3Mod[];
   server: Arma3Server;
@@ -40,9 +40,9 @@ export const ModList = ({
                 id: crypto.randomUUID(),
                 name: "mod",
                 path: "\\path\\to\\mod",
-                enabled: true
-              }
-            ]
+                enabled: true,
+              },
+            ],
           });
         }}
       >
@@ -72,11 +72,11 @@ export const ModList = ({
                             if (serverMod.id === mod.id) {
                               return {
                                 ...serverMod,
-                                name: event.target.value
+                                name: event.target.value,
                               };
                             }
                             return serverMod;
-                          })
+                          }),
                         });
                       }}
                     />
@@ -91,11 +91,11 @@ export const ModList = ({
                             if (serverMod.id === mod.id) {
                               return {
                                 ...serverMod,
-                                path: event.target.value
+                                path: event.target.value,
                               };
                             }
                             return serverMod;
-                          })
+                          }),
                         });
                       }}
                     />
@@ -110,11 +110,11 @@ export const ModList = ({
                             if (serverMod.id === mod.id) {
                               return {
                                 ...serverMod,
-                                enabled: event.target.checked
+                                enabled: event.target.checked,
                               };
                             }
                             return serverMod;
-                          })
+                          }),
                         });
                       }}
                     />
@@ -124,7 +124,9 @@ export const ModList = ({
                       onClick={() => {
                         setServer({
                           ...server,
-                          serverMods: server.serverMods.filter((serverMod) => serverMod.id !== mod.id)
+                          serverMods: server.serverMods.filter(
+                            (serverMod) => serverMod.id !== mod.id
+                          ),
                         });
                       }}
                     >

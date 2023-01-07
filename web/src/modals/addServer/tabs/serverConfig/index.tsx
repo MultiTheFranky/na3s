@@ -18,18 +18,24 @@ export const ServerConfigTab = ({ server, setServer }: TabProps) => {
       {Object.keys(server.serverSettings).map((parameter) => {
         return (
           <Grid item xs={2} key={parameter}>
-            {typeof server.serverSettings[parameter as keyof Arma3Server["serverSettings"]] === "boolean" ? (
+            {typeof server.serverSettings[
+              parameter as keyof Arma3Server["serverSettings"]
+            ] === "boolean" ? (
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={server.serverSettings[parameter as keyof Arma3Server["serverSettings"]] as boolean}
+                    checked={
+                      server.serverSettings[
+                        parameter as keyof Arma3Server["serverSettings"]
+                      ] as boolean
+                    }
                     onChange={(event) => {
                       setServer({
                         ...server,
                         serverSettings: {
                           ...server.serverSettings,
-                          [parameter]: event.target.checked
-                        }
+                          [parameter]: event.target.checked,
+                        },
                       });
                     }}
                   />
@@ -39,14 +45,18 @@ export const ServerConfigTab = ({ server, setServer }: TabProps) => {
             ) : (
               <TextField
                 label={parameter}
-                value={server.serverSettings[parameter as keyof Arma3Server["serverSettings"]]}
+                value={
+                  server.serverSettings[
+                    parameter as keyof Arma3Server["serverSettings"]
+                  ]
+                }
                 onChange={(event) => {
                   setServer({
                     ...server,
                     serverSettings: {
                       ...server.serverSettings,
-                      [parameter]: event.target.value
-                    }
+                      [parameter]: event.target.value,
+                    },
                   });
                 }}
               />

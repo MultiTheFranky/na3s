@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import { Arma3Server } from "shared";
 
 import { TabProps } from "..";
+
 /**
  * Component to display the parameters of a server
  * @param server The server to display the parameters of
@@ -17,18 +18,24 @@ export const ParametersTab = ({ server, setServer }: TabProps) => {
       {Object.keys(server.parameters).map((parameter) => {
         return (
           <Grid item xs={2} key={parameter}>
-            {typeof server.parameters[parameter as keyof Arma3Server["parameters"]] === "boolean" ? (
+            {typeof server.parameters[
+              parameter as keyof Arma3Server["parameters"]
+            ] === "boolean" ? (
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={server.parameters[parameter as keyof Arma3Server["parameters"]] as boolean}
+                    checked={
+                      server.parameters[
+                        parameter as keyof Arma3Server["parameters"]
+                      ] as boolean
+                    }
                     onChange={(event) => {
                       setServer({
                         ...server,
                         parameters: {
                           ...server.parameters,
-                          [parameter]: event.target.checked
-                        }
+                          [parameter]: event.target.checked,
+                        },
                       });
                     }}
                   />
@@ -38,14 +45,18 @@ export const ParametersTab = ({ server, setServer }: TabProps) => {
             ) : (
               <TextField
                 label={parameter}
-                value={server.parameters[parameter as keyof Arma3Server["parameters"]]}
+                value={
+                  server.parameters[
+                    parameter as keyof Arma3Server["parameters"]
+                  ]
+                }
                 onChange={(event) => {
                   setServer({
                     ...server,
                     parameters: {
                       ...server.parameters,
-                      [parameter]: event.target.value
-                    }
+                      [parameter]: event.target.value,
+                    },
                   });
                 }}
               />
