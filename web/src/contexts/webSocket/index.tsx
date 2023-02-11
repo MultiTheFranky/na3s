@@ -1,5 +1,12 @@
 import { Close } from "@mui/icons-material";
-import { Box, Button, IconButton, TextField, Toolbar, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  TextField,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import React, { ReactElement } from "react";
 import { LogData } from "shared";
 
@@ -12,7 +19,7 @@ export type WSContext = {
 
 export const WSContext = React.createContext<WSContext>({
   wsLogs: [],
-  webSocket: null
+  webSocket: null,
 });
 
 /**
@@ -41,7 +48,7 @@ export const WSProvider = ({ children }: { children: ReactElement }) => {
     if (webSocket) {
       const dataToSend: LogData = {
         type: "steamGuard",
-        message: data.steamGuard
+        message: data.steamGuard,
       };
       webSocket.send(JSON.stringify(dataToSend));
     } else {
@@ -57,7 +64,7 @@ export const WSProvider = ({ children }: { children: ReactElement }) => {
     <WSContext.Provider
       value={{
         wsLogs,
-        webSocket
+        webSocket,
       }}
     >
       {children}
@@ -75,12 +82,17 @@ export const WSProvider = ({ children }: { children: ReactElement }) => {
               <Close />
             </IconButton>
           </Toolbar>
-          <Box component="form" noValidate autoComplete="off" onSubmit={onSubmitHandler}>
+          <Box
+            component="form"
+            noValidate
+            autoComplete="off"
+            onSubmit={onSubmitHandler}
+          >
             <TextField label="Steam Guard Code" />
             <Button
               variant="contained"
               sx={{
-                width: "100%"
+                width: "100%",
               }}
               onClick={() => {
                 setOpen(false);
@@ -106,7 +118,11 @@ const createWebSocket = (
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   if (!webSocket || webSocket.readyState === WebSocket.CLOSED) {
-    const ws = new WebSocket(`ws://${window.location.hostname}:${process.env.REACT_APP_WEBHOOK_PORT ?? 8080}`);
+    const ws = new WebSocket(
+      `ws://${window.location.hostname}:${
+        process.env.REACT_APP_WEBHOOK_PORT ?? 8080
+      }`
+    );
     ws.onopen = () => {
       setWebSocket(ws);
     };
@@ -118,7 +134,10 @@ const createWebSocket = (
     ws.onclose = () => {
       setWebSocket(null);
       // Reconnect in 5 seconds
-      setTimeout(() => createWebSocket(webSocket, setWebSocket, setWSLogs, setOpen), 5000);
+      setTimeout(
+        () => createWebSocket(webSocket, setWebSocket, setWSLogs, setOpen),
+        5000
+      );
     };
   }
 };
