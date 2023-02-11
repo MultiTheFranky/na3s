@@ -50,8 +50,6 @@ export const arma3ParametersSchema: joi.ObjectSchema<Arma3ServerParameters> =
     port: joi.number().required(),
     basicConfig: joi.string().required(),
     config: joi.string().required(),
-    mods: joi.array().items(joi.string()).required(),
-    serverMods: joi.array().items(joi.string()).required(),
     ranking: joi.string().optional(),
     netLog: joi.boolean().optional(),
     profiles: joi.string().optional(),

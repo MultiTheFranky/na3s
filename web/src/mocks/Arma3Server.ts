@@ -1,7 +1,7 @@
-import { Arma3Server, ChannelId } from "shared";
+import { Arma3Server } from "shared";
 export const server: Arma3Server = {
-  id: "123e4567-e89b-12d3-a456-426655440000",
-  isOn: true,
+  id: crypto.randomUUID(),
+  isOn: false,
   parameters: {
     port: 2302,
     basicConfig: "basic.cfg",
@@ -21,30 +21,14 @@ export const server: Arma3Server = {
     serverCommandPassword: "servercommandpassword",
     maxPlayers: 64,
     motd: ["Welcome"],
-    admins: ["76561198000000000"],
+    admins: [],
     headlessClients: ["127.0.0.1"],
     localClient: ["127.0.0.1"],
-    filePatchingExceptions: ["76561198000000000"],
+    filePatchingExceptions: [],
     voteThreshold: 0.5,
     voteMissionPlayers: 1,
-    allowedVoteCmds: [
-      {
-        commandName: "string",
-        preMissionStart: true,
-        postMissionStart: true,
-        votingThreshold: 0,
-        percentSideVotingThreshold: 0,
-      },
-    ],
-    allowedVotedAdminCmds: [
-      {
-        commandName: "string",
-        preMissionStart: true,
-        postMissionStart: true,
-        votingThreshold: 0,
-        percentSideVotingThreshold: 0,
-      },
-    ],
+    allowedVoteCmds: [],
+    allowedVotedAdminCmds: [],
     kickDuplicate: true,
     loopback: true,
     upnp: true,
@@ -70,13 +54,7 @@ export const server: Arma3Server = {
     missionsToShutdown: 10,
     autoSelectMission: true,
     randomMissionOrder: true,
-    disableChannels: [
-      {
-        channelId: ChannelId.Global,
-        text: true,
-        voice: true,
-      },
-    ],
+    disableChannels: [],
     verifySignatures: 2,
     drawingInMap: true,
     disableVoN: true,
@@ -101,7 +79,7 @@ export const server: Arma3Server = {
     requiredBuild: "100000",
     statisticsEnabled: true,
     forceDifficulty: "custom",
-    missionWhitelist: ["mission1.altis"],
+    missionWhitelist: [],
     steamProtocolMaxPacketSize: 1024,
     logObjectNotFound: true,
     skipDescriptionParsing: true,
@@ -120,39 +98,8 @@ export const server: Arma3Server = {
     MaxPacketSize: 1440,
     MaxCustomFileSize: 10485760,
   },
-  missions: [
-    {
-      template: "MissionName.Altis",
-      difficulty: "Regular",
-    },
-  ],
-  mods: [
-    {
-      id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      name: "mod1",
-      path: "\\path\\to\\mod1",
-      enabled: true,
-    },
-    {
-      id: "3fa85f64-5717-4511-b3fc-2c963f66afa6",
-      name: "mod2",
-      path: "\\path\\to\\mod2",
-      enabled: true,
-    },
-    {
-      id: "3fa85f64-5717-4522-b3fc-2c963f66afa6",
-      name: "mod3",
-      path: "\\path\\to\\mod3",
-      enabled: true,
-    },
-  ],
-  serverMods: [
-    {
-      id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      name: "mod2",
-      path: "\\path\\to\\mod2",
-      enabled: true,
-    },
-  ],
+  missions: [],
+  mods: [],
+  serverMods: [],
   serverPID: 10,
 };

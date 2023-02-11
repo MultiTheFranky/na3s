@@ -6,6 +6,7 @@ import {
   DBArma3BasicServerConfigSchema,
   arma3BasicServerConfigSchema,
 } from "../basicServerConfig/schema";
+import { DBArma3MissionSchema, arma3MissionSchema } from "../mission/schema";
 import { DBArma3ModSchema, arma3ModSchema } from "../mod/schema";
 import {
   DBArma3ParametersSchema,
@@ -51,6 +52,10 @@ export const DBArma3ServerSchema = new Schema<Arma3Server>(
       type: Number,
       required: false,
     },
+    missions: {
+      type: [DBArma3MissionSchema],
+      required: true,
+    },
   },
   {
     collection: "arma3Server",
@@ -74,4 +79,5 @@ export const serverSchema: joi.ObjectSchema<Arma3Server> = joi.object({
   mods: joi.array().items(arma3ModSchema).required(),
   serverMods: joi.array().items(arma3ModSchema).required(),
   serverPID: joi.number().optional(),
+  missions: joi.array().items(arma3MissionSchema).required(),
 });

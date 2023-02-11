@@ -8,6 +8,6 @@ import { arma3serverAPI } from "..";
  * @returns {string} answer
  */
 export const addServer = async (server: Arma3Server) => {
-  const { data } = await arma3serverAPI.post("", server);
-  return data as string;
+  const { status, data } = await arma3serverAPI.post("", server);
+  return { error: status !== 200, message: data };
 };

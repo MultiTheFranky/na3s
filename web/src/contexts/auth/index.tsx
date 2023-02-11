@@ -8,9 +8,7 @@ type AuthContextType = {
   setUser: (user: (User & Token) | null) => void;
 };
 
-export const AuthContext = React.createContext<AuthContextType>(
-  {} as AuthContextType
-);
+export const AuthContext = React.createContext<AuthContextType>({} as AuthContextType);
 
 /**
  * Auth provider content system
@@ -19,9 +17,9 @@ export const AuthContext = React.createContext<AuthContextType>(
  */
 export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const [user, setUser] = useState<(User & Token) | null>(
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     localStorage.getItem("user")
-      ? (JSON.parse(localStorage.getItem("user")!) as User & Token)
+      ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        (JSON.parse(localStorage.getItem("user")!) as User & Token)
       : null
   );
 
@@ -42,7 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     <AuthContext.Provider
       value={{
         user,
-        setUser,
+        setUser
       }}
     >
       {children}

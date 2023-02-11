@@ -9,6 +9,7 @@ import {
   updateArma3Server,
 } from "../../../db/components/arma3/server";
 import { serverSchema } from "../../../db/components/arma3/server/schema";
+import { logInfo } from "../../../logger/index";
 import { isAdmin } from "../web/user";
 import { startServer, stopServer } from "./utils";
 

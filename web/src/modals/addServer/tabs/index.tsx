@@ -6,6 +6,7 @@ import { Arma3Server } from "shared";
 export type TabProps = {
   server: Arma3Server;
   setServer: React.Dispatch<React.SetStateAction<Arma3Server>>;
+  advanceMode: boolean;
 };
 
 /**
@@ -16,7 +17,7 @@ export type TabProps = {
 export const ArrayTextField = ({
   label,
   value,
-  onChange,
+  onChange
 }: {
   label: string;
   value: string[];

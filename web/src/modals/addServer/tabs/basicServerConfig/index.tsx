@@ -12,15 +12,16 @@ import { TabProps } from "..";
  * @param setServer The function to update the server state
  * @returns React component
  */
-export const BasicServerConfigTab = ({ server, setServer }: TabProps) => {
+export const BasicServerConfigTab = ({ server, setServer, advanceMode }: TabProps) => {
   return (
     <Grid container spacing={2}>
       {Object.keys(server.basicServerSettings).map((parameter) => {
+        if (!advanceMode) {
+          return null;
+        }
         return (
           <Grid item xs={2} key={parameter}>
-            {typeof server.basicServerSettings[
-              parameter as keyof Arma3Server["basicServerSettings"]
-            ] === "boolean" ? (
+            {typeof server.basicServerSettings[parameter as keyof Arma3Server["basicServerSettings"]] === "boolean" ? (
               <FormControlLabel
                 control={
                   <Checkbox
@@ -34,8 +35,8 @@ export const BasicServerConfigTab = ({ server, setServer }: TabProps) => {
                         ...server,
                         basicServerSettings: {
                           ...server.basicServerSettings,
-                          [parameter]: event.target.checked,
-                        },
+                          [parameter]: event.target.checked
+                        }
                       });
                     }}
                   />
@@ -45,18 +46,14 @@ export const BasicServerConfigTab = ({ server, setServer }: TabProps) => {
             ) : (
               <TextField
                 label={parameter}
-                value={
-                  server.basicServerSettings[
-                    parameter as keyof Arma3Server["basicServerSettings"]
-                  ]
-                }
+                value={server.basicServerSettings[parameter as keyof Arma3Server["basicServerSettings"]]}
                 onChange={(event) => {
                   setServer({
                     ...server,
                     basicServerSettings: {
                       ...server.basicServerSettings,
-                      [parameter]: event.target.value,
-                    },
+                      [parameter]: event.target.value
+                    }
                   });
                 }}
               />

@@ -6,7 +6,7 @@ import {
   updateSteamCMDUser,
 } from "../db/components/steamcmd/user";
 import { loadEnvironmentVariables } from "../env";
-import { logInfo } from "../logger";
+import { logError, logInfo } from "../logger";
 
 const logsData: LogData[] = [];
 
@@ -17,6 +17,10 @@ export let wss: WebSocketServer;
  */
 export const ws = async () => {
   const { REACT_APP_WEBHOOK_PORT } = loadEnvironmentVariables<WebSocketEnv>();
+  if (!REACT_APP_WEBHOOK_PORT) {
+    logError("🚨 Websocket server won't run becase no webhook port provided🚨");
+    return;
+  }
   wss = new WebSocketServer({ port: REACT_APP_WEBHOOK_PORT });
   wss.on("connection", (ws) => {
     logsData.forEach((data) => {

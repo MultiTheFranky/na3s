@@ -25,13 +25,15 @@ export const Home = () => {
   }, [user]);
 
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       {servers.length > 0 ? (
-        <Grid item xs={12}>
-          {servers.map((server) => {
-            return <ServerCard key={server.id} {...server} />;
-          })}
-        </Grid>
+        servers.map((server) => {
+          return (
+            <Grid item xs={2}>
+              <ServerCard key={server.id} {...server} />
+            </Grid>
+          );
+        })
       ) : (
         <Grid item xs={12}>
           <Card
@@ -39,7 +41,7 @@ export const Home = () => {
               alignItems: "center",
               display: "flex",
               justifyContent: "center",
-              padding: "2rem",
+              padding: "2rem"
             }}
           >
             <CardContent>

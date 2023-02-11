@@ -1,23 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Close, Visibility, VisibilityOff } from "@mui/icons-material";
-import {
-  AlertColor,
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { Close } from "@mui/icons-material";
+import { AlertColor, Toolbar, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import TextField from "@mui/material/TextField";
 import * as React from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import PasswordStrengthBar from "react-password-strength-bar";
 import { User } from "shared";
 import { TypeOf, boolean, object, string } from "zod";
 
@@ -39,14 +27,6 @@ type Props = {
  * @returns {JSX.Element} Add user modal
  */
 export const AddUserModal = ({ open, setOpen, setUsers }: Props) => {
-  const [newUser, setNewUser] = React.useState<User>({
-    name: "",
-    email: "",
-    password: "",
-    admin: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  });
   const { user } = React.useContext(AuthContext);
   const [addUserAlert, setAddUserAlert] = React.useState<{
     open: boolean;
@@ -58,7 +38,7 @@ export const AddUserModal = ({ open, setOpen, setUsers }: Props) => {
     name: string().min(1).max(100),
     email: string().email("Email is invalid").min(1),
     password: string().min(8),
-    admin: boolean(),
+    admin: boolean()
   });
 
   type AddUserInput = TypeOf<typeof addUserSchema>;
@@ -69,15 +49,14 @@ export const AddUserModal = ({ open, setOpen, setUsers }: Props) => {
       name: "",
       email: "",
       password: "",
-      admin: false,
-    },
+      admin: false
+    }
   });
 
   const {
     reset,
     handleSubmit,
-    register,
-    formState: { isSubmitSuccessful, errors },
+    formState: { isSubmitSuccessful }
   } = methods;
 
   React.useEffect(() => {
@@ -98,7 +77,7 @@ export const AddUserModal = ({ open, setOpen, setUsers }: Props) => {
         password: values.password,
         admin: values.admin,
         createdAt: new Date(),
-        updatedAt: new Date(),
+        updatedAt: new Date()
       })
         .then(() => {
           getUsers().then((users) => {
@@ -110,13 +89,13 @@ export const AddUserModal = ({ open, setOpen, setUsers }: Props) => {
           setAddUserAlert({
             open: true,
             message: error.response.data,
-            type: "error",
+            type: "error"
           });
           setTimeout(() => {
             setAddUserAlert({
               open: false,
               message: addUserAlert.message,
-              type: addUserAlert.type,
+              type: addUserAlert.type
             });
           }, 3000);
         });
@@ -144,45 +123,15 @@ export const AddUserModal = ({ open, setOpen, setUsers }: Props) => {
           </IconButton>
         </Toolbar>
         <FormProvider {...methods}>
-          <Box
-            component="form"
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmit(onSubmitHandler)}
-          >
-            <FormInput
-              name="name"
-              required
-              fullWidth
-              label="Name"
-              sx={{ mb: 2 }}
-            />
-            <FormInput
-              name="email"
-              required
-              fullWidth
-              label="Email"
-              sx={{ mb: 2 }}
-            />
-            <FormInput
-              name="password"
-              required
-              fullWidth
-              label="Password"
-              sx={{ mb: 2 }}
-              type="password"
-            />
-            Admin:{" "}
-            <FormInput
-              name="admin"
-              type="checkbox"
-              label="Admin"
-              sx={{ mb: 2 }}
-            />
+          <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit(onSubmitHandler)}>
+            <FormInput name="name" required fullWidth label="Name" sx={{ mb: 2 }} />
+            <FormInput name="email" required fullWidth label="Email" sx={{ mb: 2 }} />
+            <FormInput name="password" required fullWidth label="Password" sx={{ mb: 2 }} type="password" />
+            Admin: <FormInput name="admin" type="checkbox" label="Admin" sx={{ mb: 2 }} />
             <Button
               variant="contained"
               sx={{
-                width: "100%",
+                width: "100%"
               }}
               type="submit"
             >
@@ -190,11 +139,7 @@ export const AddUserModal = ({ open, setOpen, setUsers }: Props) => {
             </Button>
           </Box>
         </FormProvider>
-        <Alert
-          open={addUserAlert.open}
-          message={addUserAlert.message}
-          type={addUserAlert.type}
-        />
+        <Alert open={addUserAlert.open} message={addUserAlert.message} type={addUserAlert.type} />
       </>
     </Modal>
   );

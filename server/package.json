@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf ./build && tsc",
     "dev": "env-cmd -f ../.env nodemon",
-    "start": "node build/index.js",
+    "start": "env-cmd -f ../.env node build/index.js",
     "prepush": "yarn build",
     "precommit": "yarn lint && yarn prettier",
     "prettier": "prettier --write \"**/*.{ts,tsx}\"",
@@ -28,7 +28,7 @@
     "swagger-ui-express": "4.5.0",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "4.7.1",
-    "ws": "8.10.0",
+    "ws": "8.12.0",
     "zod": "3.19.1"
   },
   "devDependencies": {
