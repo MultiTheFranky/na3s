@@ -5357,14 +5357,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.1.3":
-  version: 1.1.3
-  resolution: "axios@npm:1.1.3"
+"axios@npm:1.3.2":
+  version: 1.3.2
+  resolution: "axios@npm:1.3.2"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: cab3b17bf6092c9387f7023d699db093cfa23650b56c4422cd474d124b78b2e3b5a520f932c330664a58ab85b867b1c25a95cace475ef72d236888c852b84e6d
+  checksum: 9791af75a6df137b15ef45d13ad11eb357b3860d2496347ee18778db9d0abc2320362a4452f1e070e3160f1dbcc518fcefdc9e005be097e7db39acb22cf608e5
   languageName: node
   linkType: hard
 
@@ -12625,6 +12625,7 @@ __metadata:
     "@types/semantic-release": ^20
     "@typescript-eslint/eslint-plugin": ^5.12.0
     "@typescript-eslint/parser": ^5.39.0
+    axios: 1.3.2
     danger: 11.2.3
     eslint: ^8.25.0
     eslint-config-google: ^0.14.0
@@ -16251,7 +16252,6 @@ __metadata:
     "@types/swagger-jsdoc": ^6
     "@types/swagger-ui-express": ^4
     "@types/ws": 8.5.3
-    axios: 1.1.3
     bcrypt: 5.1.0
     cors: 2.8.5
     env-cmd: 10.1.0
