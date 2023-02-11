@@ -41,7 +41,7 @@ export const Home = () => {
               alignItems: "center",
               display: "flex",
               justifyContent: "center",
-              padding: "2rem",
+              padding: "2rem"
             }}
           >
             <CardContent>

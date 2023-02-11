@@ -13,11 +13,11 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <WSProvider>
-          <ColorModeProvider>
+        <ColorModeProvider>
+          <WSProvider>
             <AppRouter />
-          </ColorModeProvider>
-        </WSProvider>
+          </WSProvider>
+        </ColorModeProvider>
       </AuthProvider>
     </BrowserRouter>
   );

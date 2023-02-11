@@ -11,6 +11,7 @@ import { getArma3Servers } from "../../../db/components/arma3/server";
 import { getSteamCMDUser } from "../../../db/components/steamcmd/user";
 import { getSystemDb, updateSystemDb } from "../../../db/components/system";
 import { logError, logInfo, logWarn } from "../../../logger";
+import { wsSend } from "../../websocket";
 
 /**
  * Main function to check and update the server and mods
@@ -104,7 +105,7 @@ export const runSteamCMD = async (
 export const updateServer = async (user: SteamCMDUser) => {
   let steamGuard = false;
   await runSteamCMD(
-    (data) => {
+    (data, stdin) => {
       logInfo(data);
       if (steamGuard) {
         steamGuard = false;
@@ -114,10 +115,7 @@ export const updateServer = async (user: SteamCMDUser) => {
       ) {
         setTimeout(() => {
           if (steamGuard) {
-            logWarn(
-              "The system to get the steam guard code is not ready yet. Please, use an account without steam guard code"
-            );
-            /* logInfo("Requesting steam guard code");
+            logInfo("Requesting steam guard code");
             wsSend({
               type: "steamGuard",
               message: "Please enter the steam guard code",
@@ -131,7 +129,7 @@ export const updateServer = async (user: SteamCMDUser) => {
                 stdin.write(`${user.steamGuardCode}\n`);
                 stdin.end();
               }
-            }, 1000); */
+            }, 1000);
           }
         }, 5000);
         steamGuard = true;
