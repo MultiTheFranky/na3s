@@ -8,6 +8,7 @@ import { initUserSystem } from "../db/components/user";
 import { loadEnvironmentVariables } from "../env";
 import { logInfo } from "../logger";
 import { router as apiRouter } from "./api.router";
+import { startAllServers } from "./routes/arma3";
 import { initSteamCMDCheckerSystem } from "./routes/steamcmd";
 import { initSwagger } from "./swagger";
 import { ServerEnvironment } from "./types";
@@ -48,6 +49,9 @@ export const initApi = async () => {
 
   // Init steamcmd checker system
   await initSteamCMDCheckerSystem();
+
+  // Start all servers that should be on
+  await startAllServers();
 
   const { SERVER_PORT } = await loadEnvironmentVariables<ServerEnvironment>();
 

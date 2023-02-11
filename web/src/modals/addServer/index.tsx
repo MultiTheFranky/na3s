@@ -11,14 +11,7 @@ import { addServer as addServerAPI } from "../../api/arma3/addServer";
 import { Alert } from "../../components/alert";
 import { Modal } from "../../components/modal";
 import { server as arma3ServerMock } from "../../mocks/Arma3Server";
-import {
-  BasicServerConfigTab,
-  MissionsTab,
-  ModsTab,
-  ParametersTab,
-  ServerConfigTab,
-  ServerModsTab,
-} from "./tabs";
+import { BasicServerConfigTab, MissionsTab, ModsTab, ParametersTab, ServerConfigTab, ServerModsTab } from "./tabs";
 
 type TabPanelProps = {
   children?: React.ReactNode;
@@ -73,10 +66,11 @@ export const AddServerModal = ({ open, onClose, setOpen }: Props) => {
         const serverFiltered: Arma3Server = {
           id: server.id,
           isOn: server.isOn,
+          activated: server.activated,
           parameters: {
             port: server.parameters.port,
             basicConfig: server.parameters.basicConfig,
-            config: server.parameters.config,
+            config: server.parameters.config
           },
           basicServerSettings: server.basicServerSettings,
           serverSettings: {
@@ -84,11 +78,11 @@ export const AddServerModal = ({ open, onClose, setOpen }: Props) => {
             password: server.serverSettings.password,
             maxPlayers: server.serverSettings.maxPlayers,
             passwordAdmin: server.serverSettings.passwordAdmin,
-            serverCommandPassword: server.serverSettings.serverCommandPassword,
+            serverCommandPassword: server.serverSettings.serverCommandPassword
           },
           mods: server.mods,
           serverMods: server.serverMods,
-          missions: server.missions,
+          missions: server.missions
         };
         const response = await addServerAPI(serverFiltered);
         if (response.error) setType("error");
@@ -121,11 +115,7 @@ export const AddServerModal = ({ open, onClose, setOpen }: Props) => {
             }}
           >
             <Tooltip title="Advance mode">
-              {advanceMode ? (
-                <SettingsSuggest />
-              ) : (
-                <SettingsSuggest color="disabled" />
-              )}
+              {advanceMode ? <SettingsSuggest /> : <SettingsSuggest color="disabled" />}
             </Tooltip>
           </IconButton>
           <IconButton
@@ -150,51 +140,27 @@ export const AddServerModal = ({ open, onClose, setOpen }: Props) => {
           <Tab label="ServerMods" />
         </Tabs>
         <TabPanel value={tab} index={0}>
-          <ServerConfigTab
-            server={server}
-            setServer={setServer}
-            advanceMode={advanceMode}
-          />
+          <ServerConfigTab server={server} setServer={setServer} advanceMode={advanceMode} />
         </TabPanel>
         <TabPanel value={tab} index={1}>
-          <ParametersTab
-            server={server}
-            setServer={setServer}
-            advanceMode={advanceMode}
-          />
+          <ParametersTab server={server} setServer={setServer} advanceMode={advanceMode} />
         </TabPanel>
         <TabPanel value={tab} index={2}>
-          <BasicServerConfigTab
-            server={server}
-            setServer={setServer}
-            advanceMode={advanceMode}
-          />
+          <BasicServerConfigTab server={server} setServer={setServer} advanceMode={advanceMode} />
         </TabPanel>
         <TabPanel value={tab} index={3}>
-          <MissionsTab
-            server={server}
-            setServer={setServer}
-            advanceMode={advanceMode}
-          />
+          <MissionsTab server={server} setServer={setServer} advanceMode={advanceMode} />
         </TabPanel>
         <TabPanel value={tab} index={4}>
-          <ModsTab
-            server={server}
-            setServer={setServer}
-            advanceMode={advanceMode}
-          />
+          <ModsTab server={server} setServer={setServer} advanceMode={advanceMode} />
         </TabPanel>
         <TabPanel value={tab} index={5}>
-          <ServerModsTab
-            server={server}
-            setServer={setServer}
-            advanceMode={advanceMode}
-          />
+          <ServerModsTab server={server} setServer={setServer} advanceMode={advanceMode} />
         </TabPanel>
         <Button
           variant="contained"
           sx={{
-            width: "100%",
+            width: "100%"
           }}
           onClick={addServer}
         >

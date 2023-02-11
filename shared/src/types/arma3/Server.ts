@@ -7,6 +7,7 @@ import { ServerParameters } from "./ServerParameters";
 export type Server = {
   id: string;
   isOn: boolean;
+  activated: boolean;
   parameters: ServerParameters;
   serverSettings: ServerConfig;
   basicServerSettings: BasicServerConfig;

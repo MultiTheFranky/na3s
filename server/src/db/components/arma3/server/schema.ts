@@ -24,6 +24,10 @@ export const DBArma3ServerSchema = new Schema<Arma3Server>(
       required: true,
       index: true,
     },
+    activated: {
+      type: Boolean,
+      required: true,
+    },
     isOn: {
       type: Boolean,
       required: true,
@@ -73,6 +77,7 @@ export const arma3ServerModel = model<typeof DBArma3ServerSchema>(
 export const serverSchema: joi.ObjectSchema<Arma3Server> = joi.object({
   id: joi.string().required(),
   isOn: joi.boolean().required(),
+  activated: joi.boolean().required(),
   parameters: arma3ParametersSchema.required(),
   serverSettings: arma3ServerConfigSchema.required(),
   basicServerSettings: arma3BasicServerConfigSchema.required(),

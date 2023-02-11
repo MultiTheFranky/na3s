@@ -2,6 +2,7 @@ import { Arma3Server } from "shared";
 export const server: Arma3Server = {
   id: crypto.randomUUID(),
   isOn: false,
+  activated: true,
   parameters: {
     port: 2302,
     basicConfig: "basic.cfg",

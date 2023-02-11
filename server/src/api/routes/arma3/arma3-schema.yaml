@@ -482,6 +482,10 @@ components:
           description: The ID of the server
           format: uuid
           example: "123e4567-e89b-12d3-a456-426655440000"
+        activated:
+          type: boolean
+          description: If the server is activated
+          example: true
         isOn:
           type: boolean
           description: If the server is on

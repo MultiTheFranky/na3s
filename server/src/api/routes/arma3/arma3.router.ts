@@ -9,7 +9,6 @@ import {
   updateArma3Server,
 } from "../../../db/components/arma3/server";
 import { serverSchema } from "../../../db/components/arma3/server/schema";
-import { logInfo } from "../../../logger/index";
 import { isAdmin } from "../web/user";
 import { startServer, stopServer } from "./utils";
 
@@ -131,6 +130,7 @@ router.post("/", async (req, res) => {
     const server = req.body as Arma3Server;
     //Add the server
     const added = await createArma3Server(server);
+    startServer(server);
     if (added) {
       res.status(200).send("Server added");
     } else {
