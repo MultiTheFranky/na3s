@@ -59,7 +59,7 @@ export const DropZone = ({ fileAccepted, onSubmit }: Props) => {
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 280
+            height: 280,
           }}
         >
           <Dropzone
@@ -71,17 +71,27 @@ export const DropZone = ({ fileAccepted, onSubmit }: Props) => {
             maxSize={3072000}
             maxFiles={1}
           >
-            {({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject }) => {
-              const additionalClass = isDragAccept ? "accept" : isDragReject ? "reject" : "";
+            {({
+              getRootProps,
+              getInputProps,
+              isDragActive,
+              isDragAccept,
+              isDragReject,
+            }) => {
+              const additionalClass = isDragAccept
+                ? "accept"
+                : isDragReject
+                ? "reject"
+                : "";
 
               return (
                 <div
                   {...getRootProps({
-                    className: `dropzone ${additionalClass}`
+                    className: `dropzone ${additionalClass}`,
                   })}
                   style={{
                     color: theme.palette.text.primary,
-                    backgroundColor: theme.palette.background.paper
+                    backgroundColor: theme.palette.background.paper,
                   }}
                 >
                   <input {...getInputProps()} />

@@ -16,7 +16,13 @@ type Props = {
  * Modal for upload a file to something
  * @returns
  */
-export const AddFileModal = ({ open, onClose, setOpen, fileAccepted, onSubmit }: Props) => {
+export const AddFileModal = ({
+  open,
+  onClose,
+  setOpen,
+  fileAccepted,
+  onSubmit,
+}: Props) => {
   return (
     <Modal open={open} onClose={onClose} width="80vw">
       <>

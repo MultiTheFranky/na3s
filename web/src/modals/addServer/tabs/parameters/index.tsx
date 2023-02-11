@@ -23,18 +23,24 @@ export const ParametersTab = ({ server, setServer, advanceMode }: TabProps) => {
         }
         return (
           <Grid item xs={2} key={parameter}>
-            {typeof server.parameters[parameter as keyof Arma3Server["parameters"]] === "boolean" ? (
+            {typeof server.parameters[
+              parameter as keyof Arma3Server["parameters"]
+            ] === "boolean" ? (
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={server.parameters[parameter as keyof Arma3Server["parameters"]] as boolean}
+                    checked={
+                      server.parameters[
+                        parameter as keyof Arma3Server["parameters"]
+                      ] as boolean
+                    }
                     onChange={(event) => {
                       setServer({
                         ...server,
                         parameters: {
                           ...server.parameters,
-                          [parameter]: event.target.checked
-                        }
+                          [parameter]: event.target.checked,
+                        },
                       });
                     }}
                   />
@@ -44,14 +50,18 @@ export const ParametersTab = ({ server, setServer, advanceMode }: TabProps) => {
             ) : (
               <TextField
                 label={parameter}
-                value={server.parameters[parameter as keyof Arma3Server["parameters"]]}
+                value={
+                  server.parameters[
+                    parameter as keyof Arma3Server["parameters"]
+                  ]
+                }
                 onChange={(event) => {
                   setServer({
                     ...server,
                     parameters: {
                       ...server.parameters,
-                      [parameter]: event.target.value
-                    }
+                      [parameter]: event.target.value,
+                    },
                   });
                 }}
               />

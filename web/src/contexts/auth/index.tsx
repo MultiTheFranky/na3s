@@ -8,7 +8,9 @@ type AuthContextType = {
   setUser: (user: (User & Token) | null) => void;
 };
 
-export const AuthContext = React.createContext<AuthContextType>({} as AuthContextType);
+export const AuthContext = React.createContext<AuthContextType>(
+  {} as AuthContextType
+);
 
 /**
  * Auth provider content system
@@ -40,7 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     <AuthContext.Provider
       value={{
         user,
-        setUser
+        setUser,
       }}
     >
       {children}

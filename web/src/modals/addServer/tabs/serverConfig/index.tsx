@@ -6,7 +6,13 @@ import { Arma3Server } from "shared";
 
 import { TabProps } from "..";
 
-const nonAdvanceOptions = ["hostname", "password", "passwordAdmin", "maxPlayers", "serverCommandPassword"];
+const nonAdvanceOptions = [
+  "hostname",
+  "password",
+  "passwordAdmin",
+  "maxPlayers",
+  "serverCommandPassword",
+];
 
 /**
  * Component to display the server settings of a server
@@ -14,7 +20,11 @@ const nonAdvanceOptions = ["hostname", "password", "passwordAdmin", "maxPlayers"
  * @param setServer The function to update the server state
  * @returns React component
  */
-export const ServerConfigTab = ({ server, setServer, advanceMode }: TabProps) => {
+export const ServerConfigTab = ({
+  server,
+  setServer,
+  advanceMode,
+}: TabProps) => {
   return (
     <Grid container spacing={2}>
       {Object.keys(server.serverSettings).map((parameter) => {
@@ -23,18 +33,24 @@ export const ServerConfigTab = ({ server, setServer, advanceMode }: TabProps) =>
         }
         return (
           <Grid item xs={2} key={parameter}>
-            {typeof server.serverSettings[parameter as keyof Arma3Server["serverSettings"]] === "boolean" ? (
+            {typeof server.serverSettings[
+              parameter as keyof Arma3Server["serverSettings"]
+            ] === "boolean" ? (
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={server.serverSettings[parameter as keyof Arma3Server["serverSettings"]] as boolean}
+                    checked={
+                      server.serverSettings[
+                        parameter as keyof Arma3Server["serverSettings"]
+                      ] as boolean
+                    }
                     onChange={(event) => {
                       setServer({
                         ...server,
                         serverSettings: {
                           ...server.serverSettings,
-                          [parameter]: event.target.checked
-                        }
+                          [parameter]: event.target.checked,
+                        },
                       });
                     }}
                   />
@@ -44,14 +60,18 @@ export const ServerConfigTab = ({ server, setServer, advanceMode }: TabProps) =>
             ) : (
               <TextField
                 label={parameter}
-                value={server.serverSettings[parameter as keyof Arma3Server["serverSettings"]]}
+                value={
+                  server.serverSettings[
+                    parameter as keyof Arma3Server["serverSettings"]
+                  ]
+                }
                 onChange={(event) => {
                   setServer({
                     ...server,
                     serverSettings: {
                       ...server.serverSettings,
-                      [parameter]: event.target.value
-                    }
+                      [parameter]: event.target.value,
+                    },
                   });
                 }}
               />

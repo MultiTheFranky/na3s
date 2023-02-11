@@ -1,5 +1,13 @@
 import { Add, Delete, FileUpload } from "@mui/icons-material";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
@@ -18,7 +26,7 @@ import { readHTML } from "../../utils/modsExportReader";
 export const ServerModList = ({
   mods,
   server,
-  setServer
+  setServer,
 }: {
   mods: Arma3Mod[];
   server: Arma3Server;
@@ -38,9 +46,9 @@ export const ServerModList = ({
                   id: crypto.randomUUID(),
                   name: "mod",
                   path: "\\path\\to\\mod",
-                  enabled: true
-                }
-              ]
+                  enabled: true,
+                },
+              ],
             });
           }}
         >
@@ -73,11 +81,11 @@ export const ServerModList = ({
                               if (serverMod.id === mod.id) {
                                 return {
                                   ...serverMod,
-                                  name: event.target.value
+                                  name: event.target.value,
                                 };
                               }
                               return serverMod;
-                            })
+                            }),
                           });
                         }}
                       />
@@ -92,11 +100,11 @@ export const ServerModList = ({
                               if (serverMod.id === mod.id) {
                                 return {
                                   ...serverMod,
-                                  path: event.target.value
+                                  path: event.target.value,
                                 };
                               }
                               return serverMod;
-                            })
+                            }),
                           });
                         }}
                       />
@@ -111,11 +119,11 @@ export const ServerModList = ({
                               if (serverMod.id === mod.id) {
                                 return {
                                   ...serverMod,
-                                  enabled: event.target.checked
+                                  enabled: event.target.checked,
                                 };
                               }
                               return serverMod;
-                            })
+                            }),
                           });
                         }}
                       />
@@ -125,7 +133,9 @@ export const ServerModList = ({
                         onClick={() => {
                           setServer({
                             ...server,
-                            serverMods: server.serverMods.filter((serverMod) => serverMod.id !== mod.id)
+                            serverMods: server.serverMods.filter(
+                              (serverMod) => serverMod.id !== mod.id
+                            ),
                           });
                         }}
                       >
@@ -153,16 +163,21 @@ export const ServerModList = ({
                 data &&
                 typeof data === "string" &&
                 data.length > 0 &&
-                data.includes("<!--Created by Arma 3 Launcher: https://arma3.com-->")
+                data.includes(
+                  "<!--Created by Arma 3 Launcher: https://arma3.com-->"
+                )
               ) {
                 const serverMods = readHTML(data);
                 //filter out mods that are already in the list
                 const filteredServerMods = serverMods.filter(
-                  (serverMod) => !server.serverMods.some((serverMod2) => serverMod2.name === serverMod.name)
+                  (serverMod) =>
+                    !server.serverMods.some(
+                      (serverMod2) => serverMod2.name === serverMod.name
+                    )
                 );
                 setServer({
                   ...server,
-                  serverMods: [...server.serverMods, ...filteredServerMods]
+                  serverMods: [...server.serverMods, ...filteredServerMods],
                 });
               } else {
                 console.error("Invalid file");

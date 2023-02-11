@@ -8,7 +8,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField
+  TextField,
 } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
@@ -26,7 +26,7 @@ import { readHTML } from "../../utils/modsExportReader/index";
 export const ModList = ({
   mods,
   server,
-  setServer
+  setServer,
 }: {
   mods: Arma3Mod[];
   server: Arma3Server;
@@ -46,9 +46,9 @@ export const ModList = ({
                   id: crypto.randomUUID(),
                   name: "mod",
                   path: "\\path\\to\\mod",
-                  enabled: true
-                }
-              ]
+                  enabled: true,
+                },
+              ],
             });
           }}
         >
@@ -81,11 +81,11 @@ export const ModList = ({
                               if (serverMod.id === mod.id) {
                                 return {
                                   ...serverMod,
-                                  name: event.target.value
+                                  name: event.target.value,
                                 };
                               }
                               return serverMod;
-                            })
+                            }),
                           });
                         }}
                       />
@@ -100,11 +100,11 @@ export const ModList = ({
                               if (serverMod.id === mod.id) {
                                 return {
                                   ...serverMod,
-                                  path: event.target.value
+                                  path: event.target.value,
                                 };
                               }
                               return serverMod;
-                            })
+                            }),
                           });
                         }}
                       />
@@ -119,11 +119,11 @@ export const ModList = ({
                               if (serverMod.id === mod.id) {
                                 return {
                                   ...serverMod,
-                                  enabled: event.target.checked
+                                  enabled: event.target.checked,
                                 };
                               }
                               return serverMod;
-                            })
+                            }),
                           });
                         }}
                       />
@@ -133,7 +133,9 @@ export const ModList = ({
                         onClick={() => {
                           setServer({
                             ...server,
-                            serverMods: server.serverMods.filter((serverMod) => serverMod.id !== mod.id)
+                            serverMods: server.serverMods.filter(
+                              (serverMod) => serverMod.id !== mod.id
+                            ),
                           });
                         }}
                       >
@@ -161,16 +163,20 @@ export const ModList = ({
                 data &&
                 typeof data === "string" &&
                 data.length > 0 &&
-                data.includes("<!--Created by Arma 3 Launcher: https://arma3.com-->")
+                data.includes(
+                  "<!--Created by Arma 3 Launcher: https://arma3.com-->"
+                )
               ) {
                 const mods = readHTML(data);
                 //filter out mods that are already in the list
                 const filteredMods = mods.filter((mod) => {
-                  return !server.mods.some((serverMod) => serverMod.path === mod.path);
+                  return !server.mods.some(
+                    (serverMod) => serverMod.path === mod.path
+                  );
                 });
                 setServer({
                   ...server,
-                  mods: [...server.mods, ...filteredMods]
+                  mods: [...server.mods, ...filteredMods],
                 });
               } else {
                 console.error("Invalid file");

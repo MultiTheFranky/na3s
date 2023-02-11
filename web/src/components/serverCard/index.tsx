@@ -14,7 +14,7 @@ export const ServerCard = (server: Arma3Server) => {
       sx={{
         padding: "1rem",
         margin: "1rem",
-        backgroundColor: server.isOn ? "green" : "red"
+        backgroundColor: server.isOn ? "green" : "red",
       }}
     >
       <CardHeader
@@ -22,7 +22,8 @@ export const ServerCard = (server: Arma3Server) => {
         subheader={`${getHostname()}:${server.parameters.port}`}
         titleTypographyProps={{
           variant: "h4",
-          color: (theme) => (theme.palette.mode === "dark" ? "#d2d2d2" : "#1c1c1c")
+          color: (theme) =>
+            theme.palette.mode === "dark" ? "#d2d2d2" : "#1c1c1c",
         }}
       />
     </Card>
