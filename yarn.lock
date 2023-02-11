@@ -4041,6 +4041,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/express-serve-static-core@npm:^4.17.33":
+  version: 4.17.33
+  resolution: "@types/express-serve-static-core@npm:4.17.33"
+  dependencies:
+    "@types/node": "*"
+    "@types/qs": "*"
+    "@types/range-parser": "*"
+  checksum: dce580d16b85f207445af9d4053d66942b27d0c72e86153089fa00feee3e96ae336b7bedb31ed4eea9e553c99d6dd356ed6e0928f135375d9f862a1a8015adf2
+  languageName: node
+  linkType: hard
+
 "@types/express@npm:*, @types/express@npm:^4.17.13":
   version: 4.17.14
   resolution: "@types/express@npm:4.17.14"
@@ -4050,6 +4061,18 @@ __metadata:
     "@types/qs": "*"
     "@types/serve-static": "*"
   checksum: 15c1af46d02de834e4a225eccaa9d85c0370fdbb3ed4e1bc2d323d24872309961542b993ae236335aeb3e278630224a6ea002078d39e651d78a3b0356b1eaa79
+  languageName: node
+  linkType: hard
+
+"@types/express@npm:^4":
+  version: 4.17.17
+  resolution: "@types/express@npm:4.17.17"
+  dependencies:
+    "@types/body-parser": "*"
+    "@types/express-serve-static-core": ^4.17.33
+    "@types/qs": "*"
+    "@types/serve-static": "*"
+  checksum: 0196dacc275ac3ce89d7364885cb08e7fb61f53ca101f65886dbf1daf9b7eb05c0943e2e4bbd01b0cc5e50f37e0eea7e4cbe97d0304094411ac73e1b7998f4da
   languageName: node
   linkType: hard
 
@@ -5357,14 +5380,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.3.2":
-  version: 1.3.2
-  resolution: "axios@npm:1.3.2"
+"axios@npm:1.1.3":
+  version: 1.1.3
+  resolution: "axios@npm:1.1.3"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: 9791af75a6df137b15ef45d13ad11eb357b3860d2496347ee18778db9d0abc2320362a4452f1e070e3160f1dbcc518fcefdc9e005be097e7db39acb22cf608e5
+  checksum: cab3b17bf6092c9387f7023d699db093cfa23650b56c4422cd474d124b78b2e3b5a520f932c330664a58ab85b867b1c25a95cace475ef72d236888c852b84e6d
   languageName: node
   linkType: hard
 
@@ -8444,7 +8467,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:^4.17.3":
+"express@npm:4.18.2, express@npm:^4.17.3":
   version: 4.18.2
   resolution: "express@npm:4.18.2"
   dependencies:
@@ -12625,13 +12648,11 @@ __metadata:
     "@types/semantic-release": ^20
     "@typescript-eslint/eslint-plugin": ^5.12.0
     "@typescript-eslint/parser": ^5.39.0
-    axios: 1.3.2
     danger: 11.2.3
     eslint: ^8.25.0
     eslint-config-google: ^0.14.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-import: ^2.25.4
-    express-rate-limit: 6.7.0
     husky: 8.0.1
     import-sort-style-module: 6.0.0
     prettier: 2.7.1
@@ -16246,15 +16267,19 @@ __metadata:
     "@trpc/server": 10.4.3
     "@types/bcrypt": ^5
     "@types/cors": 2.8.12
+    "@types/express": ^4
     "@types/jsonwebtoken": ^8
     "@types/luxon": ^3
     "@types/node": ^18.11.0
     "@types/swagger-jsdoc": ^6
     "@types/swagger-ui-express": ^4
     "@types/ws": 8.5.3
+    axios: 1.1.3
     bcrypt: 5.1.0
     cors: 2.8.5
     env-cmd: 10.1.0
+    express: 4.18.2
+    express-rate-limit: 6.7.0
     joi: 17.6.4
     jsonwebtoken: 8.5.1
     luxon: 3.0.4
