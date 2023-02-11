@@ -1,0 +1,19 @@
+{
+  "branches": [
+    "+([0-9])?(.{+([0-9]),x}).x",
+    { "name": "+([0-9])?(.{+([0-9]),x}).x-beta.*", "prerelease": true }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/npm",
+    "@semantic-release/github",
+    [
+      "semantic-release-slack-bot",
+      {
+        "notifyOnSuccess": true,
+        "notifyOnFail": true
+      }
+    ]
+  ]
+}

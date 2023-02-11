@@ -20,6 +20,7 @@
     "@commitlint/cli": "17.1.2",
     "@commitlint/config-conventional": "16.2.1",
     "@commitlint/config-lerna-scopes": "16.2.2",
+    "@types/semantic-release": "^20",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.39.0",
     "eslint": "^8.25.0",
@@ -29,7 +30,8 @@
     "husky": "8.0.1",
     "import-sort-style-module": "6.0.0",
     "prettier": "2.7.1",
-    "prettier-plugin-import-sort": "0.0.7"
+    "prettier-plugin-import-sort": "0.0.7",
+    "semantic-release": "20.1.0"
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {
@@ -38,7 +40,7 @@
     }
   },
   "engines": {
-    "node": ">=16.0.0",
+    "node": ">=18.0.0",
     "yarn": ">=1.22.0"
   },
   "workspaces": [
