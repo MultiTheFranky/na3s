@@ -120,7 +120,7 @@ const createWebSocket = (
   if (!webSocket || webSocket.readyState === WebSocket.CLOSED) {
     const ws = new WebSocket(
       `ws://${window.location.hostname}:${
-        process.env.REACT_APP_WEBHOOK_PORT ?? 8080
+        process.env.REACT_APP_WEBHOOK_PORT ?? 8200
       }`
     );
     ws.onopen = () => {

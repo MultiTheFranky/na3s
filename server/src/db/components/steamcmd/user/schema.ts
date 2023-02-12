@@ -35,5 +35,5 @@ export const steamCMDModel = model<typeof dbSteamCMDUserSchema>(
 export const steamCMDUserSchema: joi.ObjectSchema<SteamCMDUser> = joi.object({
   username: joi.string().required(),
   password: joi.string().required(),
-  steamGuardCode: joi.string().allow(null).required(),
+  steamGuardCode: joi.string().allow(null).optional(),
 });

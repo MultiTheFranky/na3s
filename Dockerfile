@@ -69,7 +69,7 @@ VOLUME /steamcmd
 # Set working directory
 WORKDIR /na3s
 
-# Copy all necessary files
+# Copy all necessary files (TODO: copy only build files)
 COPY package.json .
 COPY yarn.lock .
 COPY .yarnrc.yml .

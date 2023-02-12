@@ -14,7 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 0",
     "lint": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run lint",
     "launch-prod": "yarn workspaces foreach -ipv -j ${AGENT_CPU:-3} run launch-prod",
-    "local-build": "yarn build && docker build --pull --rm -f 'Dockerfile' -t na3s:latest '.' && docker compose up --force-recreate --build"
+    "local-build": "yarn build && docker compose up --force-recreate --build"
   },
   "devDependencies": {
     "@commitlint/cli": "17.1.2",

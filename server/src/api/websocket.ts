@@ -17,11 +17,7 @@ export let wss: WebSocketServer;
  */
 export const ws = async () => {
   const { REACT_APP_WEBHOOK_PORT } = loadEnvironmentVariables<WebSocketEnv>();
-  if (!REACT_APP_WEBHOOK_PORT) {
-    logError("🚨 Websocket server won't run becase no webhook port provided🚨");
-    return;
-  }
-  wss = new WebSocketServer({ port: REACT_APP_WEBHOOK_PORT });
+  wss = new WebSocketServer({ port: REACT_APP_WEBHOOK_PORT ?? 8200 });
   wss.on("connection", (ws) => {
     logsData.forEach((data) => {
       ws.send(JSON.stringify(data));
